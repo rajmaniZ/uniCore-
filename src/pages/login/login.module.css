@@ -1,0 +1,30 @@
+
+.loginForm{
+    margin:10%;
+    height:80vh;
+    /* padding:200px; */
+    background-color:white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content:center; */
+    gap:4%;
+    border-radius: 7%;
+}
+
+.loginForm input{
+    background-color: white;
+}
+
+.loginForm h1{
+    background-color: white;
+    
+}
+
+.forgetPass{
+    background-color: white;
+}
+
+.registerLink{
+    background-color: white;
+}
