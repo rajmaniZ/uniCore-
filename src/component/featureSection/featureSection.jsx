@@ -8,32 +8,32 @@ function FeatureSection(){
             id:1,
             title:"Attandance Tracking",
             highlight:'',
-            image:
+            image:''
         },
         {
             id:2,
-            title:"Timetable MAnagement",
+            title:"Timetable Management",
             highlight:'',
-            image:
+            image:''
         },
         {
             id:3,
             title:"Assignment Upload",
             highlight:'',
-            image:
+            image:''
         },
         {
             id:4,
-            title:"teacher or student Dashboard ",
+            title:"Teacher or Student Dashboard ",
             highlight:'',
-            image:
+            image:''
         },
-        {
-            id:5,
-            title:"A",
-            highlight:,
-            image:
-        },
+        // {
+        //     id:5,
+        //     title:"A",
+        //     highlight:'',
+        //     image:''
+        // },
     ]
     return (
         <>
