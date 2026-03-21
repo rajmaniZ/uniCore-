@@ -1,6 +1,12 @@
 *{
     margin:0px;
     padding: 0px;
-    background-color:aliceblue;
+    text-decoration: none;
+    
     /* color:black; */
+}
+
+body{
+    background-color:aliceblue;
+    
 }

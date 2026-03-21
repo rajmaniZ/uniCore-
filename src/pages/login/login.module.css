@@ -1,30 +1,133 @@
 
-.loginForm{
-    margin:10%;
-    height:80vh;
-    /* padding:200px; */
-    background-color:white;
+.frame{
+    display: flex;
+    min-width: 100vh;
+    min-height: 100vh;
+}
+.page{
+    width:50%;
+    /* border:1px solid black; */
+    border-radius: 7%;
+
+    /* height:80vh; */
+}
+
+.loginImg{
+    width:50%;
+    background-image: url(../../assets/loginImg.jpg);
+}
+
+
+
+.title{
+    background-color: transparent;
+    display:flex;
+    gap:20px;
+    justify-content: center;
+}
+
+.title h1{
+    background-color: transparent;
+    margin-top: 4px;
+}
+.title img{
+    background-color: transparent;
+    width:50px;
+    height:50px;
+}
+
+.inputSection{
+    background-color: transparent;
+    padding-top:10%;
+    gap:10%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    /* justify-content:center; */
-    gap:4%;
-    border-radius: 7%;
+    justify-content: space-evenly;
+    height:60%;
 }
 
-.loginForm input{
-    background-color: white;
+.loginForm{
+    background-color: transparent;
+    margin:10%;
+    height:60vh;
+    padding-left:10%;
+    padding-right:10%;
+    text-align: right;
+ 
 }
 
-.loginForm h1{
-    background-color: white;
+
+.inputSection input{
+    background-color: transparent;
+    margin:0px;
+    width:92%;
+    padding:3%;
+    border-radius: 10px;
+    border-color: none;
     
+
+}
+
+.inputSection input:hover{
+    background-color: rgb(232, 234, 236);
+    
+
 }
 
 .forgetPass{
-    background-color: white;
+    position:relative;
+    width:300px;
+    padding:10px;
+    position:relative;
+    top:-1vw;
 }
 
-.registerLink{
-    background-color: white;
+
+.forgetPass:hover{
+    color:rgb(67, 110, 148);
+}
+.forgetPass:active{
+    color:rgb(9, 46, 79);
+}
+
+.loginButton{
+    background-color: transparent;
+    text-align: center;
+    border-radius: 10px;
+    width:40%;
+    padding:10px;
+}
+.loginButton:hover{
+    background-color:rgb(155, 177, 197);
+}
+
+.loginButton:active{
+    background-color:rgb(35, 73, 108);
+}
+
+
+.registerLink a:hover{
+    color:rgb(45, 116, 179);
+}
+
+
+.registerLink a:active{
+    color:rgb(4, 23, 41);
+}
+
+
+
+
+@media (max-width:900px) {
+    .frame{
+        flex-direction: column;
+    }
+    .page{
+        background-color: transparent;
+        width:100vw;
+        height:100vh;
+    }
+    .loginImg{
+        display:none;
+    }
 }

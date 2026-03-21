@@ -1,15 +1,16 @@
-import {NavLink} from 'react-router-dom';
+import {NavLink,useLocation} from 'react-router-dom';
 
 
 import styles from './navbar.module.css'
 
 function Navbar(){
+    const location=useLocation();
+    const isHome=location.pathname==="/";
     return (
         <>
-            <div className={styles.nav}>
-                {/* <img src="../../public/uniCore.png" alt="logo" className={styles.logo}/> */}
-                <NavLink to='/' ><img src="/uniCore.png" alt="logo" className={styles.logo}/></NavLink>
-                <div className={styles.listOfNavMenu}>
+            <nav className={`${styles.nav} ${isHome ? styles.homeNav: ""} `}>
+                <NavLink to='/' ><img src="/uniCore.png" alt="logo" className={`${styles.logo} `}/></NavLink>
+                <div className={`${styles.listOfNavMenu} ${isHome ? styles.homeListOfNavMenu: ""} `} >
                     <NavLink   
                         to='/' 
                         end
@@ -45,47 +46,13 @@ function Navbar(){
                         Contect
                     </NavLink>
                     
-                    {/* <NavLink   
-                        to='/' 
-                        className={({isActive}) => isActive 
-                        ? `${styles.features} ${styles.active}`
-                        : styles.features}>
-                        features
-                    </NavLink> */}
-                    
-                    {/* <NavLink   
-                        to='/' 
-                        className={({isActive}) => isActive 
-                        ? `${styles.features} ${styles.active}`
-                        : styles.features}>
-                        features
-                    </NavLink> */}
-
-                    {/* <NavLink 
-                        to='/Features' className={styles.features}>Features</NavLink>
-                    <NavLink to='/About' className={styles.about}>About</NavLink>
-                    <NavLink to='/Contact' className={styles.contact}>Contact</NavLink> */}
                     <div className={styles.loginAndRegister}>
-                        {/* <NavLink   
-                            to='/login' 
-                            className={({isActive}) => isActive 
-                            ? `${styles.login} ${styles.active}`
-                            : styles.login}>
-                            Login
-                        </NavLink>
-                        <NavLink   
-                            to='/Regis' 
-                            className={({isActive}) => isActive 
-                            ? `${styles.features} ${styles.active}`
-                            : styles.features}>
-                            features
-                        </NavLink> */}
                         <NavLink to='/login' className={styles.login}>Login</NavLink>
                         <NavLink to='/register' className={styles.register}>Sign Up</NavLink> 
                     </div>
                 </div>
-            </div>
-            <hr/>
+            </nav>
+            <hr className={styles.hrFaded}/>
 
         </>
     );

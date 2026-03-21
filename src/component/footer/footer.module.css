@@ -1,6 +1,128 @@
 .footer{
-    padding-left:2%;
-    padding-right:2%;
-    padding-bottom:2%;
+    margin-top: 40px;
+    /* height: 90vh; */
+    /* width:60%; */
+    padding-top:-10%;
+    padding-left:10%;
+    padding-right:10%;
+    /* text-align: ce; */
+}
+
+
+
+.logoDiv{
+
+    display:flex;
+    /* gap:20px; */
+    justify-content: center;
+    align-items: center;
+}
+
+
+.hrFaded{
+    height:1px;
+    border:none;
+    /* background-color: #5856d6; */
+    border:none;
+    background:linear-gradient(
+        to right,
+        transparent 0%,
+        /* 120deg, */
+        #ff6ec4 30%,
+        #ff9a44 40%,
+        #f9c449 50%,
+        #4cd964 60%,
+        #34c759 70%,
+        #5ac8fa 80%,
+        #5856d6 90%,
+        transparent 100%
+    );
+}
+
+
+.logoDiv h1{
+    font-size: 60px;
+    background:linear-gradient(120deg,#ff6ec4,#ff9a44,#f9c449,#4cd964,#34c759,#5ac8fa,#5856d6);
+    background-size:200% auto;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color:transparent ;
     
+}
+.logo{
+    width:80px;
+    height:80px;   
+}
+
+li{
+    list-style-type: none;
+    /* gap:10px; */
+}
+.infoDiv{
+    margin-top:5%;
+    color:azure;
+    display:flex;
+
+    /* gap:5%; */
+    justify-content: space-between;
+    flex-wrap:wrap;
+    gap:30px;
+}
+.companyDiv , .resourcesDiv , .supportDiv, .subscribe {
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+
+.companyDiv h1, .resourcesDiv h1 , .supportDiv h1, .subscribe h1{
+    font-size:20px;
+    color:aqua;
+}
+
+
+.companyDiv li, .resourcesDiv li , .supportDiv li, .subscribe li {
+    font-size:16px;
+    padding-bottom:10px;
+    /* gap:50px; */
+    /* color:aqua; */
+}
+
+.subscribe input{
+    padding:10px;
+    border-radius: 30px;
+    background-color: transparent  ;
+    border: 1px solid lightblue;
+}
+
+
+.subscribe input:hover{
+    background-color: #cb80dc;
+}
+
+.subscribe button{
+    color:white;
+    margin-left:10px;
+    /* text-align: right; */
+    padding:10px;
+    border-radius: 30px;
+    background-color: transparent  ;
+    border: 1px solid lightblue;
+    
+}
+
+.subscribe button:hover{
+    background-color: #c6361a94;
+}
+
+
+
+.copyright{
+    height:40px;
+    text-align: center;
+    /* justify-content: center; */
+    display: flex;
+    justify-content: space-between;
+    padding-bottom:20px;
+    /* padding-left:50px; */
 }

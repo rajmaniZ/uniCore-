@@ -1,0 +1,44 @@
+
+
+import styles from "./featureSection.module.css"
+
+function FeatureSection(){
+    const features=[
+        {
+            id:1,
+            title:"Attandance Tracking",
+            highlight:'',
+            image:
+        },
+        {
+            id:2,
+            title:"Timetable MAnagement",
+            highlight:'',
+            image:
+        },
+        {
+            id:3,
+            title:"Assignment Upload",
+            highlight:'',
+            image:
+        },
+        {
+            id:4,
+            title:"teacher or student Dashboard ",
+            highlight:'',
+            image:
+        },
+        {
+            id:5,
+            title:"A",
+            highlight:,
+            image:
+        },
+    ]
+    return (
+        <>
+        </>
+    );
+}
+
+export default FeatureSection;

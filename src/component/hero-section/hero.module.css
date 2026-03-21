@@ -1,4 +1,117 @@
 .HeroSection{
-    background-image: url('./public/logo.png');
-    background-color:aliceblue;
+    display: flex;
+    /* height: 98vh; */
+    /* width: 100vw; */
+    padding-bottom: 200px;
+    background-color: transparent;
+    /* background-color:aliceblue; */
+}
+.heroImage{
+    width:70vw;
+    /* margin-left:-10%; */
+    /* height:50%; */
+    
+    margin-top:15%;
+    background:
+        url("./../../assets/hero2.png") no-repeat center/contain;
+    /* background-size:contain; */
+    /* background-image:no-repeat; */
+}
+.heroContent{
+    background-color: transparent;
+    width:40vw;
+    padding-top:50vh;
+    
+    padding-left:10vw;
+}
+.heroContent h1,h2,p{
+    background-color: transparent;
+    margin:20px 0px 20px; 
+    font-size: 130%;
+    color:white;
+}
+
+
+.heroContent h1{
+    font-size:60px;
+    /* color:white; */
+}
+.heroContent p{
+    font-weight: 700;
+    font-size: 25px;
+    font-variant: small-caps;
+}
+.heroContent a{
+    margin-right:20px;
+}
+/* body{
+    background-color: aqua;
+} */
+
+
+.register{
+    border-radius: 10px;
+    border:.5px solid rgb(156, 184, 214);
+    color:white;
+    padding: 3px 6px 8px 8px;
+}
+
+.login{
+    color:white;
+
+    border-radius: 10px;
+    border:.5px solid rgb(156, 184, 214);
+    padding: 3px 6px 8px 8px;
+}
+
+.register:hover{
+    border:.5px solid rgb(156, 184, 214);
+}
+
+.login:hover{
+    border:.5px solid rgb(156, 184, 214);
+    
+}
+
+
+.register:active{
+    border:.5px solid rgb(51, 124, 201);
+    background-color: rgb(51, 124, 201);
+}
+
+.login:active{
+    /* background-color: ; */
+    background-color:rgb(51, 124, 201) ;
+    border:.5px solid rgb(51, 124, 201);
+    
+}
+
+
+.hrFaded{
+    height:2px;
+    border:none;
+    background:linear-gradient(
+        to right,
+        transparent,
+        rgba(255,255,255,0.9) 0%,
+        rgba(255,255,255,0.6) 40%,
+        transparent 95%
+
+    )
+}
+
+
+@media (max-width:900px) {
+    .heroImage{
+        display:none;
+    }
+
+    .heroContent{
+    background-color: transparent;
+    width:80vw;
+    padding-top:50vh;
+    
+    padding-left:10vw;
+}
+   
 }
