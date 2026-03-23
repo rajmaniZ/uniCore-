@@ -34,7 +34,9 @@ function Login() {
                             </div>
                         </div>
                     </form>
+                    <Link to="/" className={styles.returnHome}>Back to Home</Link>
                 </div>
+
             </div>
 
 

@@ -1,92 +1,76 @@
-.HeroSection{
+/* .HeroSection{
     display: flex;
-    /* height: 98vh; */
-    /* width: 100vw; */
     padding-bottom: 200px;
     background-color: transparent;
-    /* background-color:aliceblue; */
-}
+    background: radial-gradient(
+        circle at right,rgba(15, 70, 72, 0.2) transparent 50%);
+} */
+
+/* ✅ FIXED HERO IMAGE */
 .heroImage{
-    width:70vw;
-    /* margin-left:-10%; */
-    /* height:50%; */
-    
-    margin-top:15%;
-    background:
-        url("./../../assets/hero2.png") no-repeat center/contain;
-    /* background-size:contain; */
-    /* background-image:no-repeat; */
+    width:60vw;
+    min-height: 80vh;   /* IMPORTANT: gives height so image shows */
+
+    margin-top:5%;
+
+    background: url("./../../assets/tryhero.jpg")
+                no-repeat center;
+
+    background-size: contain;  /* ensures full image visible */
 }
+
+/* CONTENT */
 .heroContent{
     background-color: transparent;
     width:40vw;
     padding-top:50vh;
-    
     padding-left:10vw;
 }
-.heroContent h1,h2,p{
-    background-color: transparent;
+
+/* TEXT */
+.heroContent h1,
+.heroContent h2,
+.heroContent p{
     margin:20px 0px 20px; 
     font-size: 130%;
     color:white;
 }
 
-
 .heroContent h1{
     font-size:60px;
-    /* color:white; */
 }
+
 .heroContent p{
     font-weight: 700;
     font-size: 25px;
     font-variant: small-caps;
 }
+
 .heroContent a{
     margin-right:20px;
 }
-/* body{
-    background-color: aqua;
-} */
 
-
-.register{
-    border-radius: 10px;
-    border:.5px solid rgb(156, 184, 214);
-    color:white;
-    padding: 3px 6px 8px 8px;
-}
-
+/* BUTTONS */
+.register,
 .login{
-    color:white;
-
     border-radius: 10px;
     border:.5px solid rgb(156, 184, 214);
+    color:white;
     padding: 3px 6px 8px 8px;
 }
 
-.register:hover{
-    border:.5px solid rgb(156, 184, 214);
-}
-
+.register:hover,
 .login:hover{
     border:.5px solid rgb(156, 184, 214);
-    
 }
 
-
-.register:active{
-    border:.5px solid rgb(51, 124, 201);
-    background-color: rgb(51, 124, 201);
-}
-
+.register:active,
 .login:active{
-    /* background-color: ; */
-    background-color:rgb(51, 124, 201) ;
+    background-color: rgb(51, 124, 201);
     border:.5px solid rgb(51, 124, 201);
-    
 }
 
-
+/* FADED LINE */
 .hrFaded{
     height:2px;
     border:none;
@@ -96,22 +80,18 @@
         rgba(255,255,255,0.9) 0%,
         rgba(255,255,255,0.6) 40%,
         transparent 95%
-
-    )
+    );
 }
 
-
+/* RESPONSIVE */
 @media (max-width:900px) {
     .heroImage{
         display:none;
     }
 
     .heroContent{
-    background-color: transparent;
-    width:80vw;
-    padding-top:50vh;
-    
-    padding-left:10vw;
-}
-   
+        width:80vw;
+        padding-top:50vh;
+        padding-left:10vw;
+    }
 }

@@ -3,9 +3,16 @@
     display: flex;
     min-width: 100vh;
     min-height: 100vh;
+    text-align: right;
+    
+}
+.frame p{
+    color:black;
+    font-size:15px;
+
 }
 .page{
-    width:50%;
+    width:30%;
     /* border:1px solid black; */
     border-radius: 7%;
 
@@ -13,8 +20,21 @@
 }
 
 .loginImg{
-    width:50%;
-    background-image: url(../../assets/loginImg.jpg);
+    width:100%;
+    flex:1;
+    position:relative;
+    background:linear-gradient(to left,rgba(240,248,255,.7),transparent),
+    url(../../assets/loginImg.jpg) center/cover ;
+    /* background-size:cover; */
+    /* background-position: center; */
+    /* background: url(../../assets//loginImg.jpg) center/cover no-repeat; */
+}
+
+.loginImg::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to right,transparent 0%,aliceblue 100%);
 }
 
 
@@ -48,7 +68,8 @@
 
 .loginForm{
     background-color: transparent;
-    margin:10%;
+    margin:30vh 10% 0% -5%;
+    /* margin-left:0px; */
     height:60vh;
     padding-left:10%;
     padding-right:10%;
@@ -112,7 +133,7 @@
 
 
 .registerLink a:active{
-    color:rgb(4, 23, 41);
+    color:rgb(76, 150, 219);
 }
 
 
@@ -130,4 +151,36 @@
     .loginImg{
         display:none;
     }
+}
+
+
+@media (max-width:500px) {
+    .frame{
+        /* flex-direction: column; */
+    }
+    .page{
+        background-color: blue;
+        width:100vw;
+        height:100vh;
+    }
+    .loginImg{
+        display:none;
+    }
+}
+
+/* @media (max-width:400){
+    .loginForm{
+        background-color: aqua;
+        /* margin-left:20%;
+        background-color: transparent;
+        width:100vw;
+        height:100vh; *
+    }
+} */
+
+.returnHome{
+    /* position:absolute; */
+    /* right:%; */
+    /* margin-right:50vw; */
+    margin-right:5.8vw;
 }

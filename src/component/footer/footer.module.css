@@ -68,6 +68,27 @@ li{
     flex-wrap:wrap;
     gap:30px;
 }
+
+
+.footer a{
+    color:white;
+    background-color:transparent;
+    text-decoration: none;
+    /* color: black; */
+    font-size: 18px;
+    font-weight: 500;
+
+}
+.footer a:hover{
+    /* background-color: antiquewhite; */
+    /* text-decoration: none; */
+    color: rgb(75, 196, 181);
+    /* font-size: 18px; */
+    /* font-weight: 900; */
+    
+}
+
+
 .companyDiv , .resourcesDiv , .supportDiv, .subscribe {
     display:flex;
     flex-direction: column;
@@ -120,9 +141,17 @@ li{
 .copyright{
     height:40px;
     text-align: center;
+    /* color:rgba(21, 117, 122, 0.176); */
     /* justify-content: center; */
     display: flex;
     justify-content: space-between;
     padding-bottom:20px;
     /* padding-left:50px; */
+}
+
+
+
+.copyright p{
+    color:antiquewhite;
+    font-size:14px;
 }

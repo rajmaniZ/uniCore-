@@ -43,7 +43,7 @@ function Navbar(){
                         className={({isActive}) => isActive 
                         ? `${styles.Contect} ${styles.active}`
                         : styles.Contect}>
-                        Contect
+                        Contact
                     </NavLink>
                     
                     <div className={styles.loginAndRegister}>

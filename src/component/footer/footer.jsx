@@ -32,34 +32,34 @@ function Footer(){
                     <div className={styles.companyDiv}>
                         <h1>Company</h1>
                         <ul>
-                            <li>About us</li>
+                            <Link to="/about"><li>About us</li></Link>
                             
-                            <li>Careers</li>
+                            <Link to="/career"><li>Careers</li></Link>
                             
-                            <li>Blog</li>
+                            <Link to="/blog"><li>Blog</li></Link>
                             
-                            <li>Contanct Us</li>
+                            <Link to="/contact" ><li>Contact Us</li></Link>
                         </ul>
                     </div>
                     
                     <div className={styles.resourcesDiv}>
                         <h1>Resources</h1>
                         <ul>
-                            <li>Documentation</li>
+                            <Link to="/docs"><li>Documentation</li></Link>
                             
-                            <li>Guides</li>
+                            <Link to="/guide"><li>Guides</li></Link>
                             
-                            <li>Help Center</li>
+                            <Link to="/help"><li>Help Center</li></Link>
                         </ul>
                     </div>
                     <div className={styles.supportDiv}>
                         <h1>Support</h1>
                         <ul>
-                            <li>FAQs</li>
+                            <Link to="/faqs"><li>FAQs</li></Link>
                             
-                            <li>Privacy policy</li>
+                            <Link to="policy"><li>Privacy policy</li></Link>
                             
-                            <li>Terms of Service</li>
+                            <Link to="/terms"><li>Terms of Service</li></Link>
                         </ul>
                     </div>
                     <div className={styles.subscribe}>

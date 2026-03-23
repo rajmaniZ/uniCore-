@@ -1,0 +1,67 @@
+.featuresSection {
+    text-align: center;
+    padding: 80px 8vw;
+    /* background: #0f172a;  */
+    color: white;
+}
+
+.heading {
+    text-align: center;
+    font-size: 36px;
+    margin-top:-5px;
+    display:inline-block;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+
+.card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.card h3 {
+    font-size: 20px;
+    /* margin-bottom: 10px; */
+}
+
+.card p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+}
+
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+
+.card:active {
+    transform: scale(0.97);
+} 
+
+
+.profile{
+    display:flex;
+    /* gap:10px; */
+    justify-content: space-between;
+    /* background-color: aqua; */
+}
+
+
+
+.profile p{
+    margin-top:-1px;
+
+}
