@@ -10,6 +10,11 @@ import Login from './pages/login/login';
 import Register from './pages/login/register';
 import ForgetPassword from './pages/login/forget-password';
 import ComingSoon from './pages/comingSoon/ComingSoon';
+// Dashboard
+import Admin from "./pages/Dashboard/AdminDashboard/Admin";
+import Student from "./pages/Dashboard/StudentDashboard/Student";
+import Teacher from "./pages/Dashboard/TeacherDashboard/Teacher";
+import Principle from "./pages/Dashboard/PrincipleDashboard/Principle";
 
 
 // import Home from './pages/home/home';
@@ -73,6 +78,10 @@ function App(){
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/forget-password' element={<ForgetPassword/>}/>
+        <Route path='/Admin' element={<Admin/>}/>
+          <Route path='/Principle' element={<Principle/>}/>
+            <Route path='/Teacher' element={<Teacher/>}/>
+              <Route path='/Student' element={<Student/>}/>
         
       </Routes>
     </>
