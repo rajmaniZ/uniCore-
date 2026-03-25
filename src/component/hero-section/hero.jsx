@@ -5,7 +5,6 @@ function Hero() {
     return (
         <div className={styles.HeroSection}>
             <div className={styles.overlay}></div>
-
             <div className={styles.heroContent}>
                 <h1><strong>uniCore</strong></h1>
                 <h2>All-in-one Smart Campus Solution</h2>
@@ -16,7 +15,12 @@ function Hero() {
                     <Link to='/login' className={styles.login}>Login</Link>
                     <Link to='/register' className={styles.register}>Sign Up</Link>
                 </div>
+                
             </div>
+             <div className={styles.heroImage}>
+                
+            </div>
+           
         </div>
     );
 }
