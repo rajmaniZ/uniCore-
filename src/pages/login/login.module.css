@@ -1,5 +1,6 @@
 
 .frame{
+    background-color: aliceblue;
     display: flex;
     min-width: 100vh;
     min-height: 100vh;
@@ -15,7 +16,6 @@
     width:30%;
     /* border:1px solid black; */
     border-radius: 7%;
-
     /* height:80vh; */
 }
 
@@ -151,6 +151,10 @@
     .loginImg{
         display:none;
     }
+    
+    .returnHome{
+        padding-right:14vw;
+    }
 }
 
 
@@ -159,12 +163,15 @@
         /* flex-direction: column; */
     }
     .page{
-        background-color: blue;
+        /* background-color: blue; */
         width:100vw;
         height:100vh;
     }
     .loginImg{
         display:none;
+    }
+    .returnHome{
+        padding-right:14vw;
     }
 }
 

@@ -3,7 +3,9 @@ import Features from "../features/features";
 import Testimonials from '../../component/testimonials/testimonials';
 
 import style from './home.module.css'
+import { Link } from 'react-router-dom';
 
+import ShowDashboard from './../../component/linkDashboard'
 function Home(){
     return (
         <div className={style.home}>
@@ -11,15 +13,7 @@ function Home(){
             <Hero/>
             <Features className={style.feature}/>
             <Testimonials/>
-            <div>
-                <li>
-                    <Link to ="/Admin"></Link>
-                    <Link to ="/Teacher"></Link>
-                    <Link to ="/Student"></Link>
-                    <Link to ="/Principle"></Link>
-
-                </li>
-            </div>
+            <ShowDashboard/>
         </div>
     );
 }
