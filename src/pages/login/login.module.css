@@ -1,53 +1,38 @@
-
-.frame{
-    background-color: aliceblue;
-    display: flex;
-    min-width: 100vh;
-    min-height: 100vh;
-    text-align: right;
-    
-}
-.frame p{
-    color:black;
-    font-size:15px;
-
-}
-.page{
-    width:30%;
-    /* border:1px solid black; */
-    border-radius: 7%;
-    /* height:80vh; */
-}
-
+/* 
 .loginImg{
     width:100%;
     flex:1;
     position:relative;
     background:linear-gradient(to left,rgba(240,248,255,.7),transparent),
-    url(../../assets/loginImg.jpg) center/cover ;
-    /* background-size:cover; */
-    /* background-position: center; */
-    /* background: url(../../assets//loginImg.jpg) center/cover no-repeat; */
+    url(../../../assets/loginImg.jpg) center/cover ;
+   
 }
+ */
 
-.loginImg::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to right,transparent 0%,aliceblue 100%);
+.loginForm{
+    
+    /* padding-inline: 10%; */
+    width:50vw;
+    /* min-height: 83vh; */
+    /* padding:10%; */
+    padding-top:20%;
+    /* padding-bottom:5%; */
+    /* padding-right: 10%; */
+    /* background-color: aqua; */
 }
-
 
 
 .title{
     background-color: transparent;
     display:flex;
     gap:20px;
+    padding-bottom: 1%;
     justify-content: center;
+    padding-right: 15%;
 }
 
 .title h1{
-    background-color: transparent;
+    /* background-color: transparent; */
     margin-top: 4px;
 }
 .title img{
@@ -58,136 +43,111 @@
 
 .inputSection{
     background-color: transparent;
-    padding-top:10%;
+    /* padding-top:10%; */
     gap:10%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height:60%;
-}
-
-.loginForm{
-    background-color: transparent;
-    margin:30vh 10% 0% -5%;
-    /* margin-left:0px; */
-    height:60vh;
-    padding-left:10%;
-    padding-right:10%;
+    margin-top:30px;
     text-align: right;
- 
+    padding-right: 15%;
+    /* height:60%; */
 }
 
 
 .inputSection input{
     background-color: transparent;
-    margin:0px;
+    margin:0px 0px 20px 0px;
     width:92%;
     padding:3%;
+    /* gap:20px; */
     border-radius: 10px;
     border-color: none;
     
 
 }
 
+.inputSection button,a{
+    margin-bottom: 20px;
+}
+.inputSection p{
+    margin-bottom: 200px;
+}
+
+.inputSection button{
+    padding-bottom: 20px,30px, 40px, 50px;
+    border-radius: 10px;
+}
 .inputSection input:hover{
     background-color: rgb(232, 234, 236);
     
 
 }
 
-.forgetPass{
-    position:relative;
-    width:300px;
-    padding:10px;
-    position:relative;
-    top:-1vw;
+.inputSection button{
+    height:40px;
+    width:200px;
+    background-color: #41dd41ab;
+    /* border-radius: ; */
+}
+
+.inputSection button:hover{
+    /* height:40px;
+    width:200px; */
+    background-color: #d0ead0be;
+}
+
+.inputSection button:active{
+    height:40px;
+    width:200px;
+    background-color: #145f14bd;
 }
 
 
-.forgetPass:hover{
-    color:rgb(67, 110, 148);
-}
-.forgetPass:active{
-    color:rgb(9, 46, 79);
+
+.loginLink a:hover{
+    color:rgb(45, 116, 179);
 }
 
-.loginButton{
-    background-color: transparent;
-    text-align: center;
-    border-radius: 10px;
-    width:40%;
-    padding:10px;
-}
-.loginButton:hover{
-    background-color:rgb(155, 177, 197);
-}
-
-.loginButton:active{
-    background-color:rgb(35, 73, 108);
+.loginLink{
+    /* margin-bottom: 20px; */
 }
 
 
-.registerLink a:hover{
+.returnHome a:active{
+    color:rgb(16, 59, 100);
+}
+
+
+.returnHome:hover{
     color:rgb(45, 116, 179);
 }
 
 
-.registerLink a:active{
-    color:rgb(76, 150, 219);
+.returnHome:active{
+    color:rgb(16, 59, 100);
 }
 
 
-
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
 
 @media (max-width:900px) {
-    .frame{
-        flex-direction: column;
-    }
-    .page{
-        background-color: transparent;
-        width:100vw;
-        height:100vh;
-    }
-    .loginImg{
-        display:none;
+    .loginForm{
+        /* background-color: aqua; */
+        /* padding:0; */
+        width:85vw;
+        height:h;
+        padding-left: 15vw;
+        /* padding:20%; */
+        /* padding-left:20%;
+        padding-right: 20%; */
     }
     
-    .returnHome{
-        padding-right:14vw;
-    }
 }
 
 
 @media (max-width:500px) {
-    .frame{
-        /* flex-direction: column; */
-    }
-    .page{
-        /* background-color: blue; */
-        width:100vw;
-        height:100vh;
-    }
-    .loginImg{
-        display:none;
-    }
-    .returnHome{
-        padding-right:14vw;
-    }
-}
-
-/* @media (max-width:400){
-    .loginForm{
-        background-color: aqua;
-        /* margin-left:20%;
-        background-color: transparent;
-        width:100vw;
-        height:100vh; *
-    }
-} */
-
-.returnHome{
-    /* position:absolute; */
-    /* right:%; */
-    /* margin-right:50vw; */
-    margin-right:5.8vw;
 }
