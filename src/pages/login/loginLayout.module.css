@@ -1,0 +1,32 @@
+.frame{
+    display:flex;
+    /* padding:10px; */
+}
+.loginImg{
+    min-height:100vh;
+    /* width:100%; */
+    flex:1;
+    position:relative;
+    background:linear-gradient(to left,rgba(240,248,255,.7),transparent),
+    url('src/assets/loginImg.jpg') center/cover ;}
+
+.loginImg::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to right,transparent 0%,aliceblue 100%);
+}
+
+@media (max-width:900px) {
+    .loginImg{
+        display:none;
+    }
+    
+}
+
+
+@media (max-width:500px) {
+    .loginImg{
+        display:none;
+    }
+}

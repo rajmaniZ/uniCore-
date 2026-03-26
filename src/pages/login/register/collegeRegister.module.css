@@ -9,16 +9,10 @@
 }
  */
 
-.loginForm{
-    
-    /* padding-inline: 10%; */
-    width:50vw;
-    /* min-height: 83vh; */
-    /* padding:10%; */
-    padding-top:20%;
+.registerForm{
+    padding-top:5%;
     /* padding-bottom:5%; */
-    /* padding-right: 10%; */
-    /* background-color: aqua; */
+    padding-right: 10%;
 }
 
 
@@ -28,7 +22,6 @@
     gap:20px;
     padding-bottom: 1%;
     justify-content: center;
-    padding-right: 15%;
 }
 
 .title h1{
@@ -50,7 +43,6 @@
     justify-content: space-evenly;
     margin-top:30px;
     text-align: right;
-    padding-right: 15%;
     /* height:60%; */
 }
 
@@ -67,13 +59,9 @@
 
 }
 
-.inputSection button,a{
+.inputSection p,button,a{
     margin-bottom: 20px;
 }
-.inputSection p{
-    margin-bottom: 100px;
-}
-
 .inputSection button{
     padding-bottom: 20px,30px, 40px, 50px;
     border-radius: 10px;
@@ -84,17 +72,25 @@
 
 }
 
+fieldset{
+    padding:20px;
+    margin-bottom: 30px;
+    text-align: left;
+    border:2px solid rgb(187, 216, 234);
+    border-radius: 10px;
+}
+
+
 .inputSection button{
     height:40px;
     width:200px;
-    background-color: #9db89dab;
-    /* border-radius: ; */
+    background-color: #41dd41ab;
 }
 
 .inputSection button:hover{
     /* height:40px;
     width:200px; */
-    background-color: #747b74be;
+    background-color: #888d88be;
 }
 
 .inputSection button:active{
@@ -118,6 +114,7 @@
     color:rgb(16, 59, 100);
 }
 
+
 .returnHome:hover{
     color:rgb(45, 116, 179);
 }
@@ -126,6 +123,12 @@
 .returnHome:active{
     color:rgb(16, 59, 100);
 }
+.bottomLink{
+    padding-bottom: 15px;
+    display:flex;
+    justify-content:space-between;
+
+}
 
 
 button:disabled {
@@ -133,12 +136,21 @@ button:disabled {
     cursor: not-allowed;
 }
 
+
+
 @media (max-width:900px) {
-    .loginForm{
-        width:85vw;
-        height:h;
-        padding-left: 15vw;
+    .registerForm{
+        width:70vw;
+        padding-left:20%;
+        /* padding-right: 20%; */
     }
+    
+.bottomLink{
+    /* display:flex; */
+    flex-direction: column;
+    /* justify-content:space-between; */
+
+}
     
 }
 
