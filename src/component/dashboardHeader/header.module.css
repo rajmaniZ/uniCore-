@@ -1,0 +1,34 @@
+nav{
+  height:40px;
+  display:flex;
+  justify-content: space-between;
+  padding-left:10px;
+  padding-right:10px;
+
+}
+.navDiv{
+  height:40px;
+}
+.navDiv img{
+  height:30px;
+}
+.navMenu{
+  width:55%;
+  /* background-color: aqua; */
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navMenu li{
+  font-size:17px;
+  font-weight: 700;
+}
+
+.navMenu li:hover{
+  font-size:19px;
+  color:burlywood;
+  font-weight: 700;
+}
+.searchImg{
+  width:30px;
+}
