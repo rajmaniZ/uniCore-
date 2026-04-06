@@ -1,7 +1,17 @@
+import DashboardHeader from "../../../component/dashboardHeader/header";
+import DashboardSidebar from './../../../component/DashboardSidebar/Sidebar'
+import ShowData from './../../../component/dataShow/dataShow'
+import styles from './Principle.module.css'
 function Principle(){
     return(
         <>
-        <h1> Principle </h1>
+        <DashboardHeader/>
+        <div className={styles.ShowData}>
+        <DashboardSidebar/>
+        
+        <ShowData/>
+        </div>
+        
         </>
     )
 
