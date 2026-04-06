@@ -11,7 +11,7 @@ import Register from './pages/login/register/collegeRegister';
 import ForgetPassword from './pages/login/forget-password';
 import RequestForAccount from './pages/login/register/requestForAccount'
 
-
+import HomePage from './pages/Homepageforcollege/homePage'
 
 
 import ComingSoon from './pages/comingSoon/ComingSoon';
@@ -93,6 +93,7 @@ function App() {
         </Route>
         <Route path='/Admin' element={<Admin />} />
         <Route path='/Principle' element={<Principle />} />
+        <Route path='/HomePage' element={<HomePage/>}/>
         <Route path='/Teacher' element={<Teacher />} />
         <Route path='/Student' element={<Student />} />
 
