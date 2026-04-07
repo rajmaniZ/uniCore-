@@ -23,7 +23,8 @@ import Principle from "./pages/Dashboard/PrincipleDashboard/Principle";
 
 
 import LoginLayout from './pages/login/loginLayout';
-
+import AboutCollegeForm from './pages/Dashboard/PrincipleDashboard/component/aboutCollege/aboutCollege';
+import AboutCollege from './pages/Dashboard/PrincipleDashboard/pages/about';
 // import Home from './pages/home/home';
 
 function App() {
@@ -93,6 +94,9 @@ function App() {
         </Route>
         <Route path='/Admin' element={<Admin />} />
         <Route path='/Principle' element={<Principle />} />
+         <Route path='/AboutCollegeForm' element={<AboutCollegeForm/>}/>
+         <Route path='/AboutCollege' element={<AboutCollege/>}/>
+
         <Route path='/HomePage' element={<HomePage/>}/>
         <Route path='/Teacher' element={<Teacher />} />
         <Route path='/Student' element={<Student />} />
