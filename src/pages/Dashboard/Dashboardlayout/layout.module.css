@@ -1,0 +1,9 @@
+.frame{
+  background-color: aliceblue;
+  display:flex;
+}
+
+.showList{
+  width: 70%;
+  
+}
