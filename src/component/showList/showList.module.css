@@ -1,0 +1,104 @@
+/* Container */
+.container {
+  padding: 20px;
+  /* background-color: #38bdf8; */
+  max-width: 1200px;
+  margin: auto;
+  /* color: white; */
+}
+
+/* Section spacing */
+.section {
+  margin-bottom: 30px;
+}
+
+/* Headings */
+.heading {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Filters & controls */
+.controls {
+  margin-bottom: 20px;
+  max-width: 150px;
+  /* width:13.3%; */
+}
+
+.filterRow {
+  display: flex;
+  min-width: 500px;
+  /* max-width:500px; */
+  /* gap: 10px; */
+  /* flex-direction: column; */
+  /* flex-wrap: wrap; */
+}
+
+/* Select inputs */
+.select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #1e293b;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+.select:hover {
+  border-color: #888;
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.03);
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Header */
+.table th {
+  background: rgba(255,255,255,0.08);
+  font-weight: 500;
+}
+
+/* Row hover */
+.table tr:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+/* Status colors */
+.pending {
+  color: orange;
+}
+
+.success {
+  color: #22c55e;
+}
+
+.rejected {
+  color: #ef4444;
+}
+
+.completed {
+  color: #38bdf8;
+}
+
+.deleted {
+  color: gray;
+}
+
+/* Divider */
+.divider {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}

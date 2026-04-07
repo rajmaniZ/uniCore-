@@ -9,7 +9,7 @@ function ShowDashboard(){
                 
                 <li><Link to='/Student'>Student</Link></li>
                 
-                <li><Link to='/Principle'>principle</Link></li>
+                <li><Link to='/HomePage'>principle</Link></li>
             </div>
     );
 }

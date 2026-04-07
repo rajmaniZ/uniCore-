@@ -1,6 +1,7 @@
 import style from './header.module.css';
 import {Link} from 'react-router-dom'
 
+
 function DashboardHeader(){
   return (
     <>
@@ -15,7 +16,8 @@ function DashboardHeader(){
            <a href="/HomePage" >home</a>
             </li>
           <li>Profile</li>
-          <li>about</li>
+          <li><Link to="/Principle" >Dashboard</Link></li>
+          <li><Link to="/AboutCollege">about</Link></li>
           <li>help</li>
           <li><Link path='/HomePage'>logout </Link></li>
           {/* <li>home</li> */}
