@@ -1,60 +1,28 @@
 import styles from "./Sidebar.module.css";
+import {Link} from 'react-router-dom';
+// const departments = ["IT", "CS", "ECE", "EE", "ME", "CE"];
+
 function Sidebar() {
   return (
-    <>
-      <div className={styles.SidebarDiv}>
-        <ul>
-          <li>Dashboard</li>
-          <li>
-            Departments
-            <select>
-              <option className={styles.option}>
-                {" "}
-                IT
-                <select>
-                  <option>Tacher</option>
-                </select>
-              </option>
-              <option option className={styles.option}>
-                CS
-              </option>
-              <option className={styles.option}> ECE</option>
-              <option option className={styles.option}>
-                EE
-              </option>
-              <option className={styles.option}> ME</option>
-              <option option className={styles.option}>
-                CE
-              </option>
-              <select>
-                <li>Teacher</li>
-                <option option className={styles.option} value="">
-                  Year
-                </option>
-                <select>
-                  <option option className={styles.option} value="1">
-                    First Year
-                  </option>
-                  <option option className={styles.option} value="2">
-                    Second Year
-                  </option>
-                  <option option className={styles.option} value="3">
-                    Third Year
-                  </option>
-                  <option option className={styles.li} value="4">
-                    Fourth Year
-                  </option>
-                </select>
-              </select>
-            </select>
-          </li>
-          <li>Teacher</li>
-          <li>Students</li>
-          <li>Dashboard</li>
-          <li>Dashboard</li>
-        </ul>
+    <div className={styles.SidebarDiv}>
+      <div className={styles.sidebarLogoDiv}>
+        <img src="/uniCore.png" alt="logo" className={`${styles.logo}`}/>
+        <h1 className="logo-text">uniCore</h1>
       </div>
-    </>
+      <ul className={styles.list}>
+        <li><Link><img src="/uniCore.png" alt="dash" /><span>Dashboard</span></Link></li>
+        <li><Link><img src="/uniCore.png" alt="student"/><span>Students</span></Link></li>
+        <li><Link><img src="/uniCore.png" alt="Teacher"/><span>Teacher</span></Link></li>
+        <li><Link><img src="/uniCore.png" alt="request"/><span>Join Request</span></Link></li>
+        <li><Link><img src="/uniCore.png" alt="setting"/><span>Settings</span></Link></li>
+        
+
+      </ul>
+      <div className={styles.Bottom} >
+        <p><img src="/uniCore.png" alt="profile"></img>userName</p>
+        <button><img src="/uniCore.png" alt="logout"/>Logout</button>
+      </div>
+    </div>
   );
 }
 
