@@ -1,0 +1,11 @@
+.frame{
+  background-color: aliceblue;
+  display:flex;
+}
+.Sidebar{
+  width:30%;
+}
+.navAndMain{
+  width: 70%;
+  
+}

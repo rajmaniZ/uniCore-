@@ -4,19 +4,17 @@
   padding-bottom: 60px;
 }
 
-.sidebarLogoDiv{
-  display:flex;
-}
-img{
-  width: 20px;
+
+.SidebarDiv{
+  background-color: aquamarine;
+  width:30%;
+  /* font-size: 18px; */
+  /* padding-left:10px; */
 
 }
-.list{
-  
-  display: flex;
-  /* justify-content: left; */
-  /* align-items: center; */
-  /* align-items: center; */
+.SidebarDiv li{
+  padding-bottom: 5px;
+  /* border-radius: 5%; */
   /* text-align: center; */
 }
 
