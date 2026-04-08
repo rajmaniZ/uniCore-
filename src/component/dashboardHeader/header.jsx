@@ -1,26 +1,19 @@
 import style from './header.module.css';
-import {Link} from 'react-router-dom'
-
+import {Link} from 'react-router-dom';
+// import {FaSearch} from 'react-';
 
 function DashboardHeader(){
   return (
     <>
       <nav>
-        <div className={style.navDiv} >
-        
-          <img src="/uniCore.png" alt="" />
-        </div>
         <ul className={style.navMenu}>
-          <li><img className={style.searchImg}src="OIP.jpg" alt="" /></li>
+          <li><input type="text"placeholder='Search'></input></li>
           <li>
            <a href="/HomePage" >home</a>
             </li>
-          <li>Profile</li>
-          <li><Link to="/Principle" >Dashboard</Link></li>
-          <li><Link to="/AboutCollege">about</Link></li>
-          <li>help</li>
-          <li><Link path='/HomePage'>logout </Link></li>
-          {/* <li>home</li> */}
+          <li>Notification</li>
+          <li><Link to="/Principle" >profile</Link></li>
+          
         </ul>
       </nav>
     </>
