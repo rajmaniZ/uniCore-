@@ -2,8 +2,10 @@
   background-color: aliceblue;
   display:flex;
 }
-
-.showList{
+.Sidebar{
+  width:30%;
+}
+.navAndMain{
   width: 70%;
   
 }

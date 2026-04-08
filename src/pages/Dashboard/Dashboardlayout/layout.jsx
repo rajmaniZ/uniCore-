@@ -10,17 +10,12 @@ import DashboardHeader from '../../../component/dashboardHeader/header';
 function DashboardLayout(){
   return(
     <>
-    <DashboardHeader/>
     <div className={styles.frame}>
-      <Sidebar/>
-        {/* <div className={styles.page}> */}
-            {/* <main className={styles.main}> */}
-                <Outlet/>
-                <ShowList className={styles.showList}/>
-            {/* </main> */}
-            
-        {/* </div> */}
-
+    <Sidebar className={styles.Sidebar}/>
+    <div className={styles.navAndMain}>
+        <DashboardHeader/>
+        <Outlet/>
+    </div>
         
         
     </div>
