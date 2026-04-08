@@ -3,13 +3,13 @@
 .SidebarDiv{
   background-color: aquamarine;
   width:30%;
-  font-size: 18px;
-  padding-left:10px;
+  /* font-size: 18px; */
+  /* padding-left:10px; */
 
 }
 .SidebarDiv li{
   padding-bottom: 5px;
-  border-radius: 5%;
+  /* border-radius: 5%; */
   /* text-align: center; */
   /* background-color: bisque; */
 
