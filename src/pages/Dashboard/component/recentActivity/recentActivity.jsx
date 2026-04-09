@@ -1,18 +1,22 @@
-function RecentActivity(){
+import styles from './recentActivity.module.css';
+
+function RecentActivity({ activities = [] }) {
   return (
-    <>
-    <header>Recent Activity</header>
-    <>
-    <main>
-      <ul>
-        <li><img src="/" alt="icon" />name of last activity</li>
-        <li><img src="/" alt="icon" />name of last second activity</li>
-        <li><img src="/" alt="icon" />name of last third activity</li>
-      </ul>
-    </main>
-    </>
-    </>
-  )
+    <div className={styles.container}>
+      <h3>Recent Activity</h3>
+
+      {activities.length === 0 ? (
+        <p className={styles.empty}>No Activity</p>
+      ) : (
+        activities.map((act, index) => (
+          <div key={index} className={styles.item}>
+            <p>{act.action}</p>
+            <span>{act.time}</span>
+          </div>
+        ))
+      )}
+    </div>
+  );
 }
 
 export default RecentActivity;

@@ -1,0 +1,268 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 260px;
+  background: rgba(127, 127, 160, 0.95);
+  backdrop-filter: blur(20px);
+  /* border-right: 1px solid rgba(255, 255, 255, 0.1); */
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  z-index: 100;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+/* Logo Section */
+.logoSection {
+  padding: 10px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+   /* gap: 12px; */
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  color: white;
+}
+
+.logoText {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.toggleBtn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  margin-top: 15px;
+  margin-left:5px;
+  background-color: transparent;
+  /* background: rgba(255, 255, 255, 0.1); */
+  /* border-radius: 8px; */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+
+.toggleBtn svg {
+  width: 40px;
+  height: 40px;
+  /* font-size: large; */
+  fill: rgba(244, 236, 236, 0.953);
+}
+
+/* Navigation */
+.nav {
+  flex: 1;
+  max-width: calc(100%-80px);
+  /* padding: 20px 12px; */
+  overflow-y: auto;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  /* gap: 4px; */
+}
+
+.menuItem{
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  /* gap:5px; */
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.menuItem:hover{
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding:13px;
+}
+.toggleBtn:hover{
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  margin-left: -1px;
+  height:55px;
+  width:99.5%;
+}
+
+.menuItem.active,.toggleBtn:active {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  color: white;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon svg {
+  width: 35px;
+  height: 35px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.activeIndicator {
+  position: absolute;
+  right: 12px;
+  width: 6px;
+  height: 6px;
+  background: #667eea;
+  border-radius: 50%;
+}
+
+/* User Section */
+.userSection {
+  padding: 10px ;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 18%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+  flex-shrink: 0;
+}
+.logoDiv {
+  display: flex;
+}
+.logoDiv img{
+  height:40px;
+}
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* height:50px; */
+}
+
+.userName {
+  font-size: 14px;
+  font-weight: 600;
+
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userRole {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.logoutBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* gap: 12px; */
+  padding: 8px 8px;
+  border: none;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 10px;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.logoutBtn:hover {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+/* Collapsed State */
+/* .collapsed .logoSection {
+  padding: 20px 12px;
+  justify-content: center;
+} */
+
+.collapsed .toggleBtn{
+    margin-top: 15px;
+    margin-left:25px;
+ 
+}
+.collapsed .toggleBtn:hover{
+    width:73px;
+    height: 40px;
+    position: relative;
+    left:-25px;
+    /* top:-15px; */
+}
+
+.collapsed .menuItem {
+  justify-content: center;
+  padding: 3px 3px 3px 3px;
+}
+
+.collapsed .userInfo {
+  justify-content: center;
+}
+.collapsed .logoutBtn{
+  width: 40px;
+  height: 40px;
+  margin-left:10px;
+}
+.collapsed h1{
+  display: none;
+}
+
+
+
+
