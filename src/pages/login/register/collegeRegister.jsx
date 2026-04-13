@@ -38,8 +38,9 @@ function Login() {
         <form className={styles.registerForm}>
             <div className={styles.title}>
                 <img src="/uniCore.png" alt="logo" className={styles.logo} />
-                <h1>Sign Up</h1>
+                <h1>UniCore</h1>
             </div>
+                {/* <h2 className={styles.h2}>Sign Up</h2> */}
 
             <div className={styles.inputSection}>
                 <fieldset>

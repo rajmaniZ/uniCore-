@@ -1,0 +1,92 @@
+.container {
+  padding: 20px;
+  color: white;
+}
+
+.heading {
+  margin-bottom: 20px;
+}
+
+/* NOTIFICATIONS */
+.notifications {
+  margin-bottom: 15px;
+}
+
+.notice {
+  background: #1e293b;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 5px;
+}
+
+/* CARD */
+.card {
+  background: #111;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.normal { background: gray; }
+.important { background: orange; }
+.must { background: red; }
+
+/* META */
+.meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.deadline {
+  color: #22c55e;
+}
+
+/* PREVIEW */
+.preview {
+  width: 100%;
+  height: 200px;
+  margin-top: 10px;
+}
+
+/* STATUS */
+.status {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.submitBox {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.reupload {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 6px 10px;
+  background: #3b82f6;
+  border-radius: 6px;
+  border: none;
+}
+
+/* EMPTY */
+.empty {
+  text-align: center;
+  color: gray;
+}

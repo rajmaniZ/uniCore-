@@ -14,6 +14,8 @@ export const roleConfig = {
       { name: "Courses", path: "/superadmin/courses", icon: "book" },
       { name: "Settings", path: "/superadmin/settings", icon: "settings" },
       { name: "Join Requests", path: "/superadmin/JoinRequests", icon: "userPlus" },
+      
+      { name: "Attendance", path: "/superadmin/attendance", icon: "checkSquare" },
     ],
     permissions: ["all"],
   },
@@ -31,7 +33,8 @@ export const roleConfig = {
       { name: "Teachers", path: "/admin/teachers", icon: "chalkboard" },
 
       { name: "Courses", path: "/admin/courses", icon: "book" },
-
+      
+      { name: "Attendance", path: "/admin/attendance", icon: "checkSquare" },
       { name: "Join Requests", path: "/admin/JoinRequests", icon: "userPlus" },
       //{ name: "Subjects", path: "/hod/subjects", icon: "book" },
       { name: "Timetable", path: "/admin/timetable", icon: "calendar" },
@@ -58,14 +61,15 @@ export const roleConfig = {
       { name: "Classes", path: "/hod/classes", icon: "door" },
       { name: "Teachers", path: "/hod/teachers", icon: "chalkboard" },
       { name: "Students", path: "/hod/students", icon: "users" },
-      { name: "Subjects", path: "/hod/subjects", icon: "book" },
+      { name: "Subjects", path: "/hod/subject", icon: "book" },
       { name: "Timetable", path: "/hod/timetable", icon: "calendar" },
       { name: "Reports", path: "/hod/reports", icon: "chart" },
       { name: "Settings", path: "/hod/settings", icon: "settings" },
+      
+      { name: "Attendance", path: "/hod/attendance", icon: "checkSquare" },
     ],
     permissions: ["manage_department", "view_department_data"],
   },
-
   teacher: {
     label: "Teacher",
     sidebar: [
@@ -73,9 +77,9 @@ export const roleConfig = {
       { name: "Dashboard", path: "/teacher/dashboard", icon: "dashboard" },
       { name: "Classes", path: "/teacher/classes", icon: "door" },
       { name: "Students", path: "/teacher/students", icon: "users" },
-      { name: "Assignments", path: "/teacher/assignments", icon: "clipboard" },
-      { name: "Attendance", path: "/teacher/attendance", icon: "checkSquare" },
-      { name: "Subjects", path: "/teacher/subjects", icon: "book" },
+      { name: "Assignments", path: "/teacher/assignment", icon: "clipboard" },
+      { name: "Attendance", path: "/teacher/attandence", icon: "checkSquare" },
+      { name: "Subjects", path: "/teacher/subject", icon: "book" },
       { name: "Timetable", path: "/teacher/timetable", icon: "calendar" },
       { name: "Settings", path: "/teacher/settings", icon: "settings" },
     ],
@@ -87,9 +91,9 @@ export const roleConfig = {
     sidebar: [
       { name: "Dashboard", path: "/student/dashboard", icon: "dashboard" },
       { name: "Profile", path: "/student/profile", icon: "user" },
-      { name: "Subjects", path: "/student/subjects", icon: "book" },
-      { name: "Assignments", path: "/student/assignments", icon: "clipboard" },
-      { name: "Attendance", path: "/student/attendance", icon: "checkSquare" },
+      { name: "Subjects", path: "/student/subject", icon: "book" },
+      { name: "Assignments", path: "/student/submitAssignment", icon: "clipboard" },
+      { name: "Attendance", path: "/student/attandence", icon: "checkSquare" },
       { name: "Grades", path: "/student/grades", icon: "award" },
       { name: "Timetable", path: "/student/timetable", icon: "calendar" },
       { name: "Settings", path: "/student/settings", icon: "settings" },

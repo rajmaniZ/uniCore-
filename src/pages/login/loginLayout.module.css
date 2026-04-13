@@ -17,10 +17,18 @@
     background:linear-gradient(to right,transparent 0%,aliceblue 100%);
 }
 
+
+.main{
+    width:100%;
+}
 @media (max-width:900px) {
     .loginImg{
         display:none;
     }
+    
+.main{
+    width:100%;
+}
     
 }
 
@@ -29,4 +37,9 @@
     .loginImg{
         display:none;
     }
+    
+.page{
+    width:100%;
+    /* padding: 30px 30px 30x 30px; */
+}
 }

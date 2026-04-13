@@ -1,0 +1,196 @@
+/* .container {
+  padding: 20px;
+  color: white;
+}
+
+.center {
+  text-align: center;
+  padding: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+select {
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.rowHeader, .row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  padding: 10px;
+}
+
+.row {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.box {
+  width: 28px;
+  height: 28px;
+  background: #111;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.present {
+  background: #22c55e;
+}
+
+.submit {
+  margin-top: 20px;
+  padding: 10px;
+  background: #3b82f6;
+  border-radius: 6px;
+  border: none;
+}
+
+.lockMsg {
+  margin-top: 15px;
+  color: #f87171;
+}
+
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+} */
+
+
+.container {
+  padding: 20px;
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.table {
+  border-radius: 10px;
+}
+
+.rowHeader, .row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  padding: 10px;
+}
+
+.row {
+  border-bottom: 1px solid #333;
+}
+
+.box {
+  width: 28px;
+  height: 28px;
+  background: #111;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.present {
+  background: #22c55e;
+}
+
+.empty {
+  text-align: center;
+  padding: 20px;
+  color: gray;
+}
+
+.pagination {
+  margin-top: 10px;
+}
+
+.submit {
+  margin-top: 20px;
+}
+
+.container {
+  padding: 20px;
+  color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.filters select {
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.table {
+  background: #111;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  padding: 8px;
+  border-bottom: 1px solid #333;
+}
+
+.box {
+  width: 24px;
+  height: 24px;
+  background: #222;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.present {
+  background: #22c55e;
+}
+
+.empty {
+  text-align: center;
+  color: gray;
+}
+
+.pagination {
+  margin-top: 10px;
+}
+
+.submit {
+  margin-top: 15px;
+  padding: 8px 12px;
+  background: #3b82f6;
+  border-radius: 6px;
+}

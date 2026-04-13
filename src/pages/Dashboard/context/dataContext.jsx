@@ -20,9 +20,12 @@ export function DataProvider({ children }) {
   const [announcements, setAnnouncements] = useState(initialAnnouncements);
   const [submissions, setSubmissions] = useState(initialSubmissions);
 
-  // Attendance functions
+  // ===================== Attendance =====================
   const markAttendance = (attendanceData) => {
-    setAttendance(prev => [...prev, { ...attendanceData, _id: `att_${Date.now()}` }]);
+    setAttendance(prev => [
+      ...prev,
+      { ...attendanceData, _id: `att_${Date.now()}` }
+    ]);
   };
 
   const getAttendanceByClass = (className, subject) => {
@@ -37,7 +40,7 @@ export function DataProvider({ children }) {
     );
   };
 
-  // Assignment functions
+  // ===================== Assignments =====================
   const createAssignment = (assignmentData) => {
     const newAssignment = {
       ...assignmentData,
@@ -61,14 +64,37 @@ export function DataProvider({ children }) {
 
   const gradeSubmission = (submissionId, marks, feedback) => {
     setSubmissions(prev =>
-      prev.map(s => s._id === submissionId 
-        ? { ...s, marks, feedback, status: 'graded' } 
-        : s
+      prev.map(s =>
+        s._id === submissionId
+          ? { ...s, marks, feedback, status: 'graded' }
+          : s
       )
     );
   };
 
-  // Announcement functions
+  // ===================== Grades (NEW - FIXED) =====================
+  const calculateGrade = (marks) => {
+    if (marks >= 90) return "A";
+    if (marks >= 75) return "B";
+    if (marks >= 60) return "C";
+    if (marks >= 40) return "D";
+    return "F";
+  };
+
+  const getStudentGrades = (studentId) => {
+    return submissions
+      .filter(s => s.studentId === studentId && s.status === "graded")
+      .map(s => ({
+        id: s._id,
+        subject: s.subject || "General",
+        title: s.assignmentTitle || "Assignment",
+        marks: s.marks,
+        grade: calculateGrade(s.marks),
+        feedback: s.feedback
+      }));
+  };
+
+  // ===================== Announcements =====================
   const createAnnouncement = (announcementData) => {
     const newAnnouncement = {
       ...announcementData,
@@ -79,6 +105,7 @@ export function DataProvider({ children }) {
     return newAnnouncement;
   };
 
+  // ===================== CONTEXT VALUE =====================
   const value = {
     students,
     setStudents,
@@ -97,6 +124,9 @@ export function DataProvider({ children }) {
     gradeSubmission,
     announcements,
     createAnnouncement,
+
+    // ⭐ grades
+    getStudentGrades
   };
 
   return (
@@ -106,6 +136,7 @@ export function DataProvider({ children }) {
   );
 }
 
+// ===================== HOOK =====================
 export const useData = () => {
   const context = useContext(DataContext);
   if (!context) {

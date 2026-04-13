@@ -11,8 +11,8 @@ function Hero() {
                 <hr className={styles.hrFaded} />
                 <p>Simplify. Connect. Learn.</p>
 
-                <div className={styles.btnGroup}>
-                    <Link to='/login' className={styles.login}>Login</Link>
+                <div  className={styles.btnGroup}>
+                    <Link to='/login' className={`${styles.login}`}>Login</Link>
                     <Link to='/register' className={styles.register}>Sign Up</Link>
                 </div>
                 
