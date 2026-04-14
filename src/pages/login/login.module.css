@@ -1,153 +1,148 @@
-/* 
-.loginImg{
-    width:100%;
-    flex:1;
-    position:relative;
-    background:linear-gradient(to left,rgba(240,248,255,.7),transparent),
-    url(../../../assets/loginImg.jpg) center/cover ;
-   
+*{
+    box-sizing: border-box;
 }
- */
+.title{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    /* gap:15px; */
+    padding-bottom: 100px;
+}
+
+.page{
+    padding-top: 70px;
+    text-align: center;
+    background-color: transparent;
+    height:100vh;
+    width:35vw;
+}
+
+
+.h2{
+    /* background-color: aqua; */
+    font-size:30px;
+    color:rgba(52, 65, 72, 0.837)
+}
+
+.title img{
+    width:50px;
+}
+
 
 .loginForm{
-    
-    /* padding-inline: 10%; */
-    width:50vw;
-    /* min-height: 83vh; */
-    /* padding:10%; */
-    padding-top:20%;
-    /* padding-bottom:5%; */
-    /* padding-right: 10%; */
-    /* background-color: aqua; */
-}
-
-
-.title{
-    background-color: transparent;
-    display:flex;
-    gap:20px;
-    padding-bottom: 1%;
-    justify-content: center;
-    padding-right: 15%;
-}
-
-.title h1{
-    /* background-color: transparent; */
-    margin-top: 4px;
-}
-.title img{
-    background-color: transparent;
-    width:50px;
-    height:50px;
+    gap:70px;
+    margin:50px 40px 40px 0px;
 }
 
 .inputSection{
-    background-color: transparent;
-    /* padding-top:10%; */
-    gap:10%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    margin-top:30px;
-    text-align: right;
-    padding-right: 15%;
-    /* height:60%; */
-}
+    gap:20px;
+    /* width:93%; */
+    padding-bottom: 20px;
 
+}
 
 .inputSection input{
-    background-color: transparent;
-    margin:0px 0px 20px 0px;
-    width:92%;
-    padding:3%;
-    /* gap:20px; */
-    border-radius: 10px;
-    border-color: none;
+    /* height: 40px; */
+    width:98%;
+    font-size: medium;
+    font-weight: 600;
+    border-radius: 30px;
+    /* text-align:ca); */
+    padding:15px;
+}
+.loginBtn{
+    /* background-color: aqua; */
+    text-align: center;
+}
+
+.loginBtn  button{
+    color: white;
+    font-weight: 700;
+    font-size: medium;
+    width:50%;
+    background-color: rgba(16, 166, 84, 0.515);
+    /* height:30px; */
+    border: none;
+    border-radius: 30px;
+    padding:15px;
+
+}
+.loginBtn button:hover{
+    /* cursor: not-allowed; */
+
+    background-color: rgba(12, 194, 93, 0.515);
     
+}
+.loginBtn button:disabled:hover{
+    /* cursor: not-allowed; */
 
-}
-
-.inputSection button,a{
-    margin-bottom: 20px;
-}
-.inputSection p{
-    margin-bottom: 200px;
-}
-
-.inputSection button{
-    padding-bottom: 20px,30px, 40px, 50px;
-    border-radius: 10px;
-}
-.inputSection input:hover{
-    background-color: rgb(232, 234, 236);
+    background-color: rgb(201, 204, 204);
     
-
 }
-
-.inputSection button{
-    height:40px;
-    width:200px;
-    background-color: #41dd41ab;
-    /* border-radius: ; */
-}
-
-.inputSection button:hover{
-    /* height:40px;
-    width:200px; */
-    background-color: #d0ead0be;
-}
-
-.inputSection button:active{
-    height:40px;
-    width:200px;
-    background-color: #145f14bd;
-}
-
-
-
-.loginLink a:hover{
-    color:rgb(45, 116, 179);
-}
-
-.loginLink{
-    /* margin-bottom: 20px; */
-}
-
-
-.returnHome a:active{
-    color:rgb(16, 59, 100);
-}
-
-
-.returnHome:hover{
-    color:rgb(45, 116, 179);
-}
-
-
-.returnHome:active{
-    color:rgb(16, 59, 100);
-}
-
-
-button:disabled {
-    background: #ccc;
+.loginBtn button:disabled{
     cursor: not-allowed;
-}
 
-@media (max-width:900px) {
-    .loginForm{
-        /* background-color: aqua; */
-        /* padding:0; */
-        width:85vw;
-        height:h;
-        padding-left: 15vw;
-        /* padding:20%; */
-        /* padding-left:20%;
-        padding-right: 20%; */
-    }
-    
+    background-color: rgb(169, 171, 171);
+
+}
+.linkToOtherPages{
+    text-align: right;
+    display: grid;
+    gap:20px;
 }
 
 
-@media (max-width:500px) {
+
+.demoSection{
+    gap:20px;
+}
+.demoButtons button{
+    padding: 5px;
+    border-radius: 10px;
+    /* margin-top: 5px; */
+}
+
+
+
+@media (max-width:900px){
+.page{
+    width: 100vw;
+    /* background-color: burlywood; */
+    padding-left: 10%;
+    padding-right:10vw;
+}
+
+.loginForm{
+    gap:70px;
+    margin:40px 0px 0px 0px;
+}
+}
+
+
+
+/* forge password */
+
+
+.forgetBtn{
+    display:flex;
+    flex-direction: column;
+    /* justify-content:center; */
+    /* width: 100%; */
+    gap:20px;
+    align-items: center;
+}
+.forgetBtn button{
+
+    padding:10px;
+    border:none;
+    border-radius: 30px;
+}
+.loginForm h2{
+    padding-bottom: 30px;
+}
+
+.titleForget{
+    padding-bottom: 50px;
 }

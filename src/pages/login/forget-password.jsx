@@ -2,7 +2,8 @@
 import { Link } from 'react-router-dom';
 
 import {useState} from 'react';
-import styles from './forget-password.module.css';
+// import styles from './forget-password.module.css';
+import styles from './login.module.css'
 function ForgetPassword(){
     
     const [digit, setDigit]=useState(false);
@@ -27,14 +28,16 @@ function ForgetPassword(){
             <div className={styles.page}>
                 <div>
                     <form className={styles.loginForm}>
-                        <div className={styles.title}>
+                        <div className={`${styles.title} ${styles.titleForget} `}>
                             <img src="/uniCore.png" alt="logo" className={styles.logo} />
-                            <h1>Forget Password</h1>
+                            <h1>uniCore</h1>
                         </div>
+                        <h2 className={styles.h2}>Welcome!</h2>
+                        {/* <div className={styles.loginForm}> */}
                         <div className={styles.inputSection}>
                             <label for="username"></label>
                             <input type="text" id="username" name="username" placeholder="Username / Email " value={formData.username} onChange={handleChange}/>
-                        <div>
+                            <div className={`${styles.forgetBtn} ${styles.loginBtn}`}>
                                 <button type="submit" 
                                 
                                 disabled={!isUsernameValid}
@@ -66,12 +69,13 @@ function ForgetPassword(){
                                 )}
                                 
 
-                            </div>
-
+                            </div  >
+                                <div className={styles.linkToOtherPages}>
                             <Link to='/login' className={styles.forgetPass}>Back to login Page</Link>
                             <p className={styles.registerLink}>Don't have an account? <Link to='/register' className={styles.registerLink}>Register</Link></p>
                             
                             <Link to="/" className={styles.returnHome}>Back to Home</Link>
+                        </div>
                         </div>
                     </form>
                    

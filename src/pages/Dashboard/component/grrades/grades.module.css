@@ -1,0 +1,50 @@
+.container {
+  padding: 20px;
+}
+
+.heading {
+  margin-bottom: 15px;
+}
+
+.noData {
+  color: gray;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.table th {
+  background-color: #f5f5f5;
+}
+
+/* grade colors */
+.a {
+  color: green;
+  font-weight: bold;
+}
+
+.b {
+  color: #4caf50;
+}
+
+.c {
+  color: orange;
+}
+
+.d {
+  color: orangered;
+}
+
+.f {
+  color: red;
+  font-weight: bold;
+}

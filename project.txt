@@ -1,0 +1,54 @@
+// ==========================
+// 📁 src/test/file1.js
+// ==========================
+
+console.log("Hello from file1");
+
+
+// ==========================
+// 📁 src/test/file2.js
+// ==========================
+
+console.log("Hello from file2");
+
+
+
+
+
+
+
+
+
+
+
+
+backend/
+│
+├── config/
+│   └── db.js
+│
+├── models/
+│   ├── User.js
+│   ├── Assignment.js
+│   ├── Submission.js
+│
+├── controllers/
+│   ├── authController.js
+│   ├── assignmentController.js
+│
+├── middleware/
+│   ├── authMiddleware.js
+│   ├── roleMiddleware.js
+│   ├── upload.js
+│
+├── routes/
+│   ├── authRoutes.js
+│   ├── assignmentRoutes.js
+│
+├── utils/
+│   ├── sendEmail.js
+│   ├── otpGenerator.js
+│
+├── uploads/
+│
+├── server.js

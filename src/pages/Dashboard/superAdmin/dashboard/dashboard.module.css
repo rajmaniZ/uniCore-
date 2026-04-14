@@ -1,0 +1,476 @@
+.dashboard {
+  /* margin: 0px; */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  /* background-color: #08144d; */
+}
+
+.header {
+  margin-bottom: 8px;
+}
+
+.greeting {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 4px 0;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Main Grid */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
+}
+
+/* Cards */
+.chartCard,
+.tableCard,
+.teacherCard,
+.leaderboardCard,
+.distributionCard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cardHeader h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.select {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.chartSubtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 20px 0;
+}
+
+/* Chart */
+.chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 200px;
+  padding: 20px 0;
+  position: relative;
+}
+
+.barContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.bar {
+  width: 36px;
+  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px 8px 0 0;
+  position: relative;
+  min-height: 20px;
+  transition: height 0.3s ease;
+}
+
+.barValue {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.barLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.chartStats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+}
+
+.statDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.statHighlight {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+/* Teacher Card */
+.teacherList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.teacherItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+}
+
+.teacherAvatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+}
+
+.teacherInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.teacherName {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.teacherDept {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+}
+
+.acceptBtn {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.badge {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Table */
+.tableCard {
+  margin-top: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table th {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.table td {
+  color: white;
+  font-size: 14px;
+}
+
+.statusActive {
+  color: #22c55e;
+  font-weight: 500;
+}
+
+.moreBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.viewFullBtn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.viewFullBtn:hover {
+  color: white;
+}
+
+/* Bottom Grid */
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Leaderboard */
+.leaderList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.leaderItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+}
+
+.leaderAvatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+}
+
+.leaderInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.leaderName {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.leaderDept {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+}
+
+.leaderScore {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.score {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.change {
+  color: #22c55e;
+  font-size: 12px;
+}
+
+/* Distribution */
+.distributionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.teacherProfile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profileAvatar {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileName {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.profileDept {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+}
+
+.deptList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.deptItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+.deptDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.deptItem span:last-child {
+  margin-left: auto;
+}
+
+.gpaCircle {
+  width: 100px;
+  height: 100px;
+  background: conic-gradient(
+    #667eea 0deg 137deg,
+    #a855f7 137deg 238deg,
+    #22c55e 238deg 299deg,
+    #f59e0b 299deg 360deg
+  );
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  align-self: flex-end;
+}
+
+.gpaCircle::before {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: rgba(25, 25, 50, 0.95);
+  border-radius: 50%;
+}
+
+.gpaValue {
+  position: relative;
+  z-index: 1;
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+
+.gpaLabel {
+  position: relative;
+  z-index: 1;
+  font-size: 11px;
+  color: #22c55e;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .mainGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bottomGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}

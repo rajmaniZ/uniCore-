@@ -1,0 +1,121 @@
+.container {
+  padding: 20px;
+  color: white;
+}
+
+/* CREATE BOX */
+.createBox {
+  background: rgba(25,25,50,0.9);
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.createBox input,
+.createBox select {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+.createBox button {
+  padding: 8px 14px;
+  background: #667eea;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: 120px repeat(6, 1fr);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.header {
+  padding: 10px;
+  background: rgba(102,126,234,0.3);
+  text-align: center;
+  font-weight: bold;
+}
+
+.time {
+  padding: 10px;
+  background: rgba(255,255,255,0.05);
+}
+
+.cell {
+  min-height: 80px;
+  padding: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cell strong {
+  font-size: 14px;
+}
+
+.cell span {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.cell small {
+  font-size: 11px;
+  color: #888;
+}
+
+.empty {
+  color: rgba(255,255,255,0.3);
+}
+
+.createBtn {
+  padding: 10px 16px;
+  background: #667eea;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.addMore {
+  margin-top: 20px;
+}
+
+.meta {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.meta input {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+.cellInput {
+  padding: 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: white;
+}
+
+.tableBox {
+  margin-top: 30px;
+}
+
+.caption {
+  margin-bottom: 10px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}

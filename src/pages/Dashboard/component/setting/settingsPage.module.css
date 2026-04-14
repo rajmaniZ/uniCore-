@@ -1,0 +1,61 @@
+.container {
+  padding: 24px;
+  color: white;
+}
+
+.title {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.section {
+  background: rgba(25, 25, 50, 0.85);
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.section h3 {
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.row label {
+  font-size: 14px;
+}
+
+select {
+  padding: 6px;
+  border-radius: 6px;
+  border: none;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+.saveBtn {
+  margin-top: 15px;
+  padding: 10px 16px;
+  background: #667eea;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.saveBtn:hover {
+  background: #5a67d8;
+}

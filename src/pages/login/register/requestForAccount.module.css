@@ -1,147 +1,128 @@
-/* 
-.loginImg{
-    width:100%;
-    flex:1;
-    position:relative;
-    background:linear-gradient(to left,rgba(240,248,255,.7),transparent),
-    url(../../../assets/loginImg.jpg) center/cover ;
-   
-}
- */
 
-.registerForm{
-    padding-top:5%;
-    /* padding-bottom:5%; */
-    padding-right: 10%;
-}
-
-
-.title{
-    background-color: transparent;
-    display:flex;
-    gap:20px;
-    padding-bottom: 1%;
+.page {
+    width: 100%;
+    min-height: 100vh;
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
-.title h1{
-    /* background-color: transparent; */
-    margin-top: 4px;
-}
-.title img{
-    background-color: transparent;
-    width:50px;
-    height:50px;
+.loginForm {
+    /* padding: 40px 30px; */
+    /* background-color: aqua; */
+    width: 35vw;
+    max-width: 500px;
+    min-width: 300px;
+    border-radius: 10px;
 }
 
-.inputSection{
-    background-color: transparent;
-    /* padding-top:10%; */
-    gap:10%;
+.title {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    
+    padding-bottom:50px;
+}
+
+.title h1 {
+    font-size: 35px;
+}
+
+.h2{
+    /* background-color: aqua; */
+    font-size:30px;
+    color:rgba(52, 65, 72, 0.837);
+    
+    padding-bottom:30px;
+}
+
+
+.title img {
+    width: 50px;
+    height: 50px;
+}
+
+.inputSection {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    margin-top:30px;
-    text-align: right;
-    /* height:60%; */
+    margin-top: 30px;
 }
 
-
-.inputSection input,select{
-    background-color: transparent;
-    margin:0px 0px 20px 0px;
-    width:92%;
-    padding:3%;
-    /* gap:20px; */
-    border-radius: 10px;
-    border-color: none;
-    
-
-}
-.inputSection select{
-    color:rgba(83, 105, 105, 0.76);
-    width:99%;
-    border:2px solid rgba(28, 31, 33, 0.927);
-
-    
-}
-
-.option{
-    background-color:aliceblue;
-}
-
-
-.inputSection p,button,a,select{
+.inputSection input,
+.inputSection select {
+    width: 100%;
+    padding: 10px;
     margin-bottom: 20px;
-}
-.inputSection button{
-    padding-bottom: 20px,30px, 40px, 50px;
     border-radius: 10px;
-}
-.inputSection input:hover{
-    background-color: rgb(232, 234, 236);
-    
-
+    border: 1px solid #ccc;
 }
 
-fieldset{
-    padding:20px;
-    margin-bottom: 30px;
-    text-align: left;
-    border:2px solid rgb(187, 216, 234);
+.inputSection select {
+    color: rgba(83, 105, 105, 0.76);
+    border: 2px solid rgba(28, 31, 33, 0.927);
+}
+
+.option {
+    background-color: aliceblue;
+}
+
+.inputSection button {
+    height: 40px;
+    width: 100%;
     border-radius: 10px;
-}
-
-
-.inputSection button{
-    height:40px;
-    width:200px;
     background-color: #919591ab;
 }
 
-.inputSection button:hover{
-    /* height:40px;
-    width:200px; */
+.inputSection button:hover {
     background-color: #6f726fbe;
 }
 
-.inputSection button:active{
-    height:40px;
-    width:200px;
+.inputSection button:active {
     background-color: #145f14bd;
 }
-
-
-
-.loginLink a:hover{
-    color:rgb(45, 116, 179);
+.LoginBtn{
+    text-align: right;
+}
+.LoginBtn button{
+    /* text-align: center; */
+    width:30%;
 }
 
-.loginLink{
-    /* margin-bottom: 20px; */
+fieldset {
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: left;
+    border: 2px solid rgb(187, 216, 234);
+    border-radius: 10px;
 }
 
-.returnHome{
-    position:relative;
-    top:-10px;
-    /* margin-bottom: -50px; */
-}
-
-.returnHome a:active{
-    color:rgb(16, 59, 100);
-}
-
-
-.returnHome:hover{
-    color:rgb(45, 116, 179);
+.loginLink a:hover {
+    color: rgb(45, 116, 179);
 }
 
 
-.returnHome:active{
-    color:rgb(16, 59, 100);
-    
+.linkToOtherPages{
+    text-align: right;
+    display: grid;
+    /* background-color: yellow; */
+    gap:30px;
 }
 
+.returnHome {
+    position: relative;
+    top: -10px;
+}
+
+.returnHome:hover {
+    color: rgb(45, 116, 179);
+}
+
+.returnHome:active {
+    color: rgb(16, 59, 100);
+}
 
 button:disabled {
     background: #ccc;
@@ -149,17 +130,44 @@ button:disabled {
 }
 
 
-@media (max-width:900px) {
-    .registerForm{
-        width:70vw;
-        padding-left:20%;
-        /* padding-right: 20%; */
+
+@media (max-width: 900px) {
+    .page {
+        width:100vw;
+        /* padding: 20px; */
+        /* background-color: bisque; */
     }
-    
 
+    .loginForm {
+        width:65%;
+        max-width: 100%;
+        /* background-color: bisque; */
+    }
+
+}
+
+@media (max-width:600px){
     
+    .loginForm {
+        width:90%;
+        max-width: 100%;
+        /* background-color: bisque; */
+    }
 }
 
 
-@media (max-width:500px) {
+@media (min-width:900px){
+    
+    .loginForm {
+        width:80%;
+        max-width: 100%;
+        /* background-color: bisque; */
+    }
 }
+
+
+
+
+
+
+

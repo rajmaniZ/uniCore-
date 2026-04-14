@@ -1,23 +1,28 @@
-function AcademicDetails(){
+import styles from './academicDetails.module.css';
+
+function AcademicDetails({ student }) {
+  if (!student) return <p className={styles.empty}>No Data</p>;
+
   return (
-    <>
-      <header>Academic Details</header>
-      <main>
-        <p>departemt</p>
-        <p>year</p>
-        <p>Semester</p>
+    <div className={styles.card}>
+      <h3>Academic Details</h3>
 
-        <ul>
-          <p>Subjects</p>
-          <li>maths</li>
-          <li>physics</li>
-          <li>chemistry</li>
-          <li>physics</li>
-        </ul>
+      <div className={styles.row}>
+        <span>Branch:</span>
+        <span>{student.branch}</span>
+      </div>
 
-      </main>
-    </>
-  )
+      <div className={styles.row}>
+        <span>Year:</span>
+        <span>{student.year}</span>
+      </div>
+
+      <div className={styles.row}>
+        <span>GPA:</span>
+        <span>{student.gpa}</span>
+      </div>
+    </div>
+  );
 }
 
 export default AcademicDetails;

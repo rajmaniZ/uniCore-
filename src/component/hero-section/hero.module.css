@@ -19,6 +19,9 @@
     background-size: contain;  /* ensures full image visible */
 }
 
+#loginC{
+    background-color: aquamarine;
+}
 /* CONTENT */
 .heroContent{
     background-color: transparent;
