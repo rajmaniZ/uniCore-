@@ -45,11 +45,11 @@ function Footer(){
                     <div className={styles.resourcesDiv}>
                         <h1>Resources</h1>
                         <ul>
-                            <Link to="/docs"><li>Documentation</li></Link>
+                            <Link to="/document"><li>Documentation</li></Link>
                             
                             <Link to="/guide"><li>Guides</li></Link>
                             
-                            <Link to="/help"><li>Help Center</li></Link>
+                            <Link to="/helpCenter"><li>Help Center</li></Link>
                         </ul>
                     </div>
                     <div className={styles.supportDiv}>
@@ -57,9 +57,9 @@ function Footer(){
                         <ul>
                             <Link to="/faqs"><li>FAQs</li></Link>
                             
-                            <Link to="policy"><li>Privacy policy</li></Link>
+                            <Link to="/privacyPolicy"><li>Privacy policy</li></Link>
                             
-                            <Link to="/terms"><li>Terms of Service</li></Link>
+                            <Link to="/termsofService"><li>Terms of Service</li></Link>
                         </ul>
                     </div>
                     <div className={styles.subscribe}>
