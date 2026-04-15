@@ -3,6 +3,8 @@ import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { AuthProvider, useAuth } from "./pages/Dashboard/context/AuthContext";
 import { DataProvider } from "./pages/Dashboard/context/dataContext";
 
+
+
 // Layouts
 import Layout from "./layout/layout";
 import LoginLayout from "./pages/login/loginLayout";
@@ -13,6 +15,21 @@ import Home from "./pages/home/home";
 import Features from "./pages/features/features";
 import About from "./pages/about/about";
 import Contact from "./pages/contact/contact";
+import AboutFeature from './pages/features/about';
+
+
+
+import Career from "./pages/careers/careers";
+import Blog from "./pages/blog/blog";
+import TermsOfservice from "./pages/termsOfservice/termsOfservice";
+import PrivacyPolicy from "./pages/privacyPolicy/privacyPolicy";
+import HelpCenter from "./pages/helpCenter/helpCenter";
+import Guide from "./pages/Guide/guides";
+import Faqs from "./pages/faqs/faqs";
+import Document from "./pages/documentation/Documantation";
+
+
+
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 
 // Auth
@@ -21,14 +38,14 @@ import Register from "./pages/login/register/collegeRegister";
 import ForgetPassword from "./pages/login/forget-password";
 import RequestForAccount from "./pages/login/register/requestForAccount";
 
-// ✅ UNIVERSAL SYSTEM
+//  UNIVERSAL SYSTEM
 import DataView from "./pages/Dashboard/component/dataView/DataView";
 import DetailsPage from "./pages/Dashboard/component/Details/Details";
 import JoinRequestsPage from './pages/Dashboard/component/joinRequests/joinRequestPage'
 import Profile from "./pages/Dashboard/component/profile/profile";
 import SettingsPage from "./pages/Dashboard/component/setting/settingsPage";
 import TimetablePage from "./pages/Dashboard/component/timetable/timetablePage";
-import Subject from './pages/Dashboard/component/subjectListAndAttendence/subjects'
+import Subject from './pages/Dashboard/component/submitAssignments/subjectListAndAttendence/subjects'
 import Attendance from "./pages/Dashboard/component/markAttandence/Attendance";
 import Assignment from "./pages/Dashboard/component/createAssignments/assignment";
 import AssignmentStudent from "./pages/Dashboard/component/submitAssignments/assignment";
@@ -56,6 +73,7 @@ import Subjects from "./pages/Dashboard/HoD/subjcts/subjcts";
 // Others
 import Student from "./pages/Dashboard/student/dashboard/dashboard";
 import Teacher from "./pages/Dashboard/teacher/dashboard/dashboard";
+import { MdHelpCenter } from "react-icons/md";
 
 // ---------------- PROTECTED ROUTE ----------------
 function ProtectedRoute({ allowedRoles }) {
@@ -90,9 +108,20 @@ function AppRoutes() {
               : <Home />
           }
         />
+
+ 
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="features" element={<Features />} />
+        <Route path="aboutFeature" element ={<AboutFeature/>}/>
+        <Route path="career" element={<Career />} />
+        <Route path="blog" element={<Blog/>} />
+        <Route path="termsofService" element={<TermsOfservice />} />
+        <Route path="privacyPolicy" element ={<PrivacyPolicy/>}/>
+        <Route path="helpCenter" element={<HelpCenter />} />
+        <Route path="Guide" element={<Guide />} />
+        <Route path="faqs" element={<Faqs />} />
+        <Route path="document" element ={<Document/>}/>
       </Route>
 
       {/* ---------- AUTH ---------- */}
