@@ -1,0 +1,66 @@
+body{
+    color:rgba(229, 250, 255, 0.864);
+    /* padding:20px; */
+    /* color:pink; */
+}
+
+.frame{
+    /* background-color: antiquewhite; */
+    padding:40px;
+    min-height: calc(100vh);
+}
+
+.frame h1{
+    text-align: center;
+    padding-bottom: 30px;
+
+}
+
+.frame img{
+    height:250px;
+    display: inline;
+    /* background-color: yellow; */
+}
+
+.info{
+    display: flex;
+    gap:20px;
+}
+
+.info h2{
+    padding-top:20px;
+    padding-bottom: 30px;
+}
+
+.info div{
+    gap:30px;
+    display: inline;
+}
+
+.info h3{
+    color:rgb(45, 121, 189);
+    font-size:30px;
+
+}
+
+.info p{
+    display: inline;
+    /* background-color: aqua; */
+}
+
+.guide h3{
+    color:rgb(210, 236, 229);
+    font-size:30px;
+
+    
+}
+.guide p{
+    font-size: 18px;
+}
+.guide{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    font-size: 17px;
+}
+
