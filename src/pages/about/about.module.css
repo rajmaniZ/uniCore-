@@ -1,0 +1,111 @@
+
+.aboutcontainer {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: #f9f9ff;
+}
+
+/* HERO */
+.abouthero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.abouttext {
+  max-width: 50%;
+}
+
+.abouttext h1 {
+  font-size: 40px;
+  color: #4b4bff;
+}
+
+.tagline {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.aboutimage img {
+  width: 250px;
+}
+
+/* FEATURES */
+.sectiontitle {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card1 {
+  background: rgb(221, 248, 221);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.card2{
+   background:  rgb(162, 162, 243);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card3{
+   background: rgb(238, 216, 194);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.card4{
+   background: rgb(245, 216, 245);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* WHY */
+.why {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.whytext {
+  width: 50%;
+}
+
+.mission {
+  width: 40%;
+  background: #eaeaff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* CTA */
+.cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.ctabutton {
+  background: #4b4bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.aboutimage{
+
+}
