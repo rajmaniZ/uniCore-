@@ -18,7 +18,7 @@ function DashboardLayout() {
 
       <div className={`${styles.mainContent} ${sidebarCollapsed ? styles.expanded : ''}`}>
         <Navbar onMenuToggle={() => setSidebarCollapsed(!sidebarCollapsed)} />
-        <a  className={styles.Ai} href="/aiChat"><img src="campusOS/src/assets/chatWithAI.png" alt="chat with AI" />AI</a>
+        <a  className={styles.Ai} href="/aiChat">Ask?</a>
         <main className={styles.content}>
 
           <Outlet /> {}
