@@ -48,7 +48,7 @@ function ShowList() {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
 
-  // 🔥 CREATE USER
+  
   const handleCreate = () => {
     if (!newUser.name) return alert("Enter name");
 
@@ -176,7 +176,7 @@ function ShowList() {
   return (
     <div className={styles.container}>
 
-      {/* CONTROLS */}
+      {}
       <div className={styles.controls}>
         <select onChange={(e) => setRole(e.target.value)}>
           <option value="admin">Admin</option>
@@ -197,7 +197,7 @@ function ShowList() {
         />
       </div>
 
-      {/* 🟢 CREATE ROW */}
+      {}
       {(role === "admin" || role === "principal") && (
         <div className={styles.createRow}>
           <input
@@ -247,7 +247,7 @@ function ShowList() {
         </div>
       )}
 
-      {/* 🔴 JOIN REQUEST */}
+      {}
       {role !== "teacher" && (
         <>
           <h2>Join Requests</h2>
@@ -270,7 +270,7 @@ function ShowList() {
         </>
       )}
 
-      {/* 🔵 MAIN LIST */}
+      {}
       <h2>Main List</h2>
       <table className={styles.table}>
         <tbody>

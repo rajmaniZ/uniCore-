@@ -47,14 +47,14 @@
   box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
 }
 
-/* 🔥 FILTERS FIXED */
+
 .filters {
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
-/* 🔥 SEARCH INPUT */
+
 .searchInput {
   flex: 1;
   min-width: 180px;
@@ -73,7 +73,7 @@
 .filters select{
   font-size: large;
   color: white;
-  /* background: rgba(255, 255, 255, 0.08); */
+  
 }
 
 
@@ -81,7 +81,7 @@
   font-size: large;
   color:black;
   
-  /* color: white; */
+  
 }
 .filterSelect {
   min-width: 120px;
@@ -99,16 +99,16 @@
   font-size: 13px;
   cursor: pointer;
 
-  appearance: none;           /* 🔥 remove default browser style */
+  appearance: none;           
 }
 
-/* 🔥 OPTION FIX */
+
 .filterSelect option {
   background: #1a1a2e;
   color: white;
 }
 
-/* 🔥 SMALL SCREEN FIX */
+
 @media (max-width: 768px) {
   .filters {
     gap: 8px;
@@ -119,7 +119,7 @@
     max-width: 200px;
   }
 }
-/* Table */
+
 .tableCard {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
@@ -292,7 +292,7 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* Pagination */
+
 .pagination {
   display: flex;
   justify-content: space-between;

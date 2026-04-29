@@ -5,7 +5,7 @@ function About(){
   return (
     <div className={style.aboutcontainer}>
 
-      {/* HERO SECTION */}
+      {}
       <div className={style.abouthero}>
         <div className={style.abouttext}>
           <h1>About Unicore</h1>
@@ -30,13 +30,13 @@ function About(){
 
         <div className={style.aboutimage}>
           <img 
-            src="/aboutpage.jpeg"
+            src="./../public"
             alt="about" 
           />
         </div>
       </div>
 
-      {/* FEATURES */}
+      {}
       <h2 className={style.sectiontitle}>Everything You Need</h2>
 
       <div className={style.features}>
@@ -61,7 +61,7 @@ function About(){
         </div>
       </div>
 
-      {/* WHY SECTION */}
+      {}
       <div className={style.why}>
         <div className={style.whytext}>
           <h2>Why Unicore?</h2>
@@ -82,7 +82,7 @@ function About(){
         </div>
       </div>
 
-      {/* FOOTER CTA */}
+      {}
       <div className={style.cta}>
         <h2>Unicore  Learn. Access. Succeed.</h2>
         <button>Get Started</button>

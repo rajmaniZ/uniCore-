@@ -1,11 +1,11 @@
 .footer{
     margin-top: 40px;
-    /* height: 90vh; */
-    /* width:60%; */
+    
+    
     padding-top:-10%;
     padding-left:10%;
     padding-right:10%;
-    /* text-align: ce; */
+    
 }
 
 
@@ -13,7 +13,7 @@
 .logoDiv{
 
     display:flex;
-    /* gap:20px; */
+    
     justify-content: center;
     align-items: center;
 }
@@ -22,12 +22,12 @@
 .hrFaded{
     height:1px;
     border:none;
-    /* background-color: #5856d6; */
+    
     border:none;
     background:linear-gradient(
         to right,
         transparent 0%,
-        /* 120deg, */
+        
         #ff6ec4 30%,
         #ff9a44 40%,
         #f9c449 50%,
@@ -56,14 +56,14 @@
 
 li{
     list-style-type: none;
-    /* gap:10px; */
+    
 }
 .infoDiv{
     margin-top:5%;
     color:azure;
     display:flex;
 
-    /* gap:5%; */
+    
     justify-content: space-between;
     flex-wrap:wrap;
     gap:30px;
@@ -74,17 +74,17 @@ li{
     color:white;
     background-color:transparent;
     text-decoration: none;
-    /* color: black; */
+    
     font-size: 18px;
     font-weight: 500;
 
 }
 .footer a:hover{
-    /* background-color: antiquewhite; */
-    /* text-decoration: none; */
+    
+    
     color: rgb(75, 196, 181);
-    /* font-size: 18px; */
-    /* font-weight: 900; */
+    
+    
     
 }
 
@@ -105,8 +105,8 @@ li{
 .companyDiv li, .resourcesDiv li , .supportDiv li, .subscribe li {
     font-size:16px;
     padding-bottom:10px;
-    /* gap:50px; */
-    /* color:aqua; */
+    
+    
 }
 
 .subscribe input{
@@ -124,7 +124,7 @@ li{
 .subscribe button{
     color:white;
     margin-left:10px;
-    /* text-align: right; */
+    
     padding:10px;
     border-radius: 30px;
     background-color: transparent  ;
@@ -141,12 +141,12 @@ li{
 .copyright{
     height:40px;
     text-align: center;
-    /* color:rgba(21, 117, 122, 0.176); */
-    /* justify-content: center; */
+    
+    
     display: flex;
     justify-content: space-between;
     padding-bottom:20px;
-    /* padding-left:50px; */
+    
 }
 
 

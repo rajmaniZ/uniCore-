@@ -1,9 +1,9 @@
 .dashboard {
-  /* margin: 0px; */
+  
   display: flex;
   flex-direction: column;
   gap: 24px;
-  /* background-color: #08144d; */
+  
 }
 
 .header {
@@ -23,21 +23,21 @@
   margin: 0;
 }
 
-/* Stats Grid */
+
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
-/* Main Grid */
+
 .mainGrid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 20px;
 }
 
-/* Cards */
+
 .chartCard,
 .tableCard,
 .teacherCard,
@@ -80,7 +80,7 @@
   margin: 0 0 20px 0;
 }
 
-/* Chart */
+
 .chart {
   display: flex;
   align-items: flex-end;
@@ -149,7 +149,7 @@
   font-weight: 600;
 }
 
-/* Teacher Card */
+
 .teacherList {
   display: flex;
   flex-direction: column;
@@ -214,7 +214,7 @@
   font-weight: 600;
 }
 
-/* Table */
+
 .tableCard {
   margin-top: 0;
 }
@@ -271,14 +271,14 @@
   color: white;
 }
 
-/* Bottom Grid */
+
 .bottomGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
-/* Leaderboard */
+
 .leaderList {
   display: flex;
   flex-direction: column;
@@ -341,7 +341,7 @@
   font-size: 12px;
 }
 
-/* Distribution */
+
 .distributionContent {
   display: flex;
   flex-direction: column;
@@ -448,7 +448,7 @@
   color: #22c55e;
 }
 
-/* Responsive */
+
 @media (max-width: 1400px) {
   .statsGrid {
     grid-template-columns: repeat(2, 1fr);

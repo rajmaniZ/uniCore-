@@ -14,6 +14,7 @@ function Hero() {
                 <div  className={styles.btnGroup}>
                     <Link to='/login' className={`${styles.login}`}>Login</Link>
                     <Link to='/register' className={styles.register}>Sign Up</Link>
+                    <Link to='/aiChat' className={styles.register}>chat with AI</Link>
                 </div>
                 
             </div>

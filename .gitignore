@@ -1,1 +1,44 @@
+# dependencies
 node_modules/
+
+# production build
+dist/
+build/
+
+# environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# editor folders
+.vscode/
+.idea/
+
+# cache
+.cache/
+.parcel-cache/
+
+# testing
+coverage/
+
+# vite specific
+vite.config.ts.timestamp-*
+vite.config.js.timestamp-*
+
+# misc
+*.tmp
+*.swp

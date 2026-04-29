@@ -1,44 +1,48 @@
 import { useState } from "react";
-import { useAuth } from "./../../context/AuthContext";
+import { useAuth } from "./../../../../context/authContext";
 import styles from "./profile.module.css";
 
 function Profile() {
-  const { currentUser, updateProfile } = useAuth();
+  const { user } = useAuth();
 
   const [isEditing, setIsEditing] = useState(false);
 
   const [formData, setFormData] = useState({
-    name: currentUser?.name || "",
-    bio: currentUser?.bio || "",
-    avatar: currentUser?.avatar || "",
+    name: user?.name || "",
+    bio: user?.bio || "",
+    avatar: user?.avatar || "",
   });
 
-  if (!currentUser) return <div>Loading...</div>;
+  if (!user) return <div>Loading...</div>;
 
-  const role = currentUser.role?.toLowerCase();
+  const role = user.role?.toLowerCase() || "";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const handleSave = () => {
-    updateProfile(formData); // 🔥 update in context
-    setIsEditing(false);
+  const handleSave = async () => {
+    try {
+      console.log("Updated Data:", formData);
+      setIsEditing(false);
+    } catch (err) {
+      console.error("Profile update failed", err);
+    }
   };
 
   return (
     <div className={styles.container}>
-      {/* HEADER */}
       <div className={styles.header}>
-        <div className={styles.avatarWrapper}>
+        {/* <div className={styles.avatarWrapper}>
           <img
             src={
               formData.avatar ||
-              `https://ui-avatars.com/api/?name=${formData.name}`
+              "https://via.placeholder.com/150"
             }
             alt="profile"
             className={styles.avatar}
@@ -48,13 +52,39 @@ function Profile() {
             <input
               type="text"
               name="avatar"
-              placeholder="Paste image URL"
+              placeholder="Avatar URL"
               value={formData.avatar}
               onChange={handleChange}
               className={styles.input}
             />
           )}
-        </div>
+        </div> */}
+        <div className={styles.avatarWrapper}>
+  {formData.avatar ? (
+    <img
+      src={formData.avatar}
+      alt="profile"
+      className={styles.avatar}
+    />
+  ) : (
+    <div className={styles.avatarFallback}>
+      {formData.name
+        ? formData.name.charAt(0).toUpperCase()
+        : "U"}
+    </div>
+  )}
+
+  {isEditing && (
+    <input
+      type="text"
+      name="avatar"
+      placeholder="Avatar URL"
+      value={formData.avatar}
+      onChange={handleChange}
+      className={styles.input}
+    />
+  )}
+</div>
 
         <div className={styles.info}>
           {isEditing ? (
@@ -66,10 +96,12 @@ function Profile() {
               className={styles.input}
             />
           ) : (
-            <h2>{currentUser.name}</h2>
+            <h2>{formData.name}</h2>
           )}
 
-          <span className={styles.role}>{role.toUpperCase()}</span>
+          <span className={styles.role}>
+            {role ? role.toUpperCase() : "USER"}
+          </span>
         </div>
 
         <button
@@ -82,9 +114,9 @@ function Profile() {
         </button>
       </div>
 
-      {/* ABOUT */}
       <div className={styles.section}>
         <h3>About</h3>
+
         {isEditing ? (
           <textarea
             name="bio"
@@ -93,45 +125,83 @@ function Profile() {
             className={styles.textarea}
           />
         ) : (
-          <p>{currentUser.bio || "No bio added"}</p>
+          <p>{formData.bio || "No bio added"}</p>
         )}
       </div>
 
-      {/* NON EDITABLE INFO */}
       <div className={styles.section}>
         <h3>Details</h3>
 
         <div className={styles.grid}>
           <div>
             <label>Email</label>
-            <span>{currentUser.email}</span>
+            <span>{user.email}</span>
           </div>
 
           {role === "student" && (
             <>
               <div>
                 <label>Roll No</label>
-                <span>{currentUser.rollNo}</span>
+                <span>{user.rollNumber || "-"}</span>
               </div>
+
               <div>
-                <label>Branch</label>
-                <span>{currentUser.branch}</span>
+                <label>Course</label>
+                <span>{user.courseId?.name || "-"}</span>
+              </div>
+
+              <div>
+                <label>Semester</label>
+                <span>{user.semester || "-"}</span>
+              </div>
+
+              <div>
+                <label>Class</label>
+                <span>{user.classId?.name || "-"}</span>
+              </div>
+
+              <div>
+                <label>Section</label>
+                <span>{user.section || "-"}</span>
               </div>
             </>
           )}
 
           {role === "teacher" && (
-            <div>
-              <label>Subjects</label>
-              <span>{currentUser.subjects?.join(", ")}</span>
-            </div>
+            <>
+              <div>
+                <label>Employee ID</label>
+                <span>{user.employeeId || "-"}</span>
+              </div>
+
+              <div>
+                <label>Subjects</label>
+                <span>
+                  {user.subjects?.length
+                    ? user.subjects.map((s) => s.name).join(", ")
+                    : "-"}
+                </span>
+              </div>
+
+              <div>
+                <label>Department</label>
+                <span>{user.departmentId?.name || "-"}</span>
+              </div>
+            </>
           )}
 
           {(role === "admin" || role === "hod") && (
-            <div>
-              <label>Department</label>
-              <span>{currentUser.department}</span>
-            </div>
+            <>
+              <div>
+                <label>Employee ID</label>
+                <span>{user.employeeId || "-"}</span>
+              </div>
+
+              <div>
+                <label>Department</label>
+                <span>{user.departmentId?.name || "-"}</span>
+              </div>
+            </>
           )}
         </div>
       </div>

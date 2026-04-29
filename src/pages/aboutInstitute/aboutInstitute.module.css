@@ -1,0 +1,213 @@
+
+.container {
+  font-family: "Poppins", sans-serif;
+  color: #1f2937;
+  background: #f4f6fb;
+  min-height:93vh;
+}
+
+
+.hero {
+  height: 50vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.overlay {
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.35)
+  );
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  color: #fff;
+}
+
+.logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: white;
+  padding: 5px;
+}
+
+
+.content {
+  padding: 30px;
+}
+
+.heading {
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: #111827;
+}
+
+
+.card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hod {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+
+.course {
+  margin-top: 18px;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.courseHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.courseHeader span {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+
+.semGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+
+.semCard {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #eee;
+}
+
+.semCard h5 {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #374151;
+}
+
+
+.semCard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.semCard li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #111827;
+}
+
+
+.subjectGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.subjectTag {
+  background: #6366f1;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+
+.desc {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.meta {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-left: 8px;
+}
+
+
+
+
+.classTitle {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.metaLine {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+
+.subjectWrapper {
+  margin-top: 15px;
+}
+
+.subjectGroup {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #eee;
+}
+
+.groupTitle {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+
+
+
+.subjectTagCommon {
+  background: #6366f1;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+
+.subjectTagStream {
+  background: #10b981;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}

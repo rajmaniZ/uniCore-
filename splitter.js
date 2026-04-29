@@ -3,7 +3,7 @@ import path from "path";
 
 const input = fs.readFileSync("project.txt", "utf-8");
 
-const files = input.split("// ==========================");
+const files = input.split("
 
 files.forEach((block) => {
   const match = block.match(/📁 (.+)/);

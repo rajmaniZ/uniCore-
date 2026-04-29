@@ -3,10 +3,10 @@ import { useAuth } from "../../context/AuthContext";
 import styles from "./grades.module.css";
 
 export default function Grades() {
-  const { getStudentGrades } = useData(); // ✅ correct
+  const { getStudentGrades } = useData(); 
   const { currentUser } = useAuth();
 
-  // ✅ directly get grades
+  
   const studentGrades = getStudentGrades(currentUser?.id) || [];
 
   return (
@@ -46,7 +46,7 @@ export default function Grades() {
   );
 }
 
-// helper for coloring grade
+
 function getGradeClass(grade) {
   switch (grade) {
     case "A":

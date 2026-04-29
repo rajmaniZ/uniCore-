@@ -5,8 +5,12 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    /* gap:15px; */
+    gap:15px;
     padding-bottom: 100px;
+}
+
+.title h1{
+    color:black;
 }
 
 .page{
@@ -16,10 +20,17 @@
     height:100vh;
     width:35vw;
 }
+.page p{
+    color:black;
+}
+
+.page a{
+    color:rgba(4, 92, 215, 0.959);
+}
 
 
 .h2{
-    /* background-color: aqua; */
+    
     font-size:30px;
     color:rgba(52, 65, 72, 0.837)
 }
@@ -27,6 +38,7 @@
 .title img{
     width:50px;
 }
+
 
 
 .loginForm{
@@ -38,22 +50,22 @@
     display: flex;
     flex-direction: column;
     gap:20px;
-    /* width:93%; */
+    
     padding-bottom: 20px;
 
 }
 
 .inputSection input{
-    /* height: 40px; */
+    
     width:98%;
     font-size: medium;
     font-weight: 600;
     border-radius: 30px;
-    /* text-align:ca); */
+    
     padding:15px;
 }
 .loginBtn{
-    /* background-color: aqua; */
+    
     text-align: center;
 }
 
@@ -63,20 +75,20 @@
     font-size: medium;
     width:50%;
     background-color: rgba(16, 166, 84, 0.515);
-    /* height:30px; */
+    
     border: none;
     border-radius: 30px;
     padding:15px;
 
 }
 .loginBtn button:hover{
-    /* cursor: not-allowed; */
+    
 
     background-color: rgba(12, 194, 93, 0.515);
     
 }
 .loginBtn button:disabled:hover{
-    /* cursor: not-allowed; */
+    
 
     background-color: rgb(201, 204, 204);
     
@@ -101,7 +113,7 @@
 .demoButtons button{
     padding: 5px;
     border-radius: 10px;
-    /* margin-top: 5px; */
+    
 }
 
 
@@ -109,7 +121,7 @@
 @media (max-width:900px){
 .page{
     width: 100vw;
-    /* background-color: burlywood; */
+    
     padding-left: 10%;
     padding-right:10vw;
 }
@@ -122,14 +134,14 @@
 
 
 
-/* forge password */
+
 
 
 .forgetBtn{
     display:flex;
     flex-direction: column;
-    /* justify-content:center; */
-    /* width: 100%; */
+    
+    
     gap:20px;
     align-items: center;
 }

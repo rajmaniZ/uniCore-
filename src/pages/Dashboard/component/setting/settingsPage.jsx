@@ -1,16 +1,24 @@
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../../../context/authContext";
 import styles from "./settingsPage.module.css";
 
-function SettingsPage() {
-  const { currentUser, updateProfile } = useAuth();
+import {
+  updateUser,
+  setupPassword
+} from "../../../../api/userAPI";
 
-  const role = currentUser?.role?.toLowerCase();
+function SettingsPage() {
+
+  const { user } = useAuth(); 
+
+  const role = user?.role?.toLowerCase();
+
+  
 
   const [settings, setSettings] = useState({
-    theme: currentUser?.theme || "light",
-    notifications: currentUser?.notifications ?? true,
-    language: currentUser?.language || "en",
+    theme: user?.theme || "light",
+    notifications: user?.notifications ?? true,
+    language: user?.language || "en",
   });
 
   const [passwords, setPasswords] = useState({
@@ -18,10 +26,15 @@ function SettingsPage() {
     newPassword: "",
   });
 
-  if (!currentUser) return <div>Loading...</div>;
+  const [loading, setLoading] = useState(false);
+
+  if (!user) return <div>Loading...</div>;
+
+  
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
     setSettings((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -30,24 +43,67 @@ function SettingsPage() {
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
-    setPasswords((prev) => ({ ...prev, [name]: value }));
+
+    setPasswords((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handleSave = () => {
-    updateProfile(settings);
-    alert("Settings updated");
+  
+
+  const handleSave = async () => {
+    try {
+      setLoading(true);
+
+      
+      await updateUser(user._id, settings);
+
+      alert("Settings updated");
+
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.msg || "Update failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handlePasswordSave = () => {
-    console.log(passwords);
-    alert("Password updated (mock)");
+  
+
+  const handlePasswordSave = async () => {
+    try {
+      if (!passwords.newPassword) {
+        alert("Enter new password");
+        return;
+      }
+
+      setLoading(true);
+
+      
+      await setupPassword({
+        password: passwords.newPassword,
+      });
+
+      setPasswords({ oldPassword: "", newPassword: "" });
+
+      alert("Password updated");
+
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.msg || "Password update failed");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Settings</h2>
 
-      {/* ---------- GENERAL SETTINGS ---------- */}
+      {}
       <div className={styles.section}>
         <h3>General</h3>
 
@@ -62,6 +118,7 @@ function SettingsPage() {
         <div className={styles.row}>
           <label>Notifications</label>
           <input
+            className="check"
             type="checkbox"
             name="notifications"
             checked={settings.notifications}
@@ -78,14 +135,14 @@ function SettingsPage() {
         </div>
       </div>
 
-      {/* ---------- ROLE BASED SETTINGS ---------- */}
+      {}
 
       {role === "student" && (
         <div className={styles.section}>
           <h3>Student Settings</h3>
           <div className={styles.row}>
             <label>Show Attendance</label>
-            <input type="checkbox" defaultChecked />
+            <input type="checkbox" />
           </div>
           <div className={styles.row}>
             <label>Auto Download Notes</label>
@@ -122,7 +179,7 @@ function SettingsPage() {
         </div>
       )}
 
-      {/* ---------- PASSWORD ---------- */}
+      {}
       <div className={styles.section}>
         <h3>Change Password</h3>
 
@@ -144,13 +201,21 @@ function SettingsPage() {
           className={styles.input}
         />
 
-        <button className={styles.saveBtn} onClick={handlePasswordSave}>
+        <button
+          className={styles.saveBtn}
+          onClick={handlePasswordSave}
+          disabled={loading}
+        >
           Update Password
         </button>
       </div>
 
-      {/* ---------- SAVE ---------- */}
-      <button className={styles.saveBtn} onClick={handleSave}>
+      {}
+      <button
+        className={styles.saveBtn}
+        onClick={handleSave}
+        disabled={loading}
+      >
         Save All Settings
       </button>
     </div>

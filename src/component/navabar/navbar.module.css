@@ -2,10 +2,10 @@
 .logo{
     width: 50px;
     height: 50px;
-    /* margin-right: 20px; */
+    
 }
 .nav{
-    /* background-color: transparent; */
+    
     padding-left:.5%;
     padding-top:.5%;
     padding-right:1%;
@@ -26,19 +26,20 @@
     color:white;
     background-color:transparent;
     text-decoration: none;
-    /* color: black; */
+    
     font-size: 18px;
     font-weight: 500;
 
 }
 .listOfNavMenu a:hover{
-    /* background-color: antiquewhite; */
-    /* text-decoration: none; */
+    
+    
     color: rgb(75, 196, 181);
-    /* font-size: 18px; */
-    /* font-weight: 900; */
+    
+    
     
 }
+
 
 .loginAndRegister{
     display:flex;
@@ -46,26 +47,18 @@
 }
 .register{
     border-radius: 10px;
-    border:.5px solid white;
     
-    padding: 3px 6px 8px 8px;
+    
+    
 }
 
 .login{
 
     border-radius: 10px;
-    border:.5px solid white;
-    padding: 3px 6px 8px 8px;
-}
-
-.register:hover{
-    border:.5px solid rgb(75, 196, 181);
-}
-
-.login:hover{
-    border:.5px solid rgb(75, 196, 181);
+    
     
 }
+
 
 
 .register:active{
@@ -121,3 +114,128 @@
 }
 
 
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  color: black;
+  min-width: 200px;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.dropdownItem {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background: #f0f0f0;
+}
+
+
+
+.dropdownTitle{
+    color:white;
+    background-color:transparent;
+    text-decoration: none;
+    
+    font-size: 18px;
+    font-weight: 500;
+
+}
+.dropdownTitle:hover{
+    color: rgb(75, 196, 181);
+    
+}
+
+
+.hamburger {
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+
+
+@media (max-width: 768px) {
+
+  .hamburger {
+    display: block;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+  }
+
+  
+  .listOfNavMenu {
+    display: none;
+  }
+
+  
+  .listOfNavMenu.mobileMenu {
+    display: flex;
+    flex-direction: column;
+    position: fixed; 
+    top: 60px;
+    right: 0;
+    
+    width: 200px;
+    background: rgba(0,0,0,0.5);
+    padding: 10px 20px;
+    
+    z-index: 2000;
+  }
+
+  
+  .closeBtn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .listOfNavMenu a {
+    color: white;
+  }
+
+  
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdownMenu {
+    left:-20px;
+    background: rgba(26, 17, 17, 0.974);
+    color: white;
+    box-shadow: none;
+    z-index:200px;
+    width:260px;
+    max-height: 300px;
+    overflow: scroll;
+  }
+  .dropdownItem:hover{
+    background-color: rgba(0, 0, 0, 0.947);
+  }
+
+  .dropdownItem {
+    color: white;
+  }
+  
+.loginAndRegister{
+    display:flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+}

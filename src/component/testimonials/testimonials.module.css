@@ -1,7 +1,7 @@
 .featuresSection {
     text-align: center;
     padding: 80px 8vw;
-    /* background: #0f172a;  */
+    
     color: white;
 }
 
@@ -10,12 +10,13 @@
     font-size: 36px;
     margin-top:-5px;
     display:inline-block;
+    padding-bottom: 40px;
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 10px;
+    gap: 20px;
 }
 
 
@@ -31,7 +32,7 @@
 
 .card h3 {
     font-size: 20px;
-    /* margin-bottom: 10px; */
+    
 }
 
 .card p {
@@ -54,9 +55,9 @@
 
 .profile{
     display:flex;
-    /* gap:10px; */
+    
     justify-content: space-between;
-    /* background-color: aqua; */
+    
 }
 
 

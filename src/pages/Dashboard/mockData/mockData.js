@@ -1,8 +1,8 @@
-// 🏫 Colleges
+
 export const colleges = [
   {
     _id: "col1",
-    type: "college", // 🔥 important
+    type: "college", 
 
     collegeName: "ABC Engineering College",
     code: "ABC123",
@@ -27,7 +27,7 @@ export const colleges = [
 
     joinedAt: new Date("2024-01-10"),
 
-    // 🔥 FULL ERP STRUCTURE
+    
     structure: {
       CSE: {
         hod: {
@@ -164,11 +164,11 @@ export const subjectsMap = {
   ],
 };
 
-// ✅ FIXED: roles now match route allowedRoles exactly (lowercase)
+
 export const users = [
   {
     _id: "super1",
-    role: "superadmin",          // was "super" — fixed to match route
+    role: "superadmin",          
     name: "System Admin",
     email: "super@campus.com",
     password: "admin123",
@@ -176,7 +176,7 @@ export const users = [
   },
   {
     _id: "admin1",
-    role: "admin",               // was "principle" — fixed to match route
+    role: "admin",               
     name: "Dr. Rajesh Kumar",
     email: "admin@abc.edu",
     password: "admin123",
@@ -258,7 +258,7 @@ export const users = [
   },
 ];
 
-// Students
+
 export const students = [];
 const classes = ["CSE-1", "CSE-2", "CSE-3", "ECE-1", "ECE-2", "ME-1", "ME-2"];
 

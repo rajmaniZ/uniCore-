@@ -6,9 +6,9 @@
   width: 260px;
   
   background: linear-gradient(135deg, #9191f7 30%, #9292b1 50%, #9191f7 100%);
-  /* background: rgba(127, 127, 160, 0.95); */
+  
   backdrop-filter: blur(20px);
-  /* border-right: 1px solid rgba(255, 255, 255, 0.1); */
+  
   display: flex;
   flex-direction: column;
   transition: width 0.3s ease;
@@ -19,7 +19,7 @@
   width: 90px;
 }
 
-/* Logo Section */
+
 .logoSection {
   padding: 10px;
   height: 72px;
@@ -33,7 +33,7 @@
   display: flex;
   align-items: center;
   padding-left: 5px;
-   /* gap: 12px; */
+   
 }
 
 .logoIcon {
@@ -53,20 +53,20 @@
   font-size: 20px;
   font-weight: 700;
   color: white;
-  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .toggleBtn {
-  /* width: 40px; */
+  
   height: 40px;
   border: none;
   margin-top: 15px;
-  /* margin-left:5px; */
+  
   background-color: transparent;
-  /* background: rgba(255, 255, 255, 0.1); */
-  /* border-radius: 8px; */
+  
+  
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -76,7 +76,7 @@
 
 
 
-/* This hides scrollbar */
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -85,15 +85,15 @@
 .toggleBtn svg {
   width: 35px;
   height: 35px;
-  /* font-size: large; */
+  
   fill: rgba(244, 236, 236, 0.953);
 }
 
-/* Navigation */
+
 .nav {
-  /* flex: 1; */
+  
   max-width: calc(100%-90px);
-  /* padding: 20px 12px; */
+  
   overflow-y: auto;
 }
 
@@ -103,15 +103,15 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  /* gap: 4px; */
+  
 }
 
 .menuItem{
   display: flex;
   align-items: center;
   padding-left: 10px;
-  /* max-height: 40px; */
-  /* gap:0px; */
+  
+  
   border-radius: 12px;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
@@ -164,7 +164,7 @@
   border-radius: 50%;
 }
 
-/* User Section */
+
 .userSection {
   padding: 10px ;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -199,7 +199,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  /* height:50px; */
+  
 }
 
 .userName {
@@ -221,7 +221,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  /* gap: 12px; */
+  
   padding: 8px 8px;
   border: none;
   background: rgba(239, 68, 68, 0.1);
@@ -237,11 +237,8 @@
   background: rgba(239, 68, 68, 0.2);
 }
 
-/* Collapsed State */
-/* .collapsed .logoSection {
-  padding: 20px 12px;
-  justify-content: center;
-} */
+
+
 
 .collapsed .toggleBtn{
     margin-top: 15px;
@@ -253,7 +250,7 @@
     height: 40px;
     position: relative;
     left:-25px;
-    /* top:-15px; */
+    
 }
 
 .collapsed .menuItem {

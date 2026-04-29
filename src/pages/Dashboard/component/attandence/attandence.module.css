@@ -1,0 +1,89 @@
+.container {
+  padding: 20px;
+  color: white;
+}
+
+.card {
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+
+.wrapper {
+  display: flex;
+}
+
+
+.days {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+
+.monthRow {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+}
+
+
+.monthBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.grid {
+  display: flex;
+  gap: 6px;
+}
+
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+
+.box {
+  width: 18px;
+  height: 18px;
+  background: #f8f9fb56;
+  border-radius: 3px;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+}
+
+
+.green {
+  background: #22c55e;
+  color: white;
+}
+
+.red {
+  background: #ef4444;
+  color: white;
+}
+
+
+.monthLabel {
+  margin-top: 6px;
+  font-size: 12px;
+  
+  color:white;
+}

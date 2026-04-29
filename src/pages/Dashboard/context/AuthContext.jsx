@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate auth check
+    
     const savedUser = localStorage.getItem('campusUser');
     if (savedUser) {
       setCurrentUser(JSON.parse(savedUser));

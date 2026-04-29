@@ -3,9 +3,9 @@
   color: white;
 }
 
-/* CREATE BOX */
+
 .createBox {
-  background: rgba(25,25,50,0.9);
+  
   padding: 15px;
   border-radius: 12px;
   margin-bottom: 20px;
@@ -19,6 +19,10 @@
   padding: 8px;
   border-radius: 6px;
   border: none;
+  min-width: 120px;
+  flex: 1;
+  background-color: transparent;
+
 }
 
 .createBox button {
@@ -30,29 +34,31 @@
   cursor: pointer;
 }
 
-/* GRID */
+
 .grid {
   display: grid;
   grid-template-columns: 120px repeat(6, 1fr);
   border: 1px solid rgba(255,255,255,0.1);
+  overflow-x: auto; 
 }
 
 .header {
   padding: 10px;
-  background: rgba(102,126,234,0.3);
+  background: rgba(46, 66, 155, 0.3);
   text-align: center;
   font-weight: bold;
 }
 
 .time {
   padding: 10px;
-  background: rgba(255,255,255,0.05);
+  
+  white-space: nowrap;
 }
 
 .cell {
   min-height: 80px;
   padding: 8px;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 2px solid rgba(214, 31, 31, 0.95);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,6 +66,7 @@
 
 .cell strong {
   font-size: 14px;
+  border:2px solid white;
 }
 
 .cell span {
@@ -69,16 +76,17 @@
 
 .cell small {
   font-size: 11px;
-  color: #888;
+  color: #803535;
 }
 
 .empty {
   color: rgba(255,255,255,0.3);
 }
 
+
 .createBtn {
   padding: 10px 16px;
-  background: #667eea;
+  
   border: none;
   border-radius: 10px;
   color: white;
@@ -86,12 +94,10 @@
   margin-bottom: 15px;
 }
 
-.addMore {
-  margin-top: 20px;
-}
 
 .meta {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 10px;
 }
@@ -100,7 +106,9 @@
   padding: 8px;
   border-radius: 6px;
   border: none;
+  flex: 1;
 }
+
 
 .cellInput {
   padding: 6px;
@@ -109,6 +117,7 @@
   color: white;
 }
 
+
 .tableBox {
   margin-top: 30px;
 }
@@ -116,6 +125,68 @@
 .caption {
   margin-bottom: 10px;
   display: flex;
-  gap: 15px;
+  flex-wrap: wrap;
+  
+  gap: 10px;
   align-items: center;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .grid {
+    font-size: 12px;
+  }
+
+  .header,
+  .time {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .cell {
+    min-height: 60px;
+    padding: 5px;
+  }
+
+  .createBox {
+    flex-direction: column;
+  }
+
+  .createBox input,
+  .createBox select {
+    width: 100%;
+  }
+
+  .caption {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 90px repeat(6, 1fr);
+  }
+
+  .cell {
+    min-height: 70px;
+  }
+}
+
+
+@media (min-width: 1400px) {
+  .grid {
+    grid-template-columns: 150px repeat(6, 1fr);
+  }
+
+  .cell {
+    min-height: 100px;
+  }
 }

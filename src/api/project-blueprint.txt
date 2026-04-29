@@ -1,0 +1,1285 @@
+
+📁 aiChat.js
+--------------------------------
+// // ❌ NO 'use client'
+// // ❌ NOT a component
+
+// const streamChatAPI = async (
+//   userMessage,
+//   token,
+//   onChunk,
+//   onDone,
+//   onError
+// ) => {
+//   try {
+//     const response = await fetch("http://localhost:5000/api/chat", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         ...(token && { Authorization: `Bearer ${token}` }),
+//       },
+//       body: JSON.stringify({
+//         message: userMessage,
+//       }),
+//     });
+
+//     if (!response.ok || !response.body) {
+//       throw new Error("Stream request failed");
+//     }
+
+//     const reader = response.body.getReader();
+//     const decoder = new TextDecoder("utf-8");
+
+//     let accumulatedText = "";
+
+//     while (true) {
+//       const { done, value } = await reader.read();
+
+//       if (done) break;
+
+//       const chunk = decoder.decode(value, { stream: true });
+
+//       accumulatedText += chunk;
+
+//       // 🔥 LIVE UI UPDATE
+//       if (onChunk) onChunk(accumulatedText);
+//     }
+
+//     if (onDone) onDone();
+//   } catch (error) {
+//     console.error("STREAM API ERROR:", error.message);
+
+//     if (onError) onError(error);
+//   }
+// };
+
+// export default streamChatAPI;
+const streamChatAPI = async (
+  userMessage,
+  token,
+  onChunk,
+  onDone,
+  onError
+) => {
+  try {
+    const response = await fetch("http://localhost:5000/api/chat/stream", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      body: JSON.stringify({ message: userMessage }),
+    });
+
+    if (!response.ok || !response.body) {
+      throw new Error("Stream request failed");
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+
+    let fullText = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value, { stream: true });
+
+      const lines = chunk.split("\n");
+
+      for (let line of lines) {
+        if (!line.startsWith("data: ")) continue;
+
+        const data = line.replace("data: ", "");
+
+        if (data === "[DONE]") {
+          onDone?.(fullText);
+          return;
+        }
+
+        fullText += data + " ";
+        onChunk?.(fullText);
+      }
+    }
+  } catch (error) {
+    console.error("STREAM API ERROR:", error.message);
+    onError?.(error);
+  }
+};
+
+export default streamChatAPI;
+
+
+📁 assignmentApi.js
+--------------------------------
+import API from "./axios";
+
+
+export const getAssignments = async () => {
+  const res = await API.get("/assignment");
+  return res.data;
+};
+
+
+export const createAssignment = async (data) => {
+  const res = await API.post("/assignment", data);
+  return res.data;
+};
+
+
+export const updateAssignment = async (id, data) => {
+  const res = await API.put(`/assignment/${id}`, data);
+  return res.data;
+};
+
+
+export const deleteAssignment = async (id) => {
+  const res = await API.delete(`/assignment/${id}`);
+  return res.data;
+};
+
+
+export const submitAssignment = async (data) => {
+  const res = await API.post("/assignment/submit", data);
+  return res.data;
+};
+
+
+export const getSubmissions = async (assignmentId) => {
+  const res = await API.get(`/assignment/submissions/${assignmentId}`);
+  return res.data;
+};
+
+
+export const gradeSubmission = async (submissionId, data) => {
+  const res = await API.put(`/assignment/grade/${submissionId}`, data);
+  return res.data;
+};
+
+
+📁 attandenceApi.js
+--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import API from "./axios";
+
+
+export const getAttendance = async () => {
+  const res = await API.get("/attendance");
+  return res.data;
+};
+
+
+export const markAttendance = async (data) => {
+  const res = await API.post("/attendance/mark", data);
+  return res.data;
+};
+
+
+📁 axios.js
+--------------------------------
+import axios from "axios";
+
+const normalizeBaseUrl = (raw) => {
+  if (!raw) return "http://localhost:5000/api";
+  const cleaned = String(raw).trim().replace(/;$/, "");
+  if (/^https?:\/\//i.test(cleaned)) return cleaned;
+  return `http://${cleaned}`;
+};
+
+const API = axios.create({
+  baseURL: normalizeBaseUrl(
+    import.meta.env.VITE_API_URL ||
+    import.meta.env.REACT_APP_API_URL ||
+    "http://localhost:5000/api"
+  ),
+  timeout: 15000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+API.interceptors.request.use(
+  (config) => {
+    try {
+      const token = localStorage.getItem("token");
+      const cleanedToken = typeof token === "string" ? token.trim() : "";
+      const isUsableToken =
+        cleanedToken &&
+        cleanedToken !== "undefined" &&
+        cleanedToken !== "null" &&
+        cleanedToken.split(".").length === 3;
+
+      if (isUsableToken) {
+        config.headers = config.headers || {};
+        config.headers.Authorization = `Bearer ${cleanedToken}`;
+      } else if (token) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+      }
+    } catch (_) {}
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const status = error.response?.status;
+    if (status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default API;
+
+
+
+📁 chatApi.js
+--------------------------------
+import axios from "axios";
+
+const API = axios.create({
+  baseURL: "http://localhost:5000/api", // change if needed
+});
+
+// 🔐 Attach token automatically
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
+export default API;
+
+
+📁 chatService.js
+--------------------------------
+import API from "./axios";
+
+// 🔹 Simple (non-stream) fallback
+export const sendChatMessage = async (message) => {
+  const res = await API.post("/chat", { message });
+  return res.data;
+};
+
+
+📁 classApi.js
+--------------------------------
+import API from "./axios";
+
+export const getClasses = async (instituteId) => {
+  const res = await API.get("/class", {
+    params: { instituteId },
+  });
+  return res.data;
+};
+
+export const createClass = async (data) => {
+  const res = await API.post("/class", data);
+  return res.data;
+};
+
+export const updateClass = async (id, data) => {
+  const res = await API.put(`/class/${id}`, data);
+  return res.data;
+};
+
+export const deleteClass = async (id) => {
+  const res = await API.delete(`/class/${id}`);
+  return res.data;
+};
+
+
+
+📁 configApi.js
+--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import API from "./axios";
+import { handle } from "./utils";
+
+const configPath = (path = "") => {
+  const base = (API?.defaults?.baseURL || "").toLowerCase();
+  const clean = path.startsWith("/") ? path : `/${path}`;
+  const baseHasConfig = /\/api\/config\/?$/.test(base);
+  if (baseHasConfig) {
+    return clean.replace(/^\/config/, "");
+  }
+  return clean.startsWith("/config") ? clean : `/config${clean}`;
+};
+
+export const getInstituteConfig = () =>
+  handle(API.get(configPath("/protected")));
+
+
+export const addDeptToConfig = (data) =>
+  handle(API.post(configPath("/department"), data));
+
+export const updateDeptHod = (data) =>
+  handle(API.put(configPath("/department/hod"), data));
+
+export const removeDeptFromConfig = (data) =>
+  handle(API.delete(configPath("/department"), { data }));
+
+
+export const addCourseToConfig = (data) =>
+  handle(API.post(configPath("/course"), data));
+
+export const removeCourseFromConfig = (data) =>
+  handle(API.delete(configPath("/course"), { data }));
+
+
+export const addSubjectToConfig = (data) =>
+  handle(API.post(configPath("/subject"), data));
+
+export const updateSubjectTeacher = (data) =>
+  handle(API.put(configPath("/subject/teacher"), data));
+
+export const removeSubjectFromConfig = (data) =>
+  handle(API.delete(configPath("/subject"), { data }));
+
+
+export const updateStructureOrder = (data) =>
+  handle(API.put(configPath("/reorder"), { data }));
+
+
+
+📁 courseApi.js
+--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import API from "./axios";
+
+
+
+export const getCourses = async (params = {}) => {
+  const { instituteId, departmentId } = params;
+
+  if (!instituteId) {
+    throw new Error("instituteId is required for getCourses");
+  }
+
+  const res = await API.get("/course", {
+    params: {
+      instituteId,          
+      ...(departmentId && { departmentId }),
+    },
+  });
+
+  return res.data;
+};
+
+
+export const createCourse = async (data) => {
+  if (!data?.name || !data?.departmentId || !data?.instituteId) {
+    throw new Error("name, departmentId, instituteId are required");
+  }
+
+  const res = await API.post("/course", data);
+  return res.data;
+};
+
+
+export const updateCourse = async (id, data) => {
+  if (!id) throw new Error("Course ID required");
+
+  const res = await API.put(`/course/${id}`, data);
+  return res.data;
+};
+
+
+export const deleteCourse = async (id) => {
+  if (!id) throw new Error("Course ID required");
+
+  const res = await API.delete(`/course/${id}`);
+  return res.data;
+};
+
+
+📁 departmentApi.js
+--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import API from "./axios";
+
+
+// protected
+export const getDepartments = async (instituteId) => {
+  const res = await API.get("/department", {
+    params: { instituteId },
+  });
+  return res.data;
+};
+
+//protected
+
+export const getDepartmentById = async (id) => {
+  const res = await API.get(`/department/${id}`);
+  return res.data;
+};
+
+export const createDepartment = async (data) => {
+  const res = await API.post("/department", data);
+  return res.data;
+};
+
+export const updateDepartment = async (id, data) => {
+  const res = await API.put(`/department/${id}`, data);
+  return res.data;
+};
+
+export const deleteDepartment = async (id) => {
+  const res = await API.delete(`/department/${id}`);
+  return res.data;
+};
+
+
+📁 instituteApi.js
+--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import API from "./axios";
+
+
+
+//public 
+
+export const getInstitutes = async () => {
+  const res = await API.get("/institute");
+  return res.data;
+};
+
+//protected
+
+export const getMyInstitute = async () => {
+  const res = await API.get("/institute/my");
+  return res.data;
+};
+
+
+export const setAboutInstitute = async (data) => {
+  const res = await API.put("/institute/setup", data);
+  return res.data;
+};
+
+
+📁 requestApi.js
+--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import API from "./axios";
+
+
+export const createAccountRequest = async (data) => {
+  const res = await API.post("/request", data);
+  return res.data;
+};
+
+
+export const getRequests = async (search = "") => {
+  const res = await API.get(`/request?search=${search}`);
+  return res.data;
+};
+
+
+export const preloadRequests = async () => {
+  const res = await API.get("/request/all");
+  return res.data;
+};
+
+
+export const approveRequest = async (id) => {
+  const res = await API.put(`/request/${id}/approve`);
+  return res.data;
+};
+
+
+export const rejectRequest = async (id) => {
+  const res = await API.put(`/request/${id}/reject`);
+  return res.data;
+};
+
+
+📁 subjectApi.js
+--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import API from "./axios";
+
+export const getSubjects = async (paramsOrDepartmentId = {}) => {
+  const params =
+    typeof paramsOrDepartmentId === "string"
+      ? { departmentId: paramsOrDepartmentId }
+      : paramsOrDepartmentId;
+
+  const res = await API.get("/subject", {
+    params,
+  });
+  return res.data;
+};
+
+export const createSubject = async (data) => {
+  const fallbackId = data?.course || data?.department || data?.classId || "create";
+  const res = await API.post(`/subject/${fallbackId}`, data);
+  return res.data;
+};
+
+export const updateSubject = async (id, data) => {
+  const res = await API.put(`/subject/${id}`, data);
+  return res.data;
+};
+
+export const deleteSubject = async (id) => {
+  const res = await API.delete(`/subject/${id}`);
+  return res.data;
+};
+
+
+
+📁 timetableApi.js
+--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import API from "./axios";
+
+
+export const getTimetables = async () => {
+  const res = await API.get("/timetable");
+  return res.data;
+};
+
+
+export const saveTimetable = async (data) => {
+  const res = await API.post("/timetable", data);
+  return res.data;
+};
+
+
+export const deleteTimetable = async (id) => {
+  const res = await API.delete(`/timetable/${id}`);
+  return res.data;
+};
+
+
+📁 uploadApi.js
+--------------------------------
+import API from "./axios";
+
+const normalizeUploadResponse = (data = {}) => ({
+  url: data.url || "",
+  type: data.type || "",
+  size: data.size || 0,
+  fileUrl: data.url || "",
+  fileType: data.type || "",
+  fileSize: data.size || 0,
+});
+
+const uploadWithProgress = async (path, file, setProgress) => {
+  const fd = new FormData();
+  fd.append("file", file);
+
+  const res = await API.post(path, fd, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    onUploadProgress: (e) => {
+      if (setProgress && e.total) {
+        const percent = Math.round((e.loaded * 100) / e.total);
+        setProgress(percent);
+      }
+    },
+  });
+
+  return normalizeUploadResponse(res.data);
+};
+
+export const uploadImageFile = async (file, setProgress) =>
+  uploadWithProgress("/upload/image", file, setProgress);
+
+
+export const uploadAssignmentFile = async (file, setProgress) => {
+  return uploadWithProgress("/upload/assignment", file, setProgress);
+};
+
+
+export const uploadSubmissionFile = async (file, setProgress) => {
+  return uploadWithProgress("/upload/submission", file, setProgress);
+};
+
+
+
+📁 userAPI.js
+--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import API from "./axios";
+
+
+
+
+export const loginUser = (data) => API.post("/login", data);
+
+
+export const sendOtp = (data) => API.post("/sendOtp", data);
+export const verifyOtp = (data) => API.post("/verifyOtp", data);
+
+
+export const sendRequestOtp = (email) =>
+  API.post("/sendOtp", { email, type: "request" });
+
+export const requestAccount = (data) =>
+  API.post("/request", data);
+
+
+export const sendCollegeOtp = (data) =>
+  API.post("/sendCollegeOtp", data);
+
+export const verifyCollegeOtp = (data) =>
+  API.post("/verifyCollegeOtp", data);
+
+export const registerCollege = (data) =>
+  API.post("/register", data);
+
+
+export const forgotPassword = (email) =>
+  API.post("/forgotPassword", { email });
+
+export const resetPassword = (data) =>
+  API.post("/resetPassword", data);
+
+
+
+export const getProfile = async () => {
+  const res = await API.get("/user/profile");
+  return res.data;
+};
+
+
+export const setupPassword = async (data) => {
+  const res = await API.post("/user/setup-password", data);
+  return res.data;
+};
+
+
+
+
+export const createHod = async (data) => {
+  const res = await API.post("/user/hod", data);
+  return res.data;
+};
+
+export const createTeacher = async (data) => {
+  const res = await API.post("/user/teacher", data);
+  return res.data;
+};
+
+export const createStudent = async (data) => {
+  const res = await API.post("/user/student", data);
+  return res.data;
+};
+
+
+export const getUsers = async (params = {}) => {
+  const res = await API.get("/user", { params });
+  return res.data;
+};
+
+
+export const deleteUser = async (id) => {
+  const res = await API.delete(`/user/${id}`);
+  return res.data;
+};
+
+
+export const updateUser = async (id, data) => {
+  const res = await API.put(`/user/${id}`, data);
+  return res.data;
+};
+
+
+
+📁 utils.js
+--------------------------------
+export const handle = async (promise) => {
+  try {
+    const res = await promise;
+    return res.data;
+  } catch (err) {
+    console.error("API Error:", err.response?.data || err.message);
+    throw err.response?.data || { msg: "Something went wrong" };
+  }
+};
+

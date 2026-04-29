@@ -1,0 +1,112 @@
+.root {
+  margin-top: 14px;
+}
+
+.title {
+  margin: 0 0 10px;
+  font-size: 28px;
+  font-weight: 800;
+  color: #10243f;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #d6e2f3;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  color: #133155;
+  font-size: 19px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.input,
+.select {
+  height: 38px;
+  border: 1px solid #c8d5e8;
+  border-radius: 10px;
+  padding: 0 12px;
+  background: #f8fbff;
+  color: #18314f;
+  font-size: 14px;
+}
+
+.primaryBtn {
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  padding: 0 14px;
+  background: #1f6ef2;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primaryBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table th {
+  text-align: left;
+  padding: 10px;
+  background: #eef4ff;
+  color: #203b5f;
+}
+
+.table td {
+  padding: 10px;
+  border-top: 1px solid #ebf0fa;
+  color: #243f63;
+}
+
+.dangerBtn {
+  border: none;
+  border-radius: 8px;
+  background: #e02424;
+  color: #fff;
+  padding: 7px 12px;
+  cursor: pointer;
+}
+
+.toastWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.toast {
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.toastSuccess {
+  background: #eafaf1;
+  border: 1px solid #b6e9cc;
+  color: #146c43;
+}
+
+.toastError {
+  background: #fff0f0;
+  border: 1px solid #ffcaca;
+  color: #b42318;
+}

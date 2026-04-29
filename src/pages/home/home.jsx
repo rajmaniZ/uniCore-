@@ -5,7 +5,7 @@ import Testimonials from '../../component/testimonials/testimonials';
 import style from './home.module.css'
 import { Link } from 'react-router-dom';
 
-import ShowDashboard from './../../component/linkDashboard'
+// import ShowDashboard from './../../component/linkDashboard'
 function Home(){
     return (
         <div className={style.home}>
@@ -13,7 +13,7 @@ function Home(){
             <Hero/>
             <Features className={style.feature}/>
             <Testimonials/>
-            <ShowDashboard/>
+            {/* <ShowDashboard/> */}
         </div>
     );
 }

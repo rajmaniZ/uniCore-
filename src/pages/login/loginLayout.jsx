@@ -1,4 +1,4 @@
-// import { Link } from 'react-router-dom';
+
 import {Link } from 'react-router-dom';
 
 
@@ -10,11 +10,11 @@ function Login() {
     <div className={styles.frame}>
         
         <div className={styles.loginImg}>
-                {/* <img scr="../../src/assets/loginImg.jpg" alt="loginimg" /> */}
+                {}
         </div>
         <div className={styles.page}>
             <main className={styles.main}>
-                <Outlet/>
+                <Outlet />
                 
             </main>
             

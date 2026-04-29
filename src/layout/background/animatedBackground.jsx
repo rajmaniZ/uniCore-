@@ -29,7 +29,7 @@ const Background = () => {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        dx: (Math.random() - 0.5) * 0.6, // slower
+        dx: (Math.random() - 0.5) * 0.6, 
         dy: (Math.random() - 0.5) * 0.6,
         size: Math.random() * 2 + 1,
       });
@@ -39,21 +39,21 @@ const Background = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((p) => {
-        // movement
+        
         p.x += p.dx;
         p.y += p.dy;
 
-        // bounce edges
+        
         if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
 
-        // draw particle
+        
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = "rgba(255,255,255,0.8)";
         ctx.fill();
 
-        // mouse interaction (repel/attract)
+        
         if (mouse.x && mouse.y) {
           let dx = mouse.x - p.x;
           let dy = mouse.y - p.y;
@@ -66,18 +66,18 @@ const Background = () => {
         }
       });
 
-      // reduced line effect
+      
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           let dx = particles[i].x - particles[j].x;
           let dy = particles[i].y - particles[j].y;
           let dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 80) { // 🔥 reduced distance
+          if (dist < 80) { 
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = "rgba(255,255,255,0.05)"; // lighter
+            ctx.strokeStyle = "rgba(255,255,255,0.05)"; 
             ctx.stroke();
           }
         }

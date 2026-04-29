@@ -28,12 +28,12 @@ function FeatureSection(){
             highlight:'',
             image:''
         },
-        // {
-        //     id:5,
-        //     title:"A",
-        //     highlight:'',
-        //     image:''
-        // },
+        
+        
+        
+        
+        
+        
     ]
     return (
         <>

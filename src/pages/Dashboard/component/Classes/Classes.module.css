@@ -9,7 +9,7 @@
   margin: auto;
 }
 
-/* Top Bar */
+
 .topBar {
   display: flex;
   justify-content: space-between;
@@ -24,7 +24,7 @@
   border: 1px solid #ddd;
 }
 
-/* Cards */
+
 .cardGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -60,7 +60,7 @@
   border-radius: 10px;
 }
 
-/* Card Sections */
+
 .cardHeader {
   display: flex;
   gap: 10px;
@@ -96,7 +96,7 @@
   cursor: pointer;
 }
 
-/* Bottom Section */
+
 .bottomSection {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -117,7 +117,7 @@
   margin: 10px 0;
 }
 
-/* Activity */
+
 .box ul {
   list-style: none;
   padding: 0;
@@ -134,7 +134,7 @@
   font-weight: bold;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .topBar {
     flex-direction: column;

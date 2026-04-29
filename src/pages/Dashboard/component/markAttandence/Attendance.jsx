@@ -1,221 +1,405 @@
-import { useState, useEffect } from "react";
-import { useData } from "../../context/dataContext";
-import { useAuth } from "../../context/AuthContext";
+// import { useEffect, useMemo, useState } from "react";
+// import { useAuth } from "../../../../context/authContext";
+// import styles from "./attendance.module.css";
+
+// import { getUsers } from "../../../../api/userAPI";
+// import { getInstituteConfig } from "../../../../api/configApi";
+// import { getAttendance, markAttendance } from "../../../../api/attandenceApi";
+// import { getTeacherSubjectScopes, getId } from "../../utils/configRuntime";
+
+// const getScopeKey = (scope) =>
+//   [
+//     scope.subjectId,
+//     scope.classId || "",
+//     scope.departmentId || "",
+//     scope.courseId || "",
+//     scope.semester || "",
+//   ].join(":");
+
+// export default function Attendance() {
+//   const { user, token } = useAuth();
+
+//   if (user?.role !== "teacher") {
+//     return (
+//       <div className={styles.center}>
+//         Only assigned teachers can mark attendance
+//       </div>
+//     );
+//   }
+
+//   const today = new Date().toISOString().split("T")[0];
+
+//   const [students, setStudents] = useState([]);
+//   const [subjectScopes, setSubjectScopes] = useState([]);
+//   const [selectedScopeKey, setSelectedScopeKey] = useState("");
+//   const [allowedStudents, setAllowedStudents] = useState([]);
+//   const [attendanceState, setAttendanceState] = useState({});
+//   const [attendanceHistory, setAttendanceHistory] = useState([]);
+//   const [error, setError] = useState("");
+//   const [message, setMessage] = useState("");
+
+//   const loadData = async () => {
+//     setError("");
+//     try {
+//       const [users, config, history] = await Promise.all([
+//         getUsers({ role: "student" }),
+//         getInstituteConfig(),
+//         getAttendance(),
+//       ]);
+
+//       const scopes = getTeacherSubjectScopes(config, user._id);
+//       setStudents(Array.isArray(users) ? users : []);
+//       setSubjectScopes(scopes);
+//       setSelectedScopeKey(scopes[0] ? getScopeKey(scopes[0]) : "");
+//       setAttendanceHistory(Array.isArray(history) ? history : []);
+//     } catch (err) {
+//       console.error("Attendance load error:", err.response?.data || err);
+//       setError(err.response?.data?.msg || err.message || "Failed to load attendance data");
+//     }
+//   };
+
+//   useEffect(() => {
+//     if (!token || !user?._id) return;
+//     loadData();
+//   }, [token, user]);
+
+//   const selectedScope = useMemo(
+//     () => subjectScopes.find((scope) => getScopeKey(scope) === selectedScopeKey) || null,
+//     [selectedScopeKey, subjectScopes]
+//   );
+
+//   useEffect(() => {
+//     if (!selectedScope) {
+//       setAllowedStudents([]);
+//       return;
+//     }
+
+//     let filtered = students;
+
+//     if (selectedScope.classId) {
+//       filtered = students.filter(
+//         (student) => getId(student.classId) === selectedScope.classId
+//       );
+//     } else {
+//       filtered = students.filter(
+//         (student) =>
+//           getId(student.departmentId) === selectedScope.departmentId &&
+//           getId(student.courseId) === selectedScope.courseId &&
+//           Number(student.semester) === Number(selectedScope.semester)
+//       );
+//     }
+
+//     setAllowedStudents(filtered);
+//     setAttendanceState({});
+//   }, [selectedScope, students]);
+
+//   const toggle = (id) => {
+//     setAttendanceState((prev) => ({
+//       ...prev,
+//       [id]: !prev[id],
+//     }));
+//   };
+
+//   const handleSubmit = async () => {
+//     if (!selectedScope) return;
+
+//     try {
+//       setError("");
+
+//       const payload = {
+//         subject: selectedScope.subjectId,
+//         students: allowedStudents.map((student) => ({
+//           student: student._id,
+//           status: attendanceState[student._id] ? "present" : "absent",
+//         })),
+//       };
+
+//       if (selectedScope.classId) {
+//         payload.classId = selectedScope.classId;
+//         payload.section = user.section || "A";
+//       } else {
+//         payload.department = selectedScope.departmentId;
+//         payload.course = selectedScope.courseId;
+//         payload.semester = selectedScope.semester;
+//       }
+
+//       await markAttendance(payload);
+//       setMessage("Attendance saved successfully");
+//       await loadData();
+//     } catch (err) {
+//       console.error("Attendance save error:", err.response?.data || err);
+//       setError(err.response?.data?.msg || err.message || "Error saving attendance");
+//     }
+//   };
+
+//   return (
+//     <div className={styles.container}>
+//       <div className={styles.header}>
+//         <h2>Attendance</h2>
+//         <span>{today}</span>
+//       </div>
+
+//       {error ? <p>{error}</p> : null}
+//       {message ? <p>{message}</p> : null}
+
+//       <select value={selectedScopeKey} onChange={(e) => setSelectedScopeKey(e.target.value)}>
+//         <option value="">Select Subject</option>
+//         {subjectScopes.map((scope) => (
+//           <option key={getScopeKey(scope)} value={getScopeKey(scope)}>
+//             {scope.subject?.name}
+//             {scope.className
+//               ? ` - ${scope.className}`
+//               : scope.courseName
+//                 ? ` - ${scope.courseName} / Semester ${scope.semester}`
+//                 : ""}
+//           </option>
+//         ))}
+//       </select>
+
+//       <div className={styles.table}>
+//         {allowedStudents.map((student) => (
+//           <div key={student._id} className={styles.row}>
+//             <span>{student.rollNumber}</span>
+//             <span>{student.name}</span>
+
+//             <div
+//               className={`${styles.box} ${
+//                 attendanceState[student._id] ? styles.present : ""
+//               }`}
+//               onClick={() => toggle(student._id)}
+//             />
+//           </div>
+//         ))}
+//       </div>
+
+//       {selectedScope && allowedStudents.length > 0 && (
+//         <button className={styles.submit} onClick={handleSubmit}>
+//           Save Attendance
+//         </button>
+//       )}
+
+//       {attendanceHistory.length > 0 && (
+//         <div className={styles.table}>
+//           <h3>Attendance History</h3>
+//           {attendanceHistory.map((entry) => {
+//             const presentCount = (entry.students || []).filter((student) => student.status === "present").length;
+//             const absentCount = (entry.students || []).filter((student) => student.status === "absent").length;
+//             return (
+//               <div key={entry._id} className={styles.row}>
+//                 <span>{entry.subject?.name || "Subject"}</span>
+//                 <span>{new Date(entry.date).toLocaleDateString()}</span>
+//                 <span>P: {presentCount}</span>
+//                 <span>A: {absentCount}</span>
+//               </div>
+//             );
+//           })}
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
+
+import { useEffect, useMemo, useState } from "react";
+import { useAuth } from "../../../../context/authContext";
 import styles from "./attendance.module.css";
 
-const ITEMS_PER_PAGE = 10;
+import { getUsers } from "../../../../api/userAPI";
+import { getInstituteConfig } from "../../../../api/configApi";
+import { getAttendance, markAttendance } from "../../../../api/attandenceApi";
+import { getTeacherSubjectScopes, getId } from "../../utils/configRuntime";
+
+const getScopeKey = (scope) =>
+  [
+    scope.subjectId,
+    scope.classId || "",
+    scope.departmentId || "",
+    scope.courseId || "",
+    scope.semester || "",
+  ].join(":");
 
 export default function Attendance() {
-  const { students, attendance, markAttendance } = useData();
-  const { currentUser, isLoading } = useAuth();
+  const { user, token } = useAuth();
 
   const today = new Date().toISOString().split("T")[0];
 
-  const [department, setDepartment] = useState("");
-  const [course, setCourse] = useState("");
-  const [year, setYear] = useState("");
-  const [semester, setSemester] = useState("");
-  const [subject, setSubject] = useState("");
-  const [selectedClass, setSelectedClass] = useState("");
-
+  const [students, setStudents] = useState([]);
+  const [subjectScopes, setSubjectScopes] = useState([]);
+  const [selectedScopeKey, setSelectedScopeKey] = useState("");
+  const [allowedStudents, setAllowedStudents] = useState([]);
   const [attendanceState, setAttendanceState] = useState({});
-  const [page, setPage] = useState(1);
+  const [attendanceHistory, setAttendanceHistory] = useState([]);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
-  if (isLoading) return <div className={styles.center}>Loading...</div>;
-  if (!currentUser) return <div className={styles.center}>Login required</div>;
+  // 🚀 LOAD DATA
+  const loadData = async () => {
+    setError("");
+    try {
+      const users = await getUsers({ role: "student" });
+      const config = await getInstituteConfig();
+      const history = await getAttendance();
 
-  const role = currentUser.role;
+      const scopes = getTeacherSubjectScopes(config, user._id);
 
-  // ✅ ROLE BASE FILTER
-  const baseStudents = students.filter(s => {
-    if (role === "teacher") return currentUser.classes.includes(s.class);
-    if (role === "hod") return s.branch === currentUser.department;
-    return true;
-  });
+      console.log("Scopes:", scopes);
 
-  // ✅ DEPARTMENT
-  const departments = [...new Set(baseStudents.map(s => s.branch))];
+      setStudents(Array.isArray(users) ? users : []);
+      setSubjectScopes(scopes || []);
+      setSelectedScopeKey(scopes[0] ? getScopeKey(scopes[0]) : "");
+      setAttendanceHistory(Array.isArray(history) ? history : []);
 
-  // ✅ COURSE (mock logic)
-  const courses = ["B.tech", "M.tech"];
+      if (!scopes || scopes.length === 0) {
+        setError("No subject assigned to this teacher");
+      }
 
-  // ✅ YEAR → SEMESTER mapping
-  const semesterMap = {
-    "1": ["1", "2"],
-    "2": ["3", "4"],
-    "3": ["5", "6"],
-    "4": ["7", "8"],
-  };
-
-  const semesters = semesterMap[year] || [];
-
-  // ✅ SUBJECT (dynamic)
-  const availableSubjects = [
-    ...new Set(
-      baseStudents
-        .filter(s =>
-          (!department || s.branch === department) &&
-          (!year || s.year === year) &&
-          (!semester || s.semester === semester)
-        )
-        .flatMap(s => s.subjects)
-    )
-  ];
-
-  // ✅ CLASS (subject controlled)
-  const availableClasses = [
-    ...new Set(
-      baseStudents
-        .filter(s =>
-          (!department || s.branch === department) &&
-          (!year || s.year === year) &&
-          (!semester || s.semester === semester) &&
-          (!subject || s.subjects.includes(subject))
-        )
-        .map(s => s.class)
-    )
-  ];
-
-  // ✅ FINAL STUDENTS
-  const finalStudents = baseStudents.filter(s =>
-    s.class === selectedClass &&
-    (!subject || s.subjects.includes(subject))
-  );
-
-  // ✅ PAGINATION
-  const totalPages = Math.ceil(finalStudents.length / ITEMS_PER_PAGE);
-  const paginated = finalStudents.slice(
-    (page - 1) * ITEMS_PER_PAGE,
-    page * ITEMS_PER_PAGE
-  );
-
-  // ✅ LOAD EXISTING
-  useEffect(() => {
-    const existing = attendance.find(
-      a =>
-        a.subject === subject &&
-        a.class === selectedClass &&
-        a.date === today
-    );
-
-    if (existing) {
-      const map = {};
-      existing.records.forEach(r => {
-        if (r.status === "present") map[r.studentId] = true;
-      });
-      setAttendanceState(map);
-    } else {
-      setAttendanceState({});
+    } catch (err) {
+      console.error("Load error:", err.response?.data || err);
+      setError(err.response?.data?.msg || err.message);
     }
-  }, [subject, selectedClass]);
+  };
 
+  useEffect(() => {
+    if (!token || !user?._id) return;
+    loadData();
+  }, [token, user]);
+
+  // 🎯 SELECTED SUBJECT
+  const selectedScope = useMemo(
+    () => subjectScopes.find((s) => getScopeKey(s) === selectedScopeKey) || null,
+    [selectedScopeKey, subjectScopes]
+  );
+
+  // 🎯 FILTER STUDENTS
+  useEffect(() => {
+    if (!selectedScope) {
+      setAllowedStudents([]);
+      return;
+    }
+
+    let filtered = students;
+
+    if (selectedScope.classId) {
+      filtered = students.filter(
+        (s) => getId(s.classId) === selectedScope.classId
+      );
+    } else {
+      filtered = students.filter(
+        (s) =>
+          getId(s.departmentId) === selectedScope.departmentId &&
+          getId(s.courseId) === selectedScope.courseId &&
+          Number(s.semester) === Number(selectedScope.semester)
+      );
+    }
+
+    setAllowedStudents(filtered);
+    setAttendanceState({});
+  }, [selectedScope, students]);
+
+  // 🎯 TOGGLE PRESENT/ABSENT
   const toggle = (id) => {
-    setAttendanceState(prev => ({
+    setAttendanceState((prev) => ({
       ...prev,
-      [id]: !prev[id]
+      [id]: !prev[id],
     }));
   };
 
-  const handleSubmit = () => {
-    const records = finalStudents.map(s => ({
-      studentId: s._id,
-      status: attendanceState[s._id] ? "present" : "absent"
-    }));
+  // ✅ SUBMIT ATTENDANCE
+  const handleSubmit = async () => {
+    if (!selectedScope) {
+      return setError("Please select subject");
+    }
 
-    markAttendance({
-      subject,
-      class: selectedClass,
-      date: today,
-      teacherId: currentUser._id,
-      createdAt: new Date(),
-      records
-    });
+    if (allowedStudents.length === 0) {
+      return setError("No students found");
+    }
+
+    try {
+      setError("");
+      setMessage("");
+
+      const studentsPayload = allowedStudents.map((student) => ({
+        student: student._id,
+        status: attendanceState[student._id] ? "present" : "absent",
+      }));
+
+      const payload = {
+        subject: selectedScope.subjectId,
+        students: studentsPayload,
+      };
+
+      // 🔥 CLASS BASED
+      if (selectedScope.classId) {
+        payload.classId = selectedScope.classId;
+        payload.section = user.section || "A";
+      }
+      // 🔥 COURSE BASED
+      else {
+        payload.department = selectedScope.departmentId;
+        payload.course = selectedScope.courseId;
+        payload.semester = selectedScope.semester;
+      }
+
+      console.log("Submitting:", payload);
+
+      const res = await markAttendance(payload);
+
+      if (res) {
+        setMessage("✅ Attendance saved in DB");
+        await loadData();
+      } else {
+        setError("Failed to save attendance");
+      }
+
+    } catch (err) {
+      console.error("Save error:", err.response?.data || err);
+      setError(err.response?.data?.msg || err.message);
+    }
   };
 
   return (
     <div className={styles.container}>
-
       <div className={styles.header}>
         <h2>Attendance</h2>
         <span>{today}</span>
       </div>
 
-      {/* 🔥 FILTERS */}
-      <div className={styles.filters}>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {message && <p style={{ color: "green" }}>{message}</p>}
 
-        {(role === "admin" || role === "hod") && (
-          <select onChange={e => setDepartment(e.target.value)}>
-            <option>Department</option>
-            {departments.map(d => <option key={d}>{d}</option>)}
-          </select>
-        )}
+      {/* SUBJECT SELECT */}
+      <select
+        value={selectedScopeKey}
+        onChange={(e) => setSelectedScopeKey(e.target.value)}
+      >
+        <option value="">Select Subject</option>
+        {subjectScopes.map((scope) => (
+          <option key={getScopeKey(scope)} value={getScopeKey(scope)}>
+            {scope.subject?.name}
+          </option>
+        ))}
+      </select>
 
-        {(role === "admin") && (
-          <select onChange={e => setCourse(e.target.value)}>
-            <option>Course</option>
-            {courses.map(c => <option key={c}>{c}</option>)}
-          </select>
-        )}
-
-        <select onChange={e => {
-          setYear(e.target.value);
-          setSemester("");
-        }}>
-          <option>Year</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-
-        <select onChange={e => setSemester(e.target.value)}>
-          <option>Semester</option>
-          {semesters.map(s => <option key={s}>{s}</option>)}
-        </select>
-
-        <select onChange={e => setSubject(e.target.value)}>
-          <option>Subject</option>
-          {availableSubjects.map(s => <option key={s}>{s}</option>)}
-        </select>
-
-        <select onChange={e => setSelectedClass(e.target.value)}>
-          <option>Class</option>
-          {availableClasses.map(c => <option key={c}>{c}</option>)}
-        </select>
-
-      </div>
-
-      {/* TABLE */}
+      {/* STUDENT LIST */}
       <div className={styles.table}>
-        {paginated.length === 0 && (
-          <div className={styles.empty}>No students</div>
-        )}
-
-        {paginated.map(s => (
-          <div key={s._id} className={styles.row}>
-            <span>{s.rollNo}</span>
-            <span>{s.name}</span>
+        {allowedStudents.map((student) => (
+          <div key={student._id} className={styles.row}>
+            <span>{student.rollNumber}</span>
+            <span>{student.name}</span>
 
             <div
               className={`${styles.box} ${
-                attendanceState[s._id] ? styles.present : ""
+                attendanceState[student._id] ? styles.present : ""
               }`}
-              onClick={() => toggle(s._id)}
+              onClick={() => toggle(student._id)}
             />
           </div>
         ))}
       </div>
 
-      {/* PAGINATION */}
-      <div className={styles.pagination}>
-        <button onClick={() => setPage(p => p - 1)} disabled={page === 1}>Prev</button>
-        <span>{page} / {totalPages || 1}</span>
-        <button onClick={() => setPage(p => p + 1)} disabled={page === totalPages}>Next</button>
-      </div>
-
-      {subject && selectedClass && (
+      {/* SAVE BUTTON */}
+      {selectedScope && allowedStudents.length > 0 && (
         <button className={styles.submit} onClick={handleSubmit}>
-          Submit
+          Save Attendance
         </button>
       )}
     </div>

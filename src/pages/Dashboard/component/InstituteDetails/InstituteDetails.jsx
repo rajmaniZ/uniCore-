@@ -8,7 +8,7 @@ function InstituteDetail() {
   const { currentUser } = useAuth();
   const { institutes, users } = useData();
 
-  // 🔥 RBAC FILTER
+  
   const filteredInstitutes =
     currentUser.role === "superadmin"
       ? institutes
@@ -21,7 +21,7 @@ function InstituteDetail() {
   return (
     <div className={styles.container}>
       
-      {/* 🔥 HEADER */}
+      {}
       <div className={styles.header}>
         <img src={institute.media.logo} className={styles.logo} />
 
@@ -31,18 +31,18 @@ function InstituteDetail() {
         </div>
       </div>
 
-      {/* 🔥 BUILDING IMAGE */}
+      {}
       <div className={styles.banner}>
         <img src={institute.media.building} alt="building" />
       </div>
 
-      {/* 🔥 ABOUT */}
+      {}
       <div className={styles.card}>
         <h2>About</h2>
         <p>{institute.about}</p>
       </div>
 
-      {/* 🔥 GALLERY */}
+      {}
       {institute.media.gallery?.length > 0 && (
         <div className={styles.card}>
           <h2>Gallery</h2>
@@ -54,11 +54,11 @@ function InstituteDetail() {
         </div>
       )}
 
-      {/* 🔥 STRUCTURE */}
+      {}
       <div className={styles.card}>
         <h2>Structure</h2>
 
-        {/* COLLEGE */}
+        {}
         {institute.type === "college" &&
           Object.entries(institute.structure).map(([dept, data]) => (
             <div key={dept} className={styles.block}>
@@ -93,7 +93,7 @@ function InstituteDetail() {
             </div>
           ))}
 
-        {/* SCHOOL */}
+        {}
         {institute.type === "school" &&
           Object.entries(institute.structure).map(([cls, data]) => (
             <div key={cls} className={styles.block}>

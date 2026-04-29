@@ -1,209 +1,1023 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import styles from './requestForAccount.module.css';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { Link } from "react-router-dom";
+// import { useState, useEffect } from "react";
+// import styles from "./requestForAccount.module.css";
+
+// import { sendRequestOtp, requestAccount, verifyOtp } from "../../../api/userAPI";
+// import { getInstitutes } from "../../../api/instituteApi";
+// import { getDepartments } from "../../../api/departmentApi";
+// import { getCourses } from "../../../api/courseApi";
+// import { getSubjects } from "../../../api/subjectApi";
+// import { getClasses } from "../../../api/classApi";
+
+// function Register() {
+//   const [role, setRole] = useState("");
+//   const [digit, setDigit] = useState(false);
+//   const [loading, setLoading] = useState(false);
+
+//   const [institutes, setInstitutes] = useState([]);
+//   const [departments, setDepartments] = useState([]);
+//   const [courses, setCourses] = useState([]);
+//   const [subjects, setSubjects] = useState([]);
+//   const [classes, setClasses] = useState([]);
+
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     instituteId: "",
+//     departmentId: "",
+//     courseId: "",
+//     subjectIds: [],
+//     semester: "",
+//     rollNumber: "",
+//     employeeId: "",
+//     classId: "",
+//     section: "",
+//     stream: "",
+//     otp: "",
+//   });
+
+  
+//   useEffect(() => {
+//     getInstitutes()
+//       .then(setInstitutes)
+//       .catch(console.error);
+//   }, []);
+
+//   const selectedInstitute = institutes.find(
+//     (institute) => institute._id === formData.instituteId
+//   );
+//   const instituteType = selectedInstitute?.type;
+
+  
+//   useEffect(() => {
+//     if (!formData.instituteId) {
+//       setDepartments([]);
+//       setClasses([]);
+//       return;
+//     }
+
+//     if (instituteType === "college") {
+//       getDepartments(formData.instituteId)
+//         .then(setDepartments)
+//         .catch(console.error);
+//       setClasses([]);
+//     }
+
+//     if (instituteType === "school") {
+//       getClasses(formData.instituteId)
+//         .then(setClasses)
+//         .catch(console.error);
+//       setDepartments([]);
+//     }
+
+//   }, [formData.instituteId, instituteType]);
+
+  
+//   useEffect(() => {
+//     if (!formData.departmentId) {
+//       setCourses([]);
+//       return;
+//     }
+
+//     getCourses({
+//       instituteId: formData.instituteId,
+//       departmentId: formData.departmentId,
+//     })
+//       .then(setCourses)
+//       .catch(console.error);
+
+//   }, [formData.departmentId, formData.instituteId]);
+
+  
+//   useEffect(() => {
+//     if (instituteType === "college" && !formData.departmentId) {
+//       setSubjects([]);
+//       return;
+//     }
+
+//     if (instituteType === "school" && !formData.classId) {
+//       setSubjects([]);
+//       return;
+//     }
+
+//     const params =
+//       instituteType === "school"
+//         ? {
+//             instituteId: formData.instituteId,
+//             type: "school",
+//             classId: formData.classId,
+//           }
+//         : {
+//             instituteId: formData.instituteId,
+//             type: "college",
+//             departmentId: formData.departmentId,
+//             courseId: formData.courseId || undefined,
+//             semester: formData.semester || undefined,
+//           };
+
+//     getSubjects(params)
+//       .then(setSubjects)
+//       .catch(console.error);
+
+//   }, [
+//     formData.instituteId,
+//     formData.departmentId,
+//     formData.courseId,
+//     formData.semester,
+//     formData.classId,
+//     instituteType,
+//   ]);
+
+  
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+
+//     let updated = { ...formData, [name]: value };
+
+    
+//     if (name === "instituteId") {
+//       updated.departmentId = "";
+//       updated.courseId = "";
+//       updated.classId = "";
+//       updated.section = "";
+//       updated.semester = "";
+//       updated.subjectIds = [];
+
+//       setDepartments([]);
+//       setCourses([]);
+//       setSubjects([]);
+//     }
+
+//     if (name === "classId") {
+//       updated.subjectIds = [];
+//       setSubjects([]);
+//     }
+
+//     if (name === "departmentId") {
+//       updated.courseId = "";
+//       updated.subjectIds = [];
+
+//       setCourses([]);
+//       setSubjects([]);
+//     }
+
+//     setFormData(updated);
+//   };
+
+  
+//   const isValid =
+//     formData.name &&
+//     formData.email &&
+//     role &&
+//     formData.instituteId &&
+//     (role === "student" ? formData.rollNumber : formData.employeeId) &&
+//     (instituteType === "school"
+//       ? formData.classId && formData.section
+//       : formData.departmentId &&
+//         (role === "teacher" || (formData.courseId && formData.semester)));
+
+  
+//   const handleSendOtp = async () => {
+//     try {
+//       setLoading(true);
+//       await sendRequestOtp(formData.email);
+//       alert("OTP sent");
+//       setDigit(true);
+//     } catch (err) {
+//       alert(err.response?.data?.msg || "Error sending OTP");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+  
+//   const handleSubmit = async () => {
+//     try {
+//       setLoading(true);
+
+//       await verifyOtp({
+//         email: formData.email,
+//         otp: formData.otp,
+//         type: "request",
+//       });
+
+//       await requestAccount({
+//         ...formData,
+//         role,
+//       });
+
+//       alert("Request submitted successfully");
+//       window.location.href = "/login";
+
+//     } catch (err) {
+//       alert(err.response?.data?.msg || "Error submitting request");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className={styles.page}>
+//       <h2>Request Account</h2>
+
+//       <form className={styles.loginForm}>
+//         <div className={styles.inputSection}>
+
+//           {}
+//           <fieldset>
+//             <legend>Personal</legend>
+
+//             <input name="name" placeholder="Name" onChange={handleChange} />
+//             <input name="email" placeholder="Email" onChange={handleChange} />
+
+//             <select onChange={(e) => setRole(e.target.value)}>
+//               <option value="">Role</option>
+//               <option value="student">Student</option>
+//               <option value="teacher">Teacher</option>
+//             </select>
+//           </fieldset>
+
+//           {}
+//           <fieldset>
+//             <legend>Institute</legend>
+
+//             <select name="instituteId" onChange={handleChange}>
+//               <option value="">Select Institute</option>
+//               {institutes.map((i) => (
+//                 <option key={i._id} value={i._id}>
+//                   {i.name}
+//                 </option>
+//               ))}
+//             </select>
+//           </fieldset>
+
+//           {}
+//           {formData.instituteId && (
+//             <fieldset>
+//               <legend>Academic</legend>
+
+//               {instituteType === "school" && (
+//                 <>
+//                   <select name="classId" onChange={handleChange}>
+//                     <option value="">Class</option>
+//                     {classes.map((cls) => (
+//                       <option key={cls._id} value={cls._id}>
+//                         {cls.name}
+//                       </option>
+//                     ))}
+//                   </select>
+
+//                   <input
+//                     name="section"
+//                     placeholder="Section"
+//                     onChange={handleChange}
+//                   />
+//                 </>
+//               )}
+
+//               {instituteType === "college" && (
+//                 <select name="departmentId" onChange={handleChange}>
+//                   <option value="">Department</option>
+//                   {departments.map((d) => (
+//                     <option key={d._id} value={d._id}>
+//                       {d.name}
+//                     </option>
+//                   ))}
+//                 </select>
+//               )}
+
+//               {}
+//               {role === "student" && (
+//                 <>
+//                   {instituteType === "college" && (
+//                     <>
+//                       <select name="courseId" onChange={handleChange}>
+//                         <option value="">Course</option>
+//                         {courses.map((c) => (
+//                           <option key={c._id} value={c._id}>
+//                             {c.name}
+//                           </option>
+//                         ))}
+//                       </select>
+
+//                       <input
+//                         name="semester"
+//                         placeholder="Semester / Year"
+//                         onChange={handleChange}
+//                       />
+//                     </>
+//                   )}
+
+//                   <input
+//                     name="rollNumber"
+//                     placeholder="Roll Number"
+//                     onChange={handleChange}
+//                   />
+//                 </>
+//               )}
+
+//               {}
+//               {role === "teacher" && (
+//                 <>
+//                   <select
+//                     multiple
+//                     onChange={(e) =>
+//                       setFormData({
+//                         ...formData,
+//                         subjectIds: Array.from(
+//                           e.target.selectedOptions,
+//                           (o) => o.value
+//                         ),
+//                       })
+//                     }
+//                   >
+//                     {subjects.map((s) => (
+//                       <option key={s._id} value={s._id}>
+//                         {s.name}
+//                       </option>
+//                     ))}
+//                   </select>
+
+//                   <input
+//                     name="employeeId"
+//                     placeholder="Employee ID"
+//                     onChange={handleChange}
+//                   />
+//                 </>
+//               )}
+//             </fieldset>
+//           )}
+
+//           {}
+//           <button
+//             type="button"
+//             disabled={!isValid || loading}
+//             onClick={handleSendOtp}
+//           >
+//             {loading ? "Sending..." : "Send OTP"}
+//           </button>
+
+//           {digit && (
+//             <>
+//               <input
+//                 name="otp"
+//                 placeholder="OTP"
+//                 onChange={handleChange}
+//               />
+
+//               <button
+//                 type="button"
+//                 onClick={handleSubmit}
+//                 disabled={loading}
+//               >
+//                 {loading ? "Submitting..." : "Submit Request"}
+//               </button>
+//             </>
+//           )}
+
+//         </div>
+//       </form>
+//     </div>
+//   );
+// }
+
+// export default Register;
+
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import styles from "./requestForAccount.module.css";
+
+import { sendRequestOtp, requestAccount, verifyOtp } from "../../../api/userAPI";
+import { getInstitutes } from "../../../api/instituteApi";
+import { getDepartments } from "../../../api/departmentApi";
+import { getCourses } from "../../../api/courseApi";
+import { getSubjects } from "../../../api/subjectApi";
+import { getClasses } from "../../../api/classApi";
 
 function Register() {
-    const [role, setRole] = useState("");
-    const [digit, setDigit] = useState(false);
+  const [role, setRole] = useState("");
+  const [digit, setDigit] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        collegeName: "",
-        department: "",
-        year: "",
-        rollNumber: "",
-        employeeID: "",
-        otp: ""
-    });
+  const [institutes, setInstitutes] = useState([]);
+  const [departments, setDepartments] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const [classes, setClasses] = useState([]);
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
+  // 🔥 Employee ID Generator (FIXED)
+  const generateEmployeeId = () => {
+    const rand = Math.floor(1000 + Math.random() * 9000);
+    return `EMP-${Date.now().toString().slice(-4)}-${rand}`;
+  };
 
-    // validation based on role
-    const isStudentValid =
-        formData.name &&
-        formData.email &&
-        role &&
-        formData.collegeName &&
-        // formData.department &&
-        // formData.year &&
-        formData.rollNumber;
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    instituteId: "",
+    departmentId: "",
+    courseId: "",
+    subjectIds: [],
+    semester: "",
+    rollNumber: "",
+    employeeId: "", // user can type OR auto-generate
+    classId: "",
+    section: "",
+    stream: "",
+    otp: "",
+  });
 
-    const isTeacherValid =
-        formData.name &&
-        formData.email &&
-        role &&
-        formData.collegeName &&
-        formData.department &&
-        formData.employeeID;
+  // ✅ Fetch Institutes
+  useEffect(() => {
+    getInstitutes()
+      .then(setInstitutes)
+      .catch(console.error);
+  }, []);
 
-    const isFormValid =
-        role === "student" ? isStudentValid :
-            role === "teacher" ? isTeacherValid :
-                false;
+  const selectedInstitute = institutes.find(
+    (i) => i._id === formData.instituteId
+  );
+  const instituteType = selectedInstitute?.type;
 
-    const isOtpValid = formData.otp;
+  // ✅ Fetch Department / Classes
+  useEffect(() => {
+    if (!formData.instituteId) {
+      setDepartments([]);
+      setClasses([]);
+      return;
+    }
 
-    return (
-        <div className={styles.page}>
-            <div className={styles.title}>
-                <img src="/uniCore.png" alt="logo" className={styles.logo} />
-                <h1>uniCore</h1>
-            </div>
-            <h2 className={styles.h2}>Request for Account</h2>
+    if (instituteType === "college") {
+      getDepartments(formData.instituteId)
+        .then(setDepartments)
+        .catch(console.error);
+      setClasses([]);
+    }
 
-            <form className={styles.loginForm}>
-                <div className={styles.inputSection}>
-                    <fieldset>
-                        <legend>Personal Details</legend>
+    if (instituteType === "school") {
+      getClasses(formData.instituteId)
+        .then(setClasses)
+        .catch(console.error);
+      setDepartments([]);
+    }
+  }, [formData.instituteId, instituteType]);
 
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Name *"
-                            onChange={handleChange}
-                        />
+  // ✅ Fetch Courses
+  useEffect(() => {
+    if (!formData.departmentId) {
+      setCourses([]);
+      return;
+    }
 
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Email ID *"
-                            onChange={handleChange}
-                        />
+    getCourses({
+      instituteId: formData.instituteId,
+      departmentId: formData.departmentId,
+    })
+      .then(setCourses)
+      .catch(console.error);
+  }, [formData.departmentId, formData.instituteId]);
 
-                        <select value={role} onChange={(e) => setRole(e.target.value)}>
-                            <option className={styles.option} value="">Select Role *</option>
-                            <option className={styles.option} value="student">Student</option>
-                            <option className={styles.option} value="teacher">Teacher</option>
-                        </select>
-                    </fieldset>
+  // ✅ Fetch Subjects
+  useEffect(() => {
+    if (instituteType === "college" && !formData.departmentId) {
+      setSubjects([]);
+      return;
+    }
 
-                    {role === "student" && (
-                        <fieldset>
-                            <legend>College details</legend>
+    if (instituteType === "school" && !formData.classId) {
+      setSubjects([]);
+      return;
+    }
 
-                            <input
-                                type="text"
-                                name="collegeName"
-                                placeholder="College name *"
-                                onChange={handleChange}
-                            />
+    const params =
+      instituteType === "school"
+        ? {
+            instituteId: formData.instituteId,
+            type: "school",
+            classId: formData.classId,
+          }
+        : {
+            instituteId: formData.instituteId,
+            type: "college",
+            departmentId: formData.departmentId,
+            courseId: formData.courseId || undefined,
+            semester: formData.semester || undefined,
+          };
 
-                            <select name="department" onChange={handleChange}>
-                                <option className={styles.option} value="">Select Department *</option>
-                                <option className={styles.option} value="IT">IT</option>
-                                <option className={styles.option} value="CS">CS</option>
-                                <option className={styles.option} value="ME">ME</option>
-                                <option className={styles.option} value="CE">CE</option>
-                                <option className={styles.option} value="ECE">ECE</option>
-                                <option className={styles.option} value="EE">EE</option>
-                            </select>
+    getSubjects(params)
+      .then(setSubjects)
+      .catch(console.error);
+  }, [
+    formData.instituteId,
+    formData.departmentId,
+    formData.courseId,
+    formData.semester,
+    formData.classId,
+    instituteType,
+  ]);
 
-                            <select name="year" onChange={handleChange}>
-                                <option className={styles.option} value="">Year *</option>
-                                <option className={styles.option} value="1">First Year</option>
-                                <option className={styles.option} value="2">Second Year</option>
-                                <option className={styles.option} value="3">Third Year</option>
-                                <option className={styles.option} value="4">Fourth Year</option>
-                            </select>
+  // ✅ Handle Input Change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-                            <input
-                                type="text"
-                                name="rollNumber"
-                                placeholder="Roll Number *"
-                                onChange={handleChange}
-                            />
-                        </fieldset>
-                    )}
+    let updated = { ...formData, [name]: value.trim() };
 
-                    {role === "teacher" && (
-                        <fieldset>
-                            <legend>College details</legend>
+    if (name === "instituteId") {
+      updated.departmentId = "";
+      updated.courseId = "";
+      updated.classId = "";
+      updated.section = "";
+      updated.semester = "";
+      updated.subjectIds = [];
 
-                            <input
-                                type="text"
-                                name="collegeName"
-                                placeholder="College name *"
-                                onChange={handleChange}
-                            />
+      setDepartments([]);
+      setCourses([]);
+      setSubjects([]);
+    }
 
-                            <select name="department" onChange={handleChange}>
-                                <option className={styles.option} value="">Select Department *</option>
-                                <option className={styles.option} value="IT">IT</option>
-                                <option className={styles.option} value="CS">CS</option>
-                                <option className={styles.option} value="ME">ME</option>
-                                <option className={styles.option} value="CE">CE</option>
-                                <option className={styles.option} value="ECE">ECE</option>
-                                <option className={styles.option} value="EE">EE</option>
-                            </select>
+    if (name === "classId") {
+      updated.subjectIds = [];
+      setSubjects([]);
+    }
 
-                            <input
-                                type="text"
-                                name="employeeID"
-                                placeholder="Employee ID *"
-                                onChange={handleChange}
-                            />
-                        </fieldset>
-                    )}
+    if (name === "departmentId") {
+      updated.courseId = "";
+      updated.subjectIds = [];
 
-                    <div className={styles.LoginBtn}>
-                        <button
-                            type="button"
-                            className={styles.registerButton}
-                            disabled={!isFormValid}
-                            onClick={() => {
-                                alert("OTP sent");
-                                setDigit(true);
-                            }}
-                        >
-                            Send OTP
-                        </button>
+      setCourses([]);
+      setSubjects([]);
+    }
 
-                        {digit && (
-                            <>
-                                <input
-                                    type="text"
-                                    name="otp"
-                                    placeholder="Enter OTP *"
-                                    onChange={handleChange}
-                                />
+    setFormData(updated);
+  };
 
-                                <button
-                                    type="button"
-                                    className={styles.verifyButton}
-                                    disabled={!isOtpValid}
-                                    onClick={() => alert("login successful")}
-                                >
-                                    Verify
-                                </button>
-                            </>
-                        )}
-                    </div>
+  // ✅ Validation (FIXED EMPLOYEE ID)
+  const isValid =
+    formData.name &&
+    formData.email &&
+    role &&
+    formData.instituteId &&
+    (role === "student"
+      ? formData.rollNumber
+      : formData.employeeId || true) && // allow auto generation
+    (instituteType === "school"
+      ? formData.classId && formData.section
+      : formData.departmentId &&
+        (role === "teacher" || (formData.courseId && formData.semester)));
 
-                    <div className={styles.linkToOtherPages}>
-                        <p className={styles.loginLink}>
-                            Have an account?{" "}
-                            <Link to="/login" className={styles.registerLink}>
-                                back to login page
-                            </Link>
-                        </p>
+  // ✅ Send OTP
+  const handleSendOtp = async () => {
+    try {
+      setLoading(true);
+      await sendRequestOtp(formData.email);
+      alert("OTP sent");
+      setDigit(true);
+    } catch (err) {
+      alert(err.response?.data?.msg || "Error sending OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-                        <div className={styles.bottomLink}>
-                            <Link to="/" className={styles.returnHome}>
-                                Back to Home
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </form>
+  // ✅ Submit (FINAL FIX)
+  const handleSubmit = async () => {
+    try {
+      setLoading(true);
+
+      await verifyOtp({
+        email: formData.email,
+        otp: formData.otp,
+        type: "request",
+      });
+
+      // 🔥 AUTO FIX EMPLOYEE ID
+      const finalEmployeeId =
+        role === "teacher"
+          ? formData.employeeId || generateEmployeeId()
+          : undefined;
+
+      await requestAccount({
+        ...formData,
+        role,
+        employeeId: finalEmployeeId,
+      });
+
+      alert("Request submitted successfully");
+      window.location.href = "/login";
+    } catch (err) {
+      alert(err.response?.data?.msg || "Error submitting request");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className={styles.page}>
+      <h2>Request Account</h2>
+
+      <form className={styles.loginForm}>
+        <div className={styles.inputSection}>
+
+          <fieldset>
+            <legend>Personal</legend>
+
+            <input name="name" placeholder="Name" onChange={handleChange} />
+            <input name="email" placeholder="Email" onChange={handleChange} />
+
+            <select onChange={(e) => setRole(e.target.value)}>
+              <option value="">Role</option>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+            </select>
+          </fieldset>
+
+          <fieldset>
+            <legend>Institute</legend>
+
+            <select name="instituteId" onChange={handleChange}>
+              <option value="">Select Institute</option>
+              {institutes.map((i) => (
+                <option key={i._id} value={i._id}>
+                  {i.name}
+                </option>
+              ))}
+            </select>
+          </fieldset>
+
+          {formData.instituteId && (
+            <fieldset>
+              <legend>Academic</legend>
+
+              {instituteType === "school" && (
+                <>
+                  <select name="classId" onChange={handleChange}>
+                    <option value="">Class</option>
+                    {classes.map((cls) => (
+                      <option key={cls._id} value={cls._id}>
+                        {cls.name}
+                      </option>
+                    ))}
+                  </select>
+
+                  <input name="section" placeholder="Section" onChange={handleChange} />
+                </>
+              )}
+
+              {instituteType === "college" && (
+                <select name="departmentId" onChange={handleChange}>
+                  <option value="">Department</option>
+                  {departments.map((d) => (
+                    <option key={d._id} value={d._id}>
+                      {d.name}
+                    </option>
+                  ))}
+                </select>
+              )}
+
+              {role === "student" && (
+                <>
+                  {instituteType === "college" && (
+                    <>
+                      <select name="courseId" onChange={handleChange}>
+                        <option value="">Course</option>
+                        {courses.map((c) => (
+                          <option key={c._id} value={c._id}>
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
+
+                      <input name="semester" placeholder="Semester" onChange={handleChange} />
+                    </>
+                  )}
+
+                  <input name="rollNumber" placeholder="Roll Number" onChange={handleChange} />
+                </>
+              )}
+
+              {role === "teacher" && (
+                <>
+                  <select
+                    multiple
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        subjectIds: Array.from(
+                          e.target.selectedOptions,
+                          (o) => o.value
+                        ),
+                      })
+                    }
+                  >
+                    {subjects.map((s) => (
+                      <option key={s._id} value={s._id}>
+                        {s.name}
+                      </option>
+                    ))}
+                  </select>
+
+                  <input
+                    name="employeeId"
+                    placeholder="Employee ID (optional)"
+                    onChange={handleChange}
+                  />
+                </>
+              )}
+            </fieldset>
+          )}
+
+          <button type="button" disabled={!isValid || loading} onClick={handleSendOtp}>
+            {loading ? "Sending..." : "Send OTP"}
+          </button>
+
+          {digit && (
+            <>
+              <input name="otp" placeholder="OTP" onChange={handleChange} />
+
+              <button type="button" onClick={handleSubmit} disabled={loading}>
+                {loading ? "Submitting..." : "Submit Request"}
+              </button>
+            </>
+          )}
 
         </div>
-    );
+      </form>
+    </div>
+  );
 }
 
 export default Register;

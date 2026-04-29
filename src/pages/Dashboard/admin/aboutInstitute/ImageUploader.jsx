@@ -1,11 +1,141 @@
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { useState } from "react";
 import styles from "./AboutInstitute.module.css";
+import { uploadImageFile } from "../../../../api/uploadApi";
 
 function ImageUploader({ image, setImage, id, label }) {
-  const handleChange = (e) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = async (e) => {
     const file = e.target.files[0];
 
-    if (file && file.type.startsWith("image/")) {
-      setImage(URL.createObjectURL(file));
+    
+    if (!file || !file.type.startsWith("image/")) {
+      alert("Please select a valid image file");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      
+      const preview = URL.createObjectURL(file);
+      setImage(preview);
+
+      const uploaded = await uploadImageFile(file);
+      setImage(uploaded.url);
+
+    } catch (err) {
+      console.error("UPLOAD ERROR:", err.response?.data || err.message);
+
+      alert(err.response?.data?.msg || "Image upload failed");
+      setImage(null);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -28,7 +158,7 @@ function ImageUploader({ image, setImage, id, label }) {
       {!image ? (
         <label htmlFor={id} className={styles.uploadBox}>
           <span className={styles.uploadIcon}>⬆</span>
-          <p>Upload</p>
+          <p>{loading ? "Uploading..." : "Upload"}</p>
         </label>
       ) : (
         <div className={styles.previewBox}>

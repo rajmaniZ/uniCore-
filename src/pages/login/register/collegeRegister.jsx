@@ -1,159 +1,492 @@
 
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import styles from './collegeRegister.module.css';
 
-function Login() {
-    const [digit, setDigit] = useState(false);
 
-    const [formData, setFormData] = useState({
-        collegeName: "",
-        collegeCode: "",
-        collegeEmail: "",
-        adminName: "",
-        adminEmail: "",
-        collegeOtp: "",
-        adminOtp: ""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import styles from "./collegeRegister.module.css";
+
+import {
+  sendCollegeOtp,
+  verifyCollegeOtp,
+  registerCollege,
+} from "../../../api/userAPI";
+
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+function RegisterCollege() {
+  const navigate = useNavigate();
+
+  const [digit, setDigit] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [timer, setTimer] = useState(0);
+
+  const [formData, setFormData] = useState({
+    instituteType: "college",
+    collegeName: "",
+    collegeCode: "",
+    collegeEmail: "",
+    adminName: "",
+    adminEmail: "",
+    password: "",
+    collegeOtp: "",
+    adminOtp: "",
+  });
+
+  
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value.trimStart(),
     });
+  };
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
+  const isFormValid =
+    formData.collegeName &&
+    formData.collegeEmail &&
+    formData.adminName &&
+    formData.adminEmail;
 
-    const isFormValid =
-        formData.collegeName &&
-        formData.collegeCode &&
-        formData.collegeEmail &&
-        formData.adminName &&
-        formData.adminEmail;
+  const isOtpValid =
+    formData.collegeOtp &&
+    formData.adminOtp &&
+    formData.password;
 
-    const isOtpValid =
-        formData.collegeOtp &&
-        formData.adminOtp;
+  
+  const getPasswordStrength = (password) => {
+    if (password.length < 6) return "Weak";
+    if (
+      password.match(/[A-Z]/) &&
+      password.match(/[0-9]/) &&
+      password.length >= 8
+    )
+      return "Strong";
+    return "Medium";
+  };
 
-    return (
-        <form className={styles.registerForm}>
-            <div className={styles.title}>
-                <img src="/uniCore.png" alt="logo" className={styles.logo} />
-                <h1>UniCore</h1>
-            </div>
-                {/* <h2 className={styles.h2}>Sign Up</h2> */}
+  const passwordStrength = getPasswordStrength(formData.password);
 
-            <div className={styles.inputSection}>
-                <fieldset>
-                    <legend>College details</legend>
+  
+  useEffect(() => {
+    let interval;
+    if (timer > 0) {
+      interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+    }
+    return () => clearInterval(interval);
+  }, [timer]);
 
-                    <input
-                        required
-                        type="text"
-                        name="collegeName"
-                        placeholder="College name *"
-                        onChange={handleChange}
-                    />
+  
+  const handleSendOtp = async () => {
+    try {
+      setLoading(true);
 
-                    <input
-                        required
-                        type="text"
-                        name="collegeCode"
-                        placeholder="College code *"
-                        onChange={handleChange}
-                    />
+      await sendCollegeOtp({
+        collegeEmail: formData.collegeEmail.trim(),
+        adminEmail: formData.adminEmail.trim(),
+      });
 
-                    <input
-                        required
-                        type="email"
-                        name="collegeEmail"
-                        placeholder="College Email ID *"
-                        onChange={handleChange}
-                    />
-                </fieldset>
+      toast.success("OTP sent to both emails");
+      setDigit(true);
+      setTimer(60);
 
-                <fieldset>
-                    <legend>Admin Details</legend>
+    } catch (err) {
+      toast.error(err.response?.data?.msg || "Failed to send OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-                    <input
-                        required
-                        type="text"
-                        name="adminName"
-                        placeholder="Admin name *"
-                        onChange={handleChange}
-                    />
+  
+  const handleRegister = async () => {
+    try {
+      if (!formData.password || formData.password.length < 6) {
+        toast.error("Password must be at least 6 characters");
+        return;
+      }
 
-                    <input
-                        required
-                        type="email"
-                        name="adminEmail"
-                        placeholder="Admin Email ID *"
-                        onChange={handleChange}
-                    />
-                </fieldset>
+      setLoading(true);
 
-                <div>
-                    <button
-                        className={styles.registerButton}
-                        type="button"
-                        disabled={!isFormValid}
-                        onClick={() => {
-                            alert("OTP sent");
-                            setDigit(true);
-                        }}
-                    >
-                        Send OTP
-                    </button>
+      
+      await verifyCollegeOtp({
+        collegeEmail: formData.collegeEmail.trim(),
+        adminEmail: formData.adminEmail.trim(),
+        collegeOtp: formData.collegeOtp.trim(),
+        adminOtp: formData.adminOtp.trim(),
+      });
 
-                    {digit && (
-                        <>
-                            <input
-                                required
-                                type="text"
-                                name="collegeOtp"
-                                placeholder="Enter College Email OTP *"
-                                onChange={handleChange}
-                            />
+      
+      const { data } = await registerCollege({
+        name: formData.adminName.trim(),
+        email: formData.adminEmail.trim(),
+        password: formData.password.trim(),
+        instituteName: formData.collegeName.trim(),
+        type: formData.instituteType,
+      });
 
-                            <input
-                                required
-                                type="text"
-                                name="adminOtp"
-                                placeholder="Enter Admin Email OTP *"
-                                onChange={handleChange}
-                            />
+      
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
-                            <button
-                                type="button"
-                                className={styles.verifyButton}
-                                disabled={!isOtpValid}
-                                onClick={() => alert("login successful")}
-                            >
-                                Verify
-                            </button>
-                        </>
-                    )}
-                </div>
+      toast.success("Registration successful");
 
-                <div>
-                    <p className={styles.loginLink}>
-                        Already registered{" "}
-                        <Link to='/login' className={styles.registerLink}>
-                            back to login page
-                        </Link>
-                    </p>
+      setTimeout(() => {
+        navigate("/admin");
+      }, 1200);
 
-                    <div className={styles.bottomLink}>
-                        <Link to="/RequestForAccount" className={styles.loginLink}>
-                            Request as Student/Teacher to create account
-                        </Link>
-                        <Link to="/" className={styles.returnHome}>
-                            Back to Home
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </form>
-    );
+    } catch (err) {
+      toast.error(err.response?.data?.msg || "OTP mismatch or expired");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <ToastContainer position="top-right" />
+
+      <form className={styles.registerForm}>
+        {}
+        <div className={styles.title}>
+          <img src="/uniCore.png" alt="logo" className={styles.logo} />
+          <h1>UniCore</h1>
+        </div>
+
+        <div className={styles.inputSection}>
+          {}
+          <fieldset>
+            <legend>Institute Details</legend>
+
+            <select name="instituteType" onChange={handleChange} value={formData.instituteType}>
+              <option value="college">College / University</option>
+              <option value="school">School</option>
+            </select>
+
+            <input
+              name="collegeName"
+              placeholder={formData.instituteType === "school" ? "School Name *" : "College Name *"}
+              onChange={handleChange}
+            />
+
+            <input
+              name="collegeCode"
+              placeholder={formData.instituteType === "school" ? "School Code" : "College Code"}
+              onChange={handleChange}
+            />
+
+            <input
+              name="collegeEmail"
+              placeholder={formData.instituteType === "school" ? "School Email *" : "College Email *"}
+              onChange={handleChange}
+            />
+          </fieldset>
+
+          {}
+          <fieldset>
+            <legend>Admin Details</legend>
+
+            <input
+              name="adminName"
+              placeholder="Admin Name *"
+              onChange={handleChange}
+            />
+
+            <input
+              name="adminEmail"
+              placeholder="Admin Email *"
+              onChange={handleChange}
+            />
+          </fieldset>
+
+          {}
+          <button
+            type="button"
+            disabled={!isFormValid || loading || timer > 0}
+            className={styles.registerButton}
+            onClick={handleSendOtp}
+          >
+            {timer > 0
+              ? `Resend in ${timer}s`
+              : loading
+                ? "Sending..."
+                : "Send OTP"}
+          </button>
+
+          {}
+          {digit && (
+            <>
+              <input
+                name="collegeOtp"
+                placeholder="College OTP"
+                onChange={handleChange}
+              />
+
+              <input
+                name="adminOtp"
+                placeholder="Admin OTP"
+                onChange={handleChange}
+              />
+
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleChange}
+              />
+
+              <p
+                style={{
+                  color:
+                    passwordStrength === "Strong"
+                      ? "green"
+                      : passwordStrength === "Medium"
+                        ? "orange"
+                        : "red",
+                }}
+              >
+                Strength: {passwordStrength}
+              </p>
+
+              <button
+                type="button"
+                disabled={!isOtpValid || loading}
+                className={styles.verifyButton}
+                onClick={handleRegister}
+              >
+                {loading ? "Processing..." : "Verify & Register"}
+              </button>
+            </>
+          )}
+
+          {}
+          <p className={styles.loginLink}>
+            Already registered <Link to="/login">Login</Link>
+
+          </p>
+          <p className={styles.registerLink}>
+            Don't have an account? {" "}
+            <Link to='/requestAccount' className={styles.registerLink}>
+             Request to Your Institute
+            </Link>
+          </p>
+
+          <Link to="/" className={styles.returnHome}>
+            Back to Home
+          </Link>
+        </div>
+      </form>
+    </>
+  );
 }
 
-export default Login;
+export default RegisterCollege;

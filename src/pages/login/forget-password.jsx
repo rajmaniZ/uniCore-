@@ -1,95 +1,253 @@
 
-import { Link } from 'react-router-dom';
 
-import {useState} from 'react';
-// import styles from './forget-password.module.css';
-import styles from './login.module.css'
-function ForgetPassword(){
-    
-    const [digit, setDigit]=useState(false);
-    
-    const [formData, setFormData] = useState({
-        username: "",
-        Otp: ""
-        });
 
-        const handleChange = (e) => {
-            setFormData({
-                ...formData,
-                [e.target.name]: e.target.value
-            });
-        };    
-        const isUsernameValid =
-            formData.username.trim() !== "";
-        const isOtpValid=
-            formData.Otp.trim() !== "";
-    return (
-        <>
-            <div className={styles.page}>
-                <div>
-                    <form className={styles.loginForm}>
-                        <div className={`${styles.title} ${styles.titleForget} `}>
-                            <img src="/uniCore.png" alt="logo" className={styles.logo} />
-                            <h1>uniCore</h1>
-                        </div>
-                        <h2 className={styles.h2}>Welcome!</h2>
-                        {/* <div className={styles.loginForm}> */}
-                        <div className={styles.inputSection}>
-                            <label for="username"></label>
-                            <input type="text" id="username" name="username" placeholder="Username / Email " value={formData.username} onChange={handleChange}/>
-                            <div className={`${styles.forgetBtn} ${styles.loginBtn}`}>
-                                <button type="submit" 
+
+
+
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 
-                                disabled={!isUsernameValid}
 
-                                className={styles.loginButton} 
-                                onClick={(e) => {  
-                                        e.preventDefault();
-                                        alert("OTP sent");
-                                        setDigit(true);
-                                    }
-                                 }>Send OTP</button>
+
+
+
+
+
+
+
+
 
                                  
-                            {digit && (
-                                    <>
-                                        <input 
-                                            required 
-                                            type="text" 
-                                            placeholder="Enter otp" 
-                                            name="Otp"
-                                            value={formData.Otp} onChange={handleChange}
-                                        />
-                                        <button
-                                        disabled={!isOtpValid}
-                                        className={styles.verifyButton}
-                                        onClick={()=>alert("login successfull")}>Verify</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
                                     
-                                    </>
-                                )}
+
+
                                 
 
-                            </div  >
-                                <div className={styles.linkToOtherPages}>
-                            <Link to='/login' className={styles.forgetPass}>Back to login Page</Link>
-                            <p className={styles.registerLink}>Don't have an account? <Link to='/register' className={styles.registerLink}>Register</Link></p>
+
+
+
+
                             
-                            <Link to="/" className={styles.returnHome}>Back to Home</Link>
-                        </div>
-                        </div>
-                    </form>
+
+
+
+
                    
-                </div>
-
-            </div>
-
-
-        </>
 
 
 
 
-    );
+
+
+
+
+
+
+
+
+
+
+
+
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import styles from './login.module.css';
+
+import {
+  forgotPassword,
+  resetPassword
+} from '../../api/userAPI';
+
+function ForgetPassword() {
+
+  const [digit, setDigit] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [formData, setFormData] = useState({
+    email: "",
+    otp: "",
+    newPassword: ""
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const isEmailValid = formData.email.trim() !== "";
+  const isOtpValid = formData.otp && formData.newPassword;
+
+  
+  const handleSendOtp = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      await forgotPassword(formData.email);
+
+      alert("OTP sent to your email");
+      setDigit(true);
+
+    } catch (err) {
+      alert(err.response?.data?.msg || "Failed to send OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  
+  const handleVerify = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      await resetPassword({
+        email: formData.email,
+        otp: formData.otp,
+        newPassword: formData.newPassword
+      });
+
+      alert("Password reset successful");
+
+      
+      window.location.href = "/login";
+
+    } catch (err) {
+      alert(err.response?.data?.msg || "Reset failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className={styles.page}>
+      <form className={styles.loginForm}>
+
+        <div className={`${styles.title} ${styles.titleForget}`}>
+          <img src="/uniCore.png" alt="logo" className={styles.logo} />
+          <h1>uniCore</h1>
+        </div>
+
+        <h2 className={styles.h2}>Reset Password</h2>
+
+        <div className={styles.inputSection}>
+
+          {}
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+
+          {}
+          <div className={`${styles.forgetBtn} ${styles.loginBtn}`}>
+            <button
+              type="button"
+              disabled={!isEmailValid || loading}
+              onClick={handleSendOtp}
+              className={styles.loginButton}
+            >
+              {loading ? "Sending..." : "Send OTP"}
+            </button>
+          </div>
+
+          {}
+          {digit && (
+            <>
+              <input
+                type="text"
+                name="otp"
+                placeholder="Enter OTP"
+                value={formData.otp}
+                onChange={handleChange}
+              />
+
+              <input
+                type="password"
+                name="newPassword"
+                placeholder="New Password"
+                value={formData.newPassword}
+                onChange={handleChange}
+              />
+
+              <button
+                type="button"
+                disabled={!isOtpValid || loading}
+                onClick={handleVerify}
+                className={styles.verifyButton}
+              >
+                {loading ? "Verifying..." : "Reset Password"}
+              </button>
+            </>
+          )}
+
+          <div className={styles.linkToOtherPages}>
+            <Link to='/login'>Back to login</Link>
+
+            <p>
+              Don't have an account?{" "}
+              <Link to='/register'>Register</Link>
+            </p>
+
+            <Link to="/">Back to Home</Link>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  );
 }
 
 export default ForgetPassword;

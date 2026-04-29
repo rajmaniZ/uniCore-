@@ -47,7 +47,7 @@
   box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
 }
 
-/* Filters */
+
 .filters {
   display: flex;
   gap: 12px;
@@ -92,7 +92,7 @@
   color: white;
 }
 
-/* Table */
+
 .tableCard {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
@@ -265,7 +265,7 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* Pagination */
+
 .pagination {
   display: flex;
   justify-content: space-between;

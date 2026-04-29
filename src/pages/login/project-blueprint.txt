@@ -1,0 +1,2387 @@
+
+📁 forget-password.jsx
+--------------------------------
+
+// import { Link } from 'react-router-dom';
+
+// import {useState} from 'react';
+// // import styles from './forget-password.module.css';
+// import styles from './login.module.css'
+// function ForgetPassword(){
+    
+//     const [digit, setDigit]=useState(false);
+    
+//     const [formData, setFormData] = useState({
+//         username: "",
+//         Otp: ""
+//         });
+
+//         const handleChange = (e) => {
+//             setFormData({
+//                 ...formData,
+//                 [e.target.name]: e.target.value
+//             });
+//         };    
+//         const isUsernameValid =
+//             formData.username.trim() !== "";
+//         const isOtpValid=
+//             formData.Otp.trim() !== "";
+//     return (
+//         <>
+//             <div className={styles.page}>
+//                 <div>
+//                     <form className={styles.loginForm}>
+//                         <div className={`${styles.title} ${styles.titleForget} `}>
+//                             <img src="/uniCore.png" alt="logo" className={styles.logo} />
+//                             <h1>uniCore</h1>
+//                         </div>
+//                         <h2 className={styles.h2}>Welcome!</h2>
+//                         {/* <div className={styles.loginForm}> */}
+//                         <div className={styles.inputSection}>
+//                             <label for="username"></label>
+//                             <input type="text" id="username" name="username" placeholder="Username / Email " value={formData.username} onChange={handleChange}/>
+//                             <div className={`${styles.forgetBtn} ${styles.loginBtn}`}>
+//                                 <button type="submit" 
+                                
+//                                 disabled={!isUsernameValid}
+
+//                                 className={styles.loginButton} 
+//                                 onClick={(e) => {  
+//                                         e.preventDefault();
+//                                         alert("OTP sent");
+//                                         setDigit(true);
+//                                     }
+//                                  }>Send OTP</button>
+
+                                 
+//                             {digit && (
+//                                     <>
+//                                         <input 
+//                                             required 
+//                                             type="text" 
+//                                             placeholder="Enter otp" 
+//                                             name="Otp"
+//                                             value={formData.Otp} onChange={handleChange}
+//                                         />
+//                                         <button
+//                                         disabled={!isOtpValid}
+//                                         className={styles.verifyButton}
+//                                         onClick={()=>alert("login successfull")}>Verify</button>
+                                    
+//                                     </>
+//                                 )}
+                                
+
+//                             </div  >
+//                                 <div className={styles.linkToOtherPages}>
+//                             <Link to='/login' className={styles.forgetPass}>Back to login Page</Link>
+//                             <p className={styles.registerLink}>Don't have an account? <Link to='/register' className={styles.registerLink}>Register</Link></p>
+                            
+//                             <Link to="/" className={styles.returnHome}>Back to Home</Link>
+//                         </div>
+//                         </div>
+//                     </form>
+                   
+//                 </div>
+
+//             </div>
+
+
+//         </>
+
+
+
+
+//     );
+// }
+
+// export default ForgetPassword;
+
+
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import styles from './login.module.css';
+
+import {
+  forgotPassword,
+  resetPassword
+} from '../../api/userAPI';
+
+function ForgetPassword() {
+
+  const [digit, setDigit] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [formData, setFormData] = useState({
+    email: "",
+    otp: "",
+    newPassword: ""
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const isEmailValid = formData.email.trim() !== "";
+  const isOtpValid = formData.otp && formData.newPassword;
+
+  /* ================= SEND OTP ================= */
+  const handleSendOtp = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      await forgotPassword(formData.email);
+
+      alert("OTP sent to your email");
+      setDigit(true);
+
+    } catch (err) {
+      alert(err.response?.data?.msg || "Failed to send OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* ================= VERIFY + RESET ================= */
+  const handleVerify = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      await resetPassword({
+        email: formData.email,
+        otp: formData.otp,
+        newPassword: formData.newPassword
+      });
+
+      alert("Password reset successful");
+
+      // redirect to login
+      window.location.href = "/login";
+
+    } catch (err) {
+      alert(err.response?.data?.msg || "Reset failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className={styles.page}>
+      <form className={styles.loginForm}>
+
+        <div className={`${styles.title} ${styles.titleForget}`}>
+          <img src="/uniCore.png" alt="logo" className={styles.logo} />
+          <h1>uniCore</h1>
+        </div>
+
+        <h2 className={styles.h2}>Reset Password</h2>
+
+        <div className={styles.inputSection}>
+
+          {/* EMAIL */}
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+
+          {/* SEND OTP */}
+          <div className={`${styles.forgetBtn} ${styles.loginBtn}`}>
+            <button
+              type="button"
+              disabled={!isEmailValid || loading}
+              onClick={handleSendOtp}
+              className={styles.loginButton}
+            >
+              {loading ? "Sending..." : "Send OTP"}
+            </button>
+          </div>
+
+          {/* OTP + NEW PASSWORD */}
+          {digit && (
+            <>
+              <input
+                type="text"
+                name="otp"
+                placeholder="Enter OTP"
+                value={formData.otp}
+                onChange={handleChange}
+              />
+
+              <input
+                type="password"
+                name="newPassword"
+                placeholder="New Password"
+                value={formData.newPassword}
+                onChange={handleChange}
+              />
+
+              <button
+                type="button"
+                disabled={!isOtpValid || loading}
+                onClick={handleVerify}
+                className={styles.verifyButton}
+              >
+                {loading ? "Verifying..." : "Reset Password"}
+              </button>
+            </>
+          )}
+
+          <div className={styles.linkToOtherPages}>
+            <Link to='/login'>Back to login</Link>
+
+            <p>
+              Don't have an account?{" "}
+              <Link to='/register'>Register</Link>
+            </p>
+
+            <Link to="/">Back to Home</Link>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  );
+}
+
+export default ForgetPassword;
+
+
+📁 forget-password.module.css
+--------------------------------
+/* 
+.loginImg{
+    width:100%;
+    flex:1;
+    position:relative;
+    background:linear-gradient(to left,rgba(240,248,255,.7),transparent),
+    url(../../../assets/loginImg.jpg) center/cover ;
+   
+}
+ */
+
+.loginForm{
+    
+    /* padding-inline: 10%; */
+    width:50vw;
+    /* min-height: 83vh; */
+    /* padding:10%; */
+    padding-top:20%;
+    /* padding-bottom:5%; */
+    /* padding-right: 10%; */
+    /* background-color: aqua; */
+}
+
+
+.title{
+    background-color: transparent;
+    display:flex;
+    gap:20px;
+    padding-bottom: 1%;
+    justify-content: center;
+    padding-right: 15%;
+}
+
+.title h1{
+    /* background-color: transparent; */
+    margin-top: 4px;
+}
+.title img{
+    background-color: transparent;
+    width:50px;
+    height:50px;
+}
+
+.inputSection{
+    background-color: transparent;
+    /* padding-top:10%; */
+    gap:10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top:30px;
+    text-align: right;
+    padding-right: 15%;
+    /* height:60%; */
+}
+
+
+.inputSection input{
+    background-color: transparent;
+    margin:0px 0px 20px 0px;
+    width:92%;
+    padding:3%;
+    /* gap:20px; */
+    border-radius: 10px;
+    border-color: none;
+    
+
+}
+
+.inputSection button,a{
+    margin-bottom: 20px;
+}
+.inputSection p{
+    margin-bottom: 100px;
+}
+
+.inputSection button{
+    padding-bottom: 20px,30px, 40px, 50px;
+    border-radius: 10px;
+}
+.inputSection input:hover{
+    background-color: rgb(232, 234, 236);
+    
+
+}
+
+.inputSection button{
+    height:40px;
+    width:200px;
+    background-color: #9db89dab;
+    /* border-radius: ; */
+}
+
+.inputSection button:hover{
+    /* height:40px;
+    width:200px; */
+    background-color: #747b74be;
+}
+
+.inputSection button:active{
+    height:40px;
+    width:200px;
+    background-color: #145f14bd;
+}
+
+
+
+.loginLink a:hover{
+    color:rgb(45, 116, 179);
+}
+
+.loginLink{
+    /* margin-bottom: 20px; */
+}
+
+
+.returnHome a:active{
+    color:rgb(16, 59, 100);
+}
+
+.returnHome:hover{
+    color:rgb(45, 116, 179);
+}
+
+
+.returnHome:active{
+    color:rgb(16, 59, 100);
+}
+
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+@media (max-width:900px) {
+    .loginForm{
+        width:85vw;
+        height:h;
+        padding-left: 15vw;
+    }
+    
+}
+
+
+@media (max-width:500px) {
+}
+
+
+
+📁 login.jsx
+--------------------------------
+// import { Link, useNavigate } from 'react-router-dom';
+// import { useState } from 'react';
+// import { useAuth } from './../Dashboard/context/AuthContext';
+
+// import styles from './login.module.css';
+
+// function Login() {
+
+//     const [email, setEmail] = useState('');
+//     const [password, setPassword] = useState('');
+//     const [error, setError] = useState('');
+//     const [isLoading, setIsLoading] = useState(false);
+
+//     const { login } = useAuth();
+//     const navigate = useNavigate();
+
+//     const isFormValid = email && password;
+
+//     const handleSubmit = async (e) => {
+//         e.preventDefault();
+//         setError('');
+//         setIsLoading(true);
+
+//         const result = login(email, password);
+
+//         if (result.success) {
+//             if (result.user.role === "superadmin") {
+//                 navigate("/superadmin");
+//             } else {
+//                 navigate(`/institute/${result.user.instituteId}`);
+//             }
+//         } else {
+//             setError(result.message || "Invalid credentials");
+//         }
+
+//         setIsLoading(false);
+//     };
+
+//     const demoAccounts = [
+//         { role: 'admin', email: 'admin@abc.edu', password: 'admin123' },
+//         { role: 'teacher', email: 'john@abc.edu', password: 'teacher123' },
+//         { role: 'student', email: 'student01@abc.edu', password: 'student123' },
+//     ];
+
+//     const fillDemo = (account) => {
+//         setEmail(account.email);
+//         setPassword(account.password);
+//     };
+
+//     return (
+//         <div className={styles.page}>
+//             {/* <div className={styles.loginfFormdiv}> */}
+
+//                 <div className={styles.title}>
+//                     <img src="/uniCore.png" alt="logo" className={styles.logo} />
+//                     <h1>uniCore</h1>
+//                 </div>
+//                     <h2 className={styles.h2}>Welcome Back</h2>
+
+//                 <form className={styles.loginForm} onSubmit={handleSubmit}>
+
+//                 {/* {error && <div className={styles.error}>{error}</div>} */}
+
+
+//                     <div className={styles.inputSection}>
+//                         {/* <label>Email</label> */}
+//                         <input
+//                             type="email"
+//                             value={email}
+//                             onChange={(e) => setEmail(e.target.value)}
+//                             placeholder="Enter your email"
+//                             required
+//                         />
+
+//                         {/* <label>Password</label> */}
+//                         <input
+//                             type="password"
+//                             value={password}
+//                             onChange={(e) => setPassword(e.target.value)}
+//                             placeholder="Enter your password"
+//                             required
+//                         />
+//                     </div>
+
+//                     <div className={styles.linkToOtherPages}>
+//                     <Link to='/forget-password' className={styles.forgetPass}>
+//                         Forget Password?
+//                     </Link>
+
+//                     <div className={styles.loginBtn}>
+//                         <button
+//                             type="submit"
+//                             disabled={!isFormValid || isLoading}
+//                             className={styles.loginButton}
+//                         >
+//                             {isLoading ? 'Signing in...' : 'Sign In'}
+//                         </button>
+//                     </div>
+
+
+//                     <div className={styles.demoSection}>
+//                         <p>Demo Accounts:</p>
+//                         <div className={styles.demoButtons}>
+//                             {demoAccounts.map((account) => (
+//                                 <button
+//                                     key={account.role}
+//                                     type="button"
+//                                     onClick={() => fillDemo(account)}
+//                                     className={styles.demoBtn}
+//                                 >
+//                                     {account.role}
+//                                 </button>
+//                             ))}
+//                         </div>
+//                     </div>
+
+                    
+//                     <p className={styles.registerLink}>
+//                         Don't have an account?{" "}
+//                         <Link to='/register' className={styles.registerLink}>
+//                             Register
+//                         </Link>
+//                     </p>
+//                     <Link to="/" className={styles.returnHome}>
+//                         Back to Home
+//                     </Link>
+//                 </div>
+//                 </form>
+
+//             {/* </div> */}
+//         </div>
+//     );
+// }
+
+// export default Login;
+
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useAuth } from './../Dashboard/context/AuthContext';
+
+import styles from './login.module.css';
+
+function Login() {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { login } = useAuth();
+    const navigate = useNavigate();
+
+    const isFormValid = email && password;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+        setIsLoading(true);
+
+        // ✅ FIX: await login
+        const result = await login(email, password);
+
+        if (result.success) {
+            const user = result.user;
+
+            // ✅ FIX: correct role handling
+            if (user.role === "superAdmin") {
+                navigate("/superadmin");
+            } else {
+                navigate(`/institute/${user.instituteId}`);
+            }
+
+        } else {
+            setError(result.message || "Invalid credentials");
+        }
+
+        setIsLoading(false);
+    };
+
+    const demoAccounts = [
+        { role: 'admin', email: 'admin@abc.edu', password: 'admin123' },
+        { role: 'teacher', email: 'john@abc.edu', password: 'teacher123' },
+        { role: 'student', email: 'student01@abc.edu', password: 'student123' },
+    ];
+
+    const fillDemo = (account) => {
+        setEmail(account.email);
+        setPassword(account.password);
+    };
+
+    return (
+        <div className={styles.page}>
+
+            <div className={styles.title}>
+                <img src="/uniCore.png" alt="logo" className={styles.logo} />
+                <h1>uniCore</h1>
+            </div>
+
+            <h2 className={styles.h2}>Welcome Back</h2>
+
+            <form className={styles.loginForm} onSubmit={handleSubmit}>
+
+                {/* ✅ SHOW ERROR */}
+                {error && <div className={styles.error}>{error}</div>}
+
+                <div className={styles.inputSection}>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email"
+                        required
+                    />
+
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter your password"
+                        required
+                    />
+                </div>
+
+                <div className={styles.linkToOtherPages}>
+
+                    <Link to='/forget-password' className={styles.forgetPass}>
+                        Forget Password?
+                    </Link>
+
+                    <div className={styles.loginBtn}>
+                        <button
+                            type="submit"
+                            disabled={!isFormValid || isLoading}
+                            className={styles.loginButton}
+                        >
+                            {isLoading ? 'Signing in...' : 'Sign In'}
+                        </button>
+                    </div>
+
+                    <div className={styles.demoSection}>
+                        <p>Demo Accounts:</p>
+                        <div className={styles.demoButtons}>
+                            {demoAccounts.map((account) => (
+                                <button
+                                    key={account.role}
+                                    type="button"
+                                    onClick={() => fillDemo(account)}
+                                    className={styles.demoBtn}
+                                >
+                                    {account.role}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <p className={styles.registerLink}>
+                        Don't have an account?{" "}
+                        <Link to='/register' className={styles.registerLink}>
+                            Register
+                        </Link>
+                    </p>
+
+                    <Link to="/" className={styles.returnHome}>
+                        Back to Home
+                    </Link>
+                </div>
+            </form>
+        </div>
+    );
+}
+
+export default Login;
+
+
+📁 login.module.css
+--------------------------------
+*{
+    box-sizing: border-box;
+}
+.title{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap:15px;
+    padding-bottom: 100px;
+}
+
+.title h1{
+    color:black;
+}
+
+.page{
+    padding-top: 70px;
+    text-align: center;
+    background-color: transparent;
+    height:100vh;
+    width:35vw;
+}
+.page p{
+    color:black;
+}
+
+.page a{
+    color:rgba(4, 92, 215, 0.959);
+}
+
+
+.h2{
+    /* background-color: aqua; */
+    font-size:30px;
+    color:rgba(52, 65, 72, 0.837)
+}
+
+.title img{
+    width:50px;
+}
+
+
+
+.loginForm{
+    gap:70px;
+    margin:50px 40px 40px 0px;
+}
+
+.inputSection{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    /* width:93%; */
+    padding-bottom: 20px;
+
+}
+
+.inputSection input{
+    /* height: 40px; */
+    width:98%;
+    font-size: medium;
+    font-weight: 600;
+    border-radius: 30px;
+    /* text-align:ca); */
+    padding:15px;
+}
+.loginBtn{
+    /* background-color: aqua; */
+    text-align: center;
+}
+
+.loginBtn  button{
+    color: white;
+    font-weight: 700;
+    font-size: medium;
+    width:50%;
+    background-color: rgba(16, 166, 84, 0.515);
+    /* height:30px; */
+    border: none;
+    border-radius: 30px;
+    padding:15px;
+
+}
+.loginBtn button:hover{
+    /* cursor: not-allowed; */
+
+    background-color: rgba(12, 194, 93, 0.515);
+    
+}
+.loginBtn button:disabled:hover{
+    /* cursor: not-allowed; */
+
+    background-color: rgb(201, 204, 204);
+    
+}
+.loginBtn button:disabled{
+    cursor: not-allowed;
+
+    background-color: rgb(169, 171, 171);
+
+}
+.linkToOtherPages{
+    text-align: right;
+    display: grid;
+    gap:20px;
+}
+
+
+
+.demoSection{
+    gap:20px;
+}
+.demoButtons button{
+    padding: 5px;
+    border-radius: 10px;
+    /* margin-top: 5px; */
+}
+
+
+
+@media (max-width:900px){
+.page{
+    width: 100vw;
+    /* background-color: burlywood; */
+    padding-left: 10%;
+    padding-right:10vw;
+}
+
+.loginForm{
+    gap:70px;
+    margin:40px 0px 0px 0px;
+}
+}
+
+
+
+/* forge password */
+
+
+.forgetBtn{
+    display:flex;
+    flex-direction: column;
+    /* justify-content:center; */
+    /* width: 100%; */
+    gap:20px;
+    align-items: center;
+}
+.forgetBtn button{
+
+    padding:10px;
+    border:none;
+    border-radius: 30px;
+}
+.loginForm h2{
+    padding-bottom: 30px;
+}
+
+.titleForget{
+    padding-bottom: 50px;
+}
+
+
+📁 loginLayout.jsx
+--------------------------------
+// import { Link } from 'react-router-dom';
+import {Link } from 'react-router-dom';
+
+
+
+import {Outlet} from 'react-router-dom';
+import styles from './loginLayout.module.css';
+function Login() {
+    return (
+    <div className={styles.frame}>
+        
+        <div className={styles.loginImg}>
+                {/* <img scr="../../src/assets/loginImg.jpg" alt="loginimg" /> */}
+        </div>
+        <div className={styles.page}>
+            <main className={styles.main}>
+                <Outlet />
+                
+            </main>
+            
+        </div>
+
+        
+        
+    </div>
+                
+
+
+    );
+}
+
+export default Login;
+
+
+📁 loginLayout.module.css
+--------------------------------
+.frame{
+    display:flex;
+    /* padding:10px; */
+}
+.loginImg{
+    min-height:100vh;
+    /* width:100%; */
+    flex:1;
+    position:relative;
+    background:linear-gradient(to left,rgba(240,248,255,.7),transparent),
+    url('src/assets/loginImg.jpg') center/cover ;}
+
+.loginImg::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to right,transparent 0%,aliceblue 100%);
+}
+
+
+.main{
+    width:100%;
+}
+@media (max-width:900px) {
+    .loginImg{
+        display:none;
+    }
+    
+.main{
+    width:100%;
+}
+    
+}
+
+
+@media (max-width:500px) {
+    .loginImg{
+        display:none;
+    }
+    
+.page{
+    width:100%;
+    /* padding: 30px 30px 30x 30px; */
+}
+}
+
+
+
+📁 register\collegeRegister.jsx
+--------------------------------
+
+// // import { Link } from 'react-router-dom';
+// // import { useState } from 'react';
+// // import styles from './collegeRegister.module.css';
+
+// // function Login() {
+// //     const [digit, setDigit] = useState(false);
+
+// //     const [formData, setFormData] = useState({
+// //         collegeName: "",
+// //         collegeCode: "",
+// //         collegeEmail: "",
+// //         adminName: "",
+// //         adminEmail: "",
+// //         collegeOtp: "",
+// //         adminOtp: ""
+// //     });
+
+// //     const handleChange = (e) => {
+// //         setFormData({
+// //             ...formData,
+// //             [e.target.name]: e.target.value
+// //         });
+// //     };
+
+// //     const isFormValid =
+// //         formData.collegeName &&
+// //         formData.collegeCode &&
+// //         formData.collegeEmail &&
+// //         formData.adminName &&
+// //         formData.adminEmail;
+
+// //     const isOtpValid =
+// //         formData.collegeOtp &&
+// //         formData.adminOtp;
+
+// //     return (
+// //         <form className={styles.registerForm}>
+// //             <div className={styles.title}>
+// //                 <img src="/uniCore.png" alt="logo" className={styles.logo} />
+// //                 <h1>UniCore</h1>
+// //             </div>
+// //                 {/* <h2 className={styles.h2}>Sign Up</h2> */}
+
+// //             <div className={styles.inputSection}>
+// //                 <fieldset>
+// //                     <legend>College details</legend>
+
+// //                     <input
+// //                         required
+// //                         type="text"
+// //                         name="collegeName"
+// //                         placeholder="College name *"
+// //                         onChange={handleChange}
+// //                     />
+
+// //                     <input
+// //                         required
+// //                         type="text"
+// //                         name="collegeCode"
+// //                         placeholder="College code *"
+// //                         onChange={handleChange}
+// //                     />
+
+// //                     <input
+// //                         required
+// //                         type="email"
+// //                         name="collegeEmail"
+// //                         placeholder="College Email ID *"
+// //                         onChange={handleChange}
+// //                     />
+// //                 </fieldset>
+
+// //                 <fieldset>
+// //                     <legend>Admin Details</legend>
+
+// //                     <input
+// //                         required
+// //                         type="text"
+// //                         name="adminName"
+// //                         placeholder="Admin name *"
+// //                         onChange={handleChange}
+// //                     />
+
+// //                     <input
+// //                         required
+// //                         type="email"
+// //                         name="adminEmail"
+// //                         placeholder="Admin Email ID *"
+// //                         onChange={handleChange}
+// //                     />
+// //                 </fieldset>
+
+// //                 <div>
+// //                     <button
+// //                         className={styles.registerButton}
+// //                         type="button"
+// //                         disabled={!isFormValid}
+// //                         onClick={() => {
+// //                             alert("OTP sent");
+// //                             setDigit(true);
+// //                         }}
+// //                     >
+// //                         Send OTP
+// //                     </button>
+
+// //                     {digit && (
+// //                         <>
+// //                             <input
+// //                                 required
+// //                                 type="text"
+// //                                 name="collegeOtp"
+// //                                 placeholder="Enter College Email OTP *"
+// //                                 onChange={handleChange}
+// //                             />
+
+// //                             <input
+// //                                 required
+// //                                 type="text"
+// //                                 name="adminOtp"
+// //                                 placeholder="Enter Admin Email OTP *"
+// //                                 onChange={handleChange}
+// //                             />
+
+// //                             <button
+// //                                 type="button"
+// //                                 className={styles.verifyButton}
+// //                                 disabled={!isOtpValid}
+// //                                 onClick={() => alert("login successful")}
+// //                             >
+// //                                 Verify
+// //                             </button>
+// //                         </>
+// //                     )}
+// //                 </div>
+
+// //                 <div>
+// //                     <p className={styles.loginLink}>
+// //                         Already registered{" "}
+// //                         <Link to='/login' className={styles.registerLink}>
+// //                             back to login page
+// //                         </Link>
+// //                     </p>
+
+// //                     <div className={styles.bottomLink}>
+// //                         <div><p>Request as Student/Teacher to <Link to="/RequestForAccount" className={styles.loginLink}>
+// //                             Create account
+// //                         </Link></p></div>
+                        
+// //                         <Link to="/" className={styles.returnHome}>
+// //                             Back to Home
+// //                         </Link>
+// //                     </div>
+// //                 </div>
+// //             </div>
+// //         </form>
+// //     );
+// // }
+
+// // export default Login;
+
+
+// import { Link, useNavigate } from 'react-router-dom';
+// import { useState } from 'react';
+
+// import styles from './collegeRegister.module.css';
+
+// import {
+//   sendCollegeOtp,
+//   verifyCollegeOtp,
+//   registerCollege
+// } from "../../../api/userAPI";
+
+// function RegisterCollege() {
+
+//   const navigate = useNavigate();
+
+//   const [digit, setDigit] = useState(false);
+//   const [loading, setLoading] = useState(false);
+
+//   const [formData, setFormData] = useState({
+//     collegeName: "",
+//     collegeCode: "",
+//     collegeEmail: "",
+//     adminName: "",
+//     adminEmail: "",
+//     password: "",
+//     collegeOtp: "",
+//     adminOtp: ""
+//   });
+
+//   const handleChange = (e) => {
+//     setFormData({
+//       ...formData,
+//       [e.target.name]: e.target.value
+//     });
+//   };
+
+//   const isFormValid =
+//     formData.collegeName &&
+//     formData.collegeCode &&
+//     formData.collegeEmail &&
+//     formData.adminName &&
+//     formData.adminEmail;
+
+//   const isOtpValid =
+//     formData.collegeOtp &&
+//     formData.adminOtp;
+
+//   /* ================= SEND OTP ================= */
+//   const handleSendOtp = async () => {
+//     try {
+//       setLoading(true);
+
+//       await sendCollegeOtp({
+//         collegeEmail: formData.collegeEmail,
+//         adminEmail: formData.adminEmail
+//       });
+
+//       alert("OTP sent to both emails");
+//       setDigit(true);
+
+//     } catch (err) {
+//       alert(err.response?.data?.msg || "Failed to send OTP");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   /* ================= VERIFY OTP + REGISTER ================= */
+//   const handleVerify = async () => {
+//     try {
+//       setLoading(true);
+
+//       // 1️⃣ verify OTP
+//       await verifyCollegeOtp({
+//         collegeEmail: formData.collegeEmail,
+//         adminEmail: formData.adminEmail,
+//         collegeOtp: formData.collegeOtp,
+//         adminOtp: formData.adminOtp
+//       });
+
+//       // 2️⃣ register
+//       const { data } = await registerCollege({
+//         name: formData.adminName,
+//         email: formData.adminEmail,
+//         password: formData.password || "admin123",
+//         instituteName: formData.collegeName
+//       });
+
+//       // 3️⃣ store auth
+//       localStorage.setItem("token", data.token);
+//       localStorage.setItem("user", JSON.stringify(data.user));
+
+//       alert("Registration successful");
+
+//       // ✅ THIS IS THE ONLY REDIRECT YOU NEED
+//       navigate("/");
+
+//     } catch (err) {
+//       alert(err.response?.data?.msg || "Verification failed");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <form className={styles.registerForm}>
+//       <div className={styles.title}>
+//         <img src="/uniCore.png" alt="logo" className={styles.logo} />
+//         <h1>UniCore</h1>
+//       </div>
+
+//       <div className={styles.inputSection}>
+
+//         <fieldset>
+//           <legend>College details</legend>
+
+//           <input
+//             type="text"
+//             name="collegeName"
+//             placeholder="College name"
+//             onChange={handleChange}
+//           />
+
+//           <input
+//             type="text"
+//             name="collegeCode"
+//             placeholder="College code"
+//             onChange={handleChange}
+//           />
+
+//           <input
+//             type="email"
+//             name="collegeEmail"
+//             placeholder="College Email"
+//             onChange={handleChange}
+//           />
+//         </fieldset>
+
+//         <fieldset>
+//           <legend>Admin Details</legend>
+
+//           <input
+//             type="text"
+//             name="adminName"
+//             placeholder="Admin name"
+//             onChange={handleChange}
+//           />
+
+//           <input
+//             type="email"
+//             name="adminEmail"
+//             placeholder="Admin Email"
+//             onChange={handleChange}
+//           />
+
+//           <input
+//             type="password"
+//             name="password"
+//             placeholder="Password"
+//             onChange={handleChange}
+//           />
+//         </fieldset>
+
+//         <div>
+//           <button
+//             type="button"
+//             disabled={!isFormValid || loading}
+//             onClick={handleSendOtp}
+//           >
+//             {loading ? "Sending..." : "Send OTP"}
+//           </button>
+
+//           {digit && (
+//             <>
+//               <input
+//                 type="text"
+//                 name="collegeOtp"
+//                 placeholder="College OTP"
+//                 onChange={handleChange}
+//               />
+
+//               <input
+//                 type="text"
+//                 name="adminOtp"
+//                 placeholder="Admin OTP"
+//                 onChange={handleChange}
+//               />
+
+//               <button
+//                 type="button"
+//                 disabled={!isOtpValid || loading}
+//                 onClick={handleVerify}
+//               >
+//                 {loading ? "Verifying..." : "Verify & Register"}
+//               </button>
+//             </>
+//           )}
+//         </div>
+
+//         <div>
+//           <Link to="/login">Back to login</Link>
+//         </div>
+
+//       </div>
+//     </form>
+//   );
+// }
+
+// export default RegisterCollege;
+
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import styles from './collegeRegister.module.css';
+
+import {
+  sendCollegeOtp,
+  verifyCollegeOtp,
+  registerCollege
+} from "../../../api/userAPI";
+
+function RegisterCollege() {
+
+  const navigate = useNavigate();
+
+  const [digit, setDigit] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [formData, setFormData] = useState({
+    collegeName: "",
+    collegeCode: "",
+    collegeEmail: "",
+    adminName: "",
+    adminEmail: "",
+    password: "",
+    collegeOtp: "",
+    adminOtp: ""
+  });
+
+  /* ================= INPUT HANDLER ================= */
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: value.trimStart() // 🔥 prevent leading spaces
+    });
+  };
+
+  const isFormValid =
+    formData.collegeName &&
+    formData.collegeCode &&
+    formData.collegeEmail &&
+    formData.adminName &&
+    formData.adminEmail;
+
+  const isOtpValid =
+    formData.collegeOtp &&
+    formData.adminOtp;
+
+  /* ================= SEND OTP ================= */
+  const handleSendOtp = async () => {
+    try {
+      if (digit) {
+        alert("OTP already sent. Please verify.");
+        return;
+      }
+
+      setLoading(true);
+
+      await sendCollegeOtp({
+        collegeEmail: formData.collegeEmail.trim(),
+        adminEmail: formData.adminEmail.trim()
+      });
+
+      alert("OTP sent to both emails");
+      setDigit(true);
+
+    } catch (err) {
+      alert(err.response?.data?.msg || "Failed to send OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* ================= VERIFY OTP + REGISTER ================= */
+  const handleVerify = async () => {
+    try {
+      if (!isOtpValid) {
+        alert("Enter both OTPs");
+        return;
+      }
+
+      setLoading(true);
+
+      // 🔥 CLEAN INPUT
+      const collegeOtp = formData.collegeOtp.trim();
+      const adminOtp = formData.adminOtp.trim();
+
+      /* 1️⃣ VERIFY OTP */
+      await verifyCollegeOtp({
+        collegeEmail: formData.collegeEmail.trim(),
+        adminEmail: formData.adminEmail.trim(),
+        collegeOtp,
+        adminOtp
+      });
+
+      /* 2️⃣ REGISTER */
+      const { data } = await registerCollege({
+        name: formData.adminName.trim(),
+        email: formData.adminEmail.trim(),
+        password: formData.password || "admin123",
+        instituteName: formData.collegeName.trim()
+      });
+
+      /* 3️⃣ STORE AUTH */
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      alert("Registration successful");
+
+      navigate("/");
+
+    } catch (err) {
+      console.log(err);
+
+      alert(
+        err.response?.data?.msg ||
+        "OTP mismatch or expired"
+      );
+
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form className={styles.registerForm}>
+      <div className={styles.title}>
+        <img src="/uniCore.png" alt="logo" className={styles.logo} />
+        <h1>UniCore</h1>
+      </div>
+
+      <div className={styles.inputSection}>
+
+        <fieldset>
+          <legend>College details</legend>
+
+          <input
+            type="text"
+            name="collegeName"
+            placeholder="College name"
+            onChange={handleChange}
+          />
+
+          <input
+            type="text"
+            name="collegeCode"
+            placeholder="College code"
+            onChange={handleChange}
+          />
+
+          <input
+            type="email"
+            name="collegeEmail"
+            placeholder="College Email"
+            onChange={handleChange}
+          />
+        </fieldset>
+
+        <fieldset>
+          <legend>Admin Details</legend>
+
+          <input
+            type="text"
+            name="adminName"
+            placeholder="Admin name"
+            onChange={handleChange}
+          />
+
+          <input
+            type="email"
+            name="adminEmail"
+            placeholder="Admin Email"
+            onChange={handleChange}
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+          />
+        </fieldset>
+
+        <div>
+          <button
+            type="button"
+            disabled={!isFormValid || loading || digit} // 🔥 prevent resend
+            onClick={handleSendOtp}
+          >
+            {loading ? "Sending..." : "Send OTP"}
+          </button>
+
+          {digit && (
+            <>
+              <input
+                type="text"
+                name="collegeOtp"
+                placeholder="College OTP"
+                onChange={handleChange}
+              />
+
+              <input
+                type="text"
+                name="adminOtp"
+                placeholder="Admin OTP"
+                onChange={handleChange}
+              />
+
+              <button
+                type="button"
+                disabled={!isOtpValid || loading}
+                onClick={handleVerify}
+              >
+                {loading ? "Verifying..." : "Verify & Register"}
+              </button>
+            </>
+          )}
+        </div>
+
+        <div>
+          <Link to="/login">Back to login</Link>
+        </div>
+
+      </div>
+    </form>
+  );
+}
+
+export default RegisterCollege;
+
+
+📁 register\collegeRegister.module.css
+--------------------------------
+/* 
+.loginImg{
+    width:100%;
+    flex:1;
+    position:relative;
+    background:linear-gradient(to left,rgba(240,248,255,.7),transparent),
+    url(../../../assets/loginImg.jpg) center/cover ;
+   
+}
+ */
+
+.registerForm{
+    padding-top:5%;
+    /* padding-bottom:5%; */
+    padding-right: 10%;
+}
+
+
+.registerForm p{
+    color:black;
+}
+
+.registerForm a{
+    color:rgba(4, 92, 215, 0.959);
+}
+
+
+.title{
+    background-color: transparent;
+    display:flex;
+    gap:20px;
+    padding-bottom: 1%;
+    justify-content: center;
+}
+
+.title h1 {
+    margin-top: 5px;
+    font-size: 35px;
+    color: black;
+}
+
+.title img{
+    background-color: transparent;
+    width:50px;
+    height:50px;
+}
+
+.inputSection{
+    background-color: transparent;
+    /* padding-top:10%; */
+    gap:10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top:30px;
+    text-align: right;
+    /* height:60%; */
+}
+
+
+.inputSection input{
+    background-color: transparent;
+    margin:0px 0px 20px 0px;
+    width:92%;
+    padding:3%;
+    /* gap:20px; */
+    border-radius: 10px;
+    border-color: none;
+    
+
+}
+
+.inputSection p,button,a{
+    margin-bottom: 20px;
+}
+.inputSection button{
+    padding-bottom: 20px,30px, 40px, 50px;
+    border-radius: 10px;
+}
+.inputSection input:hover{
+    background-color: rgb(232, 234, 236);
+    
+
+}
+
+fieldset{
+    padding:20px;
+    margin-bottom: 30px;
+    text-align: left;
+    border:2px solid rgb(187, 216, 234);
+    border-radius: 10px;
+}
+
+
+.inputSection button{
+    height:40px;
+    width:200px;
+    background-color: #41dd41ab;
+}
+
+.inputSection button:hover{
+    /* height:40px;
+    width:200px; */
+    background-color: #888d88be;
+}
+
+.inputSection button:active{
+    height:40px;
+    width:200px;
+    background-color: #145f14bd;
+}
+
+
+
+.loginLink a:hover{
+    color:rgb(45, 116, 179);
+}
+
+.loginLink{
+    /* margin-bottom: 20px; */
+}
+
+
+.returnHome a:active{
+    color:rgb(16, 59, 100);
+}
+
+
+.returnHome:hover{
+    color:rgb(45, 116, 179);
+}
+
+
+.returnHome:active{
+    color:rgb(16, 59, 100);
+}
+.bottomLink{
+    /* padding-bottom: 15px; */
+    display:flex;
+    justify-content:space-between;
+
+}
+
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+
+
+@media (max-width:900px) {
+    .registerForm{
+        width:100vw;
+        padding-left:20%;
+        padding:2% 20% 0% 20%;
+        /* padding-right: 20%; */
+    }
+    
+.bottomLink{
+    /* display:flex; */
+    flex-direction: column;
+    /* justify-content:space-between; */
+
+}
+    
+}
+
+
+@media (max-width:500px) {
+    .registerForm{
+        width:100vw;
+        /* padding-left:20%; */
+        padding:3% 10% 0% 10%;
+        /* padding-right: 20%; */
+    }
+}
+
+
+
+📁 register\requestForAccount.jsx
+--------------------------------
+// import { Link } from 'react-router-dom';
+// import { useState } from 'react';
+// import styles from './requestForAccount.module.css';
+
+// function Register() {
+//     const [role, setRole] = useState("");
+//     const [digit, setDigit] = useState(false);
+
+//     const [formData, setFormData] = useState({
+//         name: "",
+//         email: "",
+//         collegeName: "",
+//         department: "",
+//         year: "",
+//         rollNumber: "",
+//         employeeID: "",
+//         otp: ""
+//     });
+
+//     const handleChange = (e) => {
+//         setFormData({
+//             ...formData,
+//             [e.target.name]: e.target.value
+//         });
+//     };
+
+//     // validation based on role
+//     const isStudentValid =
+//         formData.name &&
+//         formData.email &&
+//         role &&
+//         formData.collegeName &&
+//         // formData.department &&
+//         // formData.year &&
+//         formData.rollNumber;
+
+//     const isTeacherValid =
+//         formData.name &&
+//         formData.email &&
+//         role &&
+//         formData.collegeName &&
+//         formData.department &&
+//         formData.employeeID;
+
+//     const isFormValid =
+//         role === "student" ? isStudentValid :
+//             role === "teacher" ? isTeacherValid :
+//                 false;
+
+//     const isOtpValid = formData.otp;
+
+//     return (
+//         <div className={styles.page}>
+//             <div className={styles.title}>
+//                 <img src="/uniCore.png" alt="logo" className={styles.logo} />
+//                 <h1>uniCore</h1>
+//             </div>
+//             <h2 className={styles.h2}>Request for Account</h2>
+
+//             <form className={styles.loginForm}>
+//                 <div className={styles.inputSection}>
+//                     <fieldset>
+//                         <legend>Personal Details</legend>
+
+//                         <input
+//                             type="text"
+//                             name="name"
+//                             placeholder="Name *"
+//                             onChange={handleChange}
+//                         />
+
+//                         <input
+//                             type="email"
+//                             name="email"
+//                             placeholder="Email ID *"
+//                             onChange={handleChange}
+//                         />
+
+//                         <select value={role} onChange={(e) => setRole(e.target.value)}>
+//                             <option className={styles.option} value="">Select Role *</option>
+//                             <option className={styles.option} value="student">Student</option>
+//                             <option className={styles.option} value="teacher">Teacher</option>
+//                         </select>
+//                     </fieldset>
+
+//                     {role === "student" && (
+//                         <fieldset>
+//                             <legend>College details</legend>
+
+//                             <input
+//                                 type="text"
+//                                 name="collegeName"
+//                                 placeholder="College name *"
+//                                 onChange={handleChange}
+//                             />
+
+//                             <select name="department" onChange={handleChange}>
+//                                 <option className={styles.option} value="">Select Department *</option>
+//                                 <option className={styles.option} value="IT">IT</option>
+//                                 <option className={styles.option} value="CS">CS</option>
+//                                 <option className={styles.option} value="ME">ME</option>
+//                                 <option className={styles.option} value="CE">CE</option>
+//                                 <option className={styles.option} value="ECE">ECE</option>
+//                                 <option className={styles.option} value="EE">EE</option>
+//                             </select>
+
+//                             <select name="year" onChange={handleChange}>
+//                                 <option className={styles.option} value="">Year *</option>
+//                                 <option className={styles.option} value="1">First Year</option>
+//                                 <option className={styles.option} value="2">Second Year</option>
+//                                 <option className={styles.option} value="3">Third Year</option>
+//                                 <option className={styles.option} value="4">Fourth Year</option>
+//                             </select>
+
+//                             <input
+//                                 type="text"
+//                                 name="rollNumber"
+//                                 placeholder="Roll Number *"
+//                                 onChange={handleChange}
+//                             />
+//                         </fieldset>
+//                     )}
+
+//                     {role === "teacher" && (
+//                         <fieldset>
+//                             <legend>College details</legend>
+
+//                             <input
+//                                 type="text"
+//                                 name="collegeName"
+//                                 placeholder="College name *"
+//                                 onChange={handleChange}
+//                             />
+
+//                             <select name="department" onChange={handleChange}>
+//                                 <option className={styles.option} value="">Select Department *</option>
+//                                 <option className={styles.option} value="IT">IT</option>
+//                                 <option className={styles.option} value="CS">CS</option>
+//                                 <option className={styles.option} value="ME">ME</option>
+//                                 <option className={styles.option} value="CE">CE</option>
+//                                 <option className={styles.option} value="ECE">ECE</option>
+//                                 <option className={styles.option} value="EE">EE</option>
+//                             </select>
+
+//                             <input
+//                                 type="text"
+//                                 name="employeeID"
+//                                 placeholder="Employee ID *"
+//                                 onChange={handleChange}
+//                             />
+//                         </fieldset>
+//                     )}
+
+//                     <div className={styles.LoginBtn}>
+//                         <button
+//                             type="button"
+//                             className={styles.registerButton}
+//                             disabled={!isFormValid}
+//                             onClick={() => {
+//                                 alert("OTP sent");
+//                                 setDigit(true);
+//                             }}
+//                         >
+//                             Send OTP
+//                         </button>
+
+//                         {digit && (
+//                             <>
+//                                 <input
+//                                     type="text"
+//                                     name="otp"
+//                                     placeholder="Enter OTP *"
+//                                     onChange={handleChange}
+//                                 />
+
+//                                 <button
+//                                     type="button"
+//                                     className={styles.verifyButton}
+//                                     disabled={!isOtpValid}
+//                                     onClick={() => alert("login successful")}
+//                                 >
+//                                     Verify
+//                                 </button>
+//                             </>
+//                         )}
+//                     </div>
+
+//                     <div className={styles.linkToOtherPages}>
+//                         <p className={styles.loginLink}>
+//                             Have an account?{" "}
+//                             <Link to="/login" className={styles.registerLink}>
+//                                 back to login page
+//                             </Link>
+//                         </p>
+
+//                         <div className={styles.bottomLink}>
+//                             <Link to="/" className={styles.returnHome}>
+//                                 Back to Home
+//                             </Link>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </form>
+
+//         </div>
+//     );
+// }
+
+// export default Register;
+
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import styles from './requestForAccount.module.css';
+
+import {
+  sendRequestOtp,
+  requestAccount,
+  getInstitutes
+} from '../../../api/userAPI';
+
+function Register() {
+  const [role, setRole] = useState("");
+  const [digit, setDigit] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [institutes, setInstitutes] = useState([]);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    instituteId: "",   // replaced collegeName
+    department: "",
+    year: "",
+    rollNumber: "",
+    employeeID: "",
+    otp: ""
+  });
+
+  /* ================= FETCH INSTITUTES ================= */
+  useEffect(() => {
+    const fetchInstitutes = async () => {
+      try {
+        const { data } = await getInstitutes();
+        setInstitutes(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchInstitutes();
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  /* ================= VALIDATION ================= */
+  const isStudentValid =
+    formData.name &&
+    formData.email &&
+    role &&
+    formData.instituteId &&
+    formData.rollNumber;
+
+  const isTeacherValid =
+    formData.name &&
+    formData.email &&
+    role &&
+    formData.instituteId &&
+    formData.department &&
+    formData.employeeID;
+
+  const isFormValid =
+    role === "student" ? isStudentValid :
+    role === "teacher" ? isTeacherValid :
+    false;
+
+  const isOtpValid = formData.otp;
+
+  /* ================= SEND OTP ================= */
+  const handleSendOtp = async () => {
+    try {
+      setLoading(true);
+
+      await sendRequestOtp(formData.email);
+
+      alert("OTP sent to your email");
+      setDigit(true);
+
+    } catch (err) {
+      alert(err.response?.data?.msg || "Failed to send OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* ================= VERIFY + SUBMIT ================= */
+  const handleVerify = async () => {
+    try {
+      setLoading(true);
+
+      await requestAccount({
+        ...formData,
+        role
+      });
+
+      alert("Request submitted successfully");
+
+      // redirect to login
+      window.location.href = "/login";
+
+    } catch (err) {
+      alert(err.response?.data?.msg || "Verification failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className={styles.page}>
+      <div className={styles.title}>
+        <img src="/uniCore.png" alt="logo" className={styles.logo} />
+        <h1>uniCore</h1>
+      </div>
+
+      <h2 className={styles.h2}>Request for Account</h2>
+
+      <form className={styles.loginForm}>
+        <div className={styles.inputSection}>
+
+          {/* PERSONAL */}
+          <fieldset>
+            <legend>Personal Details</legend>
+
+            <input
+              type="text"
+              name="name"
+              placeholder="Name *"
+              onChange={handleChange}
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email ID *"
+              onChange={handleChange}
+            />
+
+            <select value={role} onChange={(e) => setRole(e.target.value)}>
+              <option value="">Select Role *</option>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+            </select>
+          </fieldset>
+
+          {/* STUDENT */}
+          {role === "student" && (
+            <fieldset>
+              <legend>College details</legend>
+
+              {/* 🔥 INSTITUTE DROPDOWN */}
+              <select name="instituteId" onChange={handleChange}>
+                <option value="">Select Institute *</option>
+                {institutes.map((inst) => (
+                  <option key={inst._id} value={inst._id}>
+                    {inst.name}
+                  </option>
+                ))}
+              </select>
+
+              <select name="year" onChange={handleChange}>
+                <option value="">Year *</option>
+                <option value="1">First Year</option>
+                <option value="2">Second Year</option>
+                <option value="3">Third Year</option>
+                <option value="4">Fourth Year</option>
+              </select>
+
+              <input
+                type="text"
+                name="rollNumber"
+                placeholder="Roll Number *"
+                onChange={handleChange}
+              />
+            </fieldset>
+          )}
+
+          {/* TEACHER */}
+          {role === "teacher" && (
+            <fieldset>
+              <legend>College details</legend>
+
+              <select name="instituteId" onChange={handleChange}>
+                <option value="">Select Institute *</option>
+                {institutes.map((inst) => (
+                  <option key={inst._id} value={inst._id}>
+                    {inst.name}
+                  </option>
+                ))}
+              </select>
+
+              <select name="department" onChange={handleChange}>
+                <option value="">Select Department *</option>
+                <option value="IT">IT</option>
+                <option value="CS">CS</option>
+                <option value="ME">ME</option>
+                <option value="CE">CE</option>
+                <option value="ECE">ECE</option>
+                <option value="EE">EE</option>
+              </select>
+
+              <input
+                type="text"
+                name="employeeID"
+                placeholder="Employee ID *"
+                onChange={handleChange}
+              />
+            </fieldset>
+          )}
+
+          {/* OTP */}
+          <div className={styles.LoginBtn}>
+            <button
+              type="button"
+              disabled={!isFormValid || loading}
+              onClick={handleSendOtp}
+            >
+              {loading ? "Sending..." : "Send OTP"}
+            </button>
+
+            {digit && (
+              <>
+                <input
+                  type="text"
+                  name="otp"
+                  placeholder="Enter OTP *"
+                  onChange={handleChange}
+                />
+
+                <button
+                  type="button"
+                  disabled={!isOtpValid || loading}
+                  onClick={handleVerify}
+                >
+                  {loading ? "Verifying..." : "Verify"}
+                </button>
+              </>
+            )}
+          </div>
+
+          <div className={styles.linkToOtherPages}>
+            <p>
+              Have an account?{" "}
+              <Link to="/login">Back to login</Link>
+            </p>
+
+            <Link to="/">Back to Home</Link>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  );
+}
+
+export default Register;
+
+
+📁 register\requestForAccount.module.css
+--------------------------------
+
+.page {
+    width: 100%;
+    min-height: 100vh;
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginForm {
+    /* padding: 40px 30px; */
+    /* background-color: aqua; */
+    width: 35vw;
+    max-width: 500px;
+    min-width: 300px;
+    border-radius: 10px;
+}
+.page p{
+
+    color:black;
+}
+
+.page a{
+    color:rgba(4, 92, 215, 0.959);
+}
+
+
+.title {
+    display: flex;
+    /* flex-direction: row; */
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    
+    padding-bottom:50px;
+}
+
+.title h1 {
+    font-size: 35px;
+}
+
+.h2{
+    /* background-color: aqua; */
+    font-size:30px;
+    color:rgba(52, 65, 72, 0.837);
+    
+    padding-bottom:30px;
+}
+
+
+.title img {
+    width: 50px;
+    height: 50px;
+}
+
+.inputSection {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.inputSection input,
+.inputSection select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.inputSection select {
+    color: rgba(83, 105, 105, 0.76);
+    /* border: 2px solid rgba(28, 31, 33, 0.927); */
+}
+
+.option {
+    background-color: aliceblue;
+}
+
+.inputSection button {
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #919591ab;
+}
+
+.inputSection button:hover {
+    background-color: #6f726fbe;
+}
+
+.inputSection button:active {
+    background-color: #145f14bd;
+}
+.LoginBtn{
+    text-align: right;
+}
+.LoginBtn button{
+    /* text-align: center; */
+    width:30%;
+}
+
+fieldset {
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: left;
+    border: 2px solid rgb(187, 216, 234);
+    border-radius: 10px;
+    color:rgba(0, 0, 0, 0.455);
+}
+
+.loginLink a:hover {
+    color: rgb(45, 116, 179);
+}
+
+
+.linkToOtherPages{
+    text-align: right;
+    display: grid;
+    /* background-color: yellow; */
+    gap:100px;
+    padding-top: 70px;
+}
+
+.returnHome {
+    position: relative;
+    top: -10px;
+}
+
+.returnHome:hover {
+    color: rgb(45, 116, 179);
+}
+
+.returnHome:active {
+    color: rgb(16, 59, 100);
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+
+
+@media (max-width: 900px) {
+    .page {
+        width:100vw;
+        /* padding: 20px; */
+        /* background-color: bisque; */
+    }
+
+    .loginForm {
+        width:65%;
+        max-width: 100%;
+        /* background-color: bisque; */
+    }
+
+}
+
+@media (max-width:600px){
+    
+    .loginForm {
+        width:90%;
+        max-width: 100%;
+        /* background-color: bisque; */
+    }
+}
+
+
+@media (min-width:900px){
+    
+    .loginForm {
+        width:80%;
+        max-width: 100%;
+        /* background-color: bisque; */
+    }
+}
+
+
+
+
+
+
+
+
+

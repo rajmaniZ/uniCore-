@@ -10,7 +10,7 @@ function AdminDashboard() {
   const { currentUser, joinRequests } = useAuth();
   const { students, teachers, colleges } = useData();
 
-  // Filter data by college
+  
   const collegeData = useMemo(() => {
     const collegeId = currentUser?.collegeId;
     return {
@@ -21,7 +21,7 @@ function AdminDashboard() {
     };
   }, [currentUser, students, teachers, joinRequests]);
 
-  // Weekly data for chart
+  
   const weeklyData = [
     { day: 'Fri', value: 150 },
     { day: 'Sat', value: 280 },
@@ -35,7 +35,7 @@ function AdminDashboard() {
 
   const maxValue = Math.max(...weeklyData.map(d => d.value));
 
-  // Department performance data
+  
   const departmentData = [
     { rank: 1, name: 'Computer Science', avgGPA: 8.8, faculty: 35, students: 1250, status: 'Active' },
     { rank: 2, name: 'Electronics', avgGPA: 8.3, faculty: 28, students: 990, status: 'Active' },
@@ -43,7 +43,7 @@ function AdminDashboard() {
     { rank: 4, name: 'Civil', avgGPA: 7.9, faculty: 18, students: 600, status: 'Active' },
   ];
 
-  // Top teachers data
+  
   const topTeachers = [
     { name: 'Alice Johnson', dept: 'CSE-1', score: 89, change: '+8.8%' },
     { name: 'David Lee', dept: 'ME-1', score: 85, change: '+3.7%' },
@@ -54,7 +54,7 @@ function AdminDashboard() {
   return (
     <>
       <div className={styles.dashboard}>
-        {/* Header */}
+        {}
         <div className={styles.header}>
           <div>
             <h1 className={styles.greeting}>Welcome, Admin</h1>
@@ -62,7 +62,7 @@ function AdminDashboard() {
           </div>
         </div>
 
-        {/* Stats Cards */}
+        {}
         <div className={styles.statsGrid}>
           <StatsCard
             title="Total Students"
@@ -110,9 +110,9 @@ function AdminDashboard() {
           />
         </div>
 
-        {/* Main Content Grid */}
+        {}
         <div className={styles.mainGrid}>
-          {/* College Overview Chart */}
+          {}
           <div className={styles.chartCard}>
             <div className={styles.cardHeader}>
               <h3>College Overview</h3>
@@ -153,10 +153,10 @@ function AdminDashboard() {
             </div>
           </div>
 
-          {/* Join Requests */}
+          {}
           <JoinRequests requests={joinRequests} />
 
-          {/* Top Teachers */}
+          {}
           <div className={styles.teacherCard}>
             <div className={styles.cardHeader}>
               <h3>Top Teachers</h3>
@@ -179,7 +179,7 @@ function AdminDashboard() {
           </div>
         </div>
 
-        {/* Department Performance Table */}
+        {}
         <div className={styles.tableCard}>
           <div className={styles.cardHeader}>
             <h3>Department Performance</h3>
@@ -214,9 +214,9 @@ function AdminDashboard() {
           <button className={styles.viewFullBtn}>View Full List →</button>
         </div>
 
-        {/* Bottom Row */}
+        {}
         <div className={styles.bottomGrid}>
-          {/* Teacher Leaderboard */}
+          {}
           <div className={styles.leaderboardCard}>
             <div className={styles.cardHeader}>
               <h3>Teacher Leaderboard</h3>
@@ -240,7 +240,7 @@ function AdminDashboard() {
             </div>
           </div>
 
-          {/* Department Distribution */}
+          {}
           <div className={styles.distributionCard}>
             <div className={styles.cardHeader}>
               <h3>Teacher Leaderboard</h3>

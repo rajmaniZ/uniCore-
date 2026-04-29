@@ -4,7 +4,7 @@ import style from "./Classes.module.css";
 const ClassCard = ({ title, subtitle, students, teacher, time, highlight }) => (
   <div className={`${style.card} ${highlight ? style.highlight : ""}`}>
     
-    {/* Header */}
+    {}
     <div className={style.cardHeader}>
       <div className={style.icon}>📘</div>
       <div>
@@ -13,7 +13,7 @@ const ClassCard = ({ title, subtitle, students, teacher, time, highlight }) => (
       </div>
     </div>
 
-    {/* Students */}
+    {}
     <div className={style.students}>
       <h2>{students}</h2>
       <span>Students</span>
@@ -21,7 +21,7 @@ const ClassCard = ({ title, subtitle, students, teacher, time, highlight }) => (
 
     <hr />
 
-    {/* Teacher */}
+    {}
     <div className={style.teacher}>
       <div className={style.avatar}>👨‍🏫</div>
       <div>
@@ -30,13 +30,13 @@ const ClassCard = ({ title, subtitle, students, teacher, time, highlight }) => (
       </div>
     </div>
 
-    {/* Footer */}
+    {}
     <div className={style.footer}>
       <span>View Class</span>
       <span>→</span>
     </div>
 
-    {/* Notification badge */}
+    {}
     {highlight && <div className={style.badge}>New</div>}
   </div>
 );
@@ -46,7 +46,7 @@ function Classes() {
     <div className={style.container}>
       <div className={style.main}>
 
-        {/* Header */}
+        {}
         <div className={style.topBar}>
           <h1>Classes</h1>
 
@@ -68,7 +68,7 @@ function Classes() {
           </div>
         </div>
 
-        {/* Cards */}
+        {}
         <div className={style.cardGrid}>
           <ClassCard
             title="CSE-1"
@@ -104,17 +104,17 @@ function Classes() {
           />
         </div>
 
-        {/* Bottom Section */}
+        {}
         <div className={style.bottomSection}>
           
-          {/* Attendance */}
+          {}
           <div className={style.box}>
             <h3>Attendance Overview</h3>
             <div className={style.chart}>Chart Here</div>
             <p>84% School Average</p>
           </div>
 
-          {/* Activity */}
+          {}
           <div className={style.box}>
             <h3>Class Activity</h3>
             <ul>
@@ -125,7 +125,7 @@ function Classes() {
             </ul>
           </div>
 
-          {/* Leaderboard */}
+          {}
           <div className={style.box}>
             <h3>Student Leaderboard</h3>
             <ul>

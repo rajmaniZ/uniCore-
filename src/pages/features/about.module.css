@@ -1,66 +1,115 @@
-body{
-    color:rgba(229, 250, 255, 0.864);
-    /* padding:20px; */
-    /* color:pink; */
+
+.frame {
+    padding: 60px 8vw;
+    min-height: 100vh;
+    color: #e6f7ff;
 }
 
-.frame{
-    /* background-color: antiquewhite; */
-    padding:40px;
-    min-height: calc(100vh);
-}
 
-.frame h1{
+.title {
     text-align: center;
-    padding-bottom: 30px;
-
+    font-size: 42px;
+    font-weight: 600;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
 }
 
-.frame img{
-    height:250px;
-    display: inline;
-    /* background-color: yellow; */
-}
 
-.info{
+.info {
     display: flex;
-    gap:20px;
+    align-items: center;
+    gap: 40px;
+    background: rgba(255, 255, 255, 0.329);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-.info h2{
-    padding-top:20px;
-    padding-bottom: 30px;
+
+.info img {
+    width: 220px;
+    height: 220px;
+    object-fit: contain;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.08);
+    padding: 20px;
 }
 
-.info div{
-    gap:30px;
-    display: inline;
-}
 
-.info h3{
-    color:rgb(45, 121, 189);
-    font-size:30px;
-
-}
-
-.info p{
-    display: inline;
-    /* background-color: aqua; */
-}
-
-.guide h3{
-    color:rgb(210, 236, 229);
-    font-size:30px;
-
-    
-}
-.guide p{
-    font-size: 18px;
-}
-.guide{
+.info div {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap:10px;
-    font-size: 17px;
+    gap: 15px;
 }
 
+
+.info h2 {
+    font-size: 22px;
+    font-weight: 500;
+    color: #bfe9ff;
+}
+
+
+.info h3 {
+    font-size: 26px;
+    color: #4fc3f7;
+}
+
+
+.info p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.8);
+}
+
+
+.guide {
+    margin-top: 40px;
+    background: rgba(251, 242, 242, 0.218);
+    padding: 25px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+}
+
+
+.guide h3 {
+    font-size: 26px;
+    color: #81d4fa;
+    margin-bottom: 10px;
+}
+
+
+.guide p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+
+.guide ol {
+    padding-left: 20px;
+}
+
+.guide li {
+    margin-bottom: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+
+@media (max-width: 768px) {
+    .info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .info img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+}

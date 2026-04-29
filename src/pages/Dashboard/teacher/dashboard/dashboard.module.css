@@ -21,21 +21,21 @@
   margin: 0;
 }
 
-/* Stats Grid */
+
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
-/* Main Grid */
+
 .mainGrid {
   display: grid;
   grid-template-columns: 2fr 1.5fr 1fr;
   gap: 20px;
 }
 
-/* Cards */
+
 .card {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
@@ -98,7 +98,7 @@
   margin-bottom: 8px;
 }
 
-/* Chart */
+
 .chart {
   display: flex;
   align-items: flex-end;
@@ -155,7 +155,7 @@
   font-size: 13px;
 }
 
-/* Performance */
+
 .performanceHeader {
   display: flex;
   justify-content: space-between;
@@ -264,7 +264,7 @@
   cursor: pointer;
 }
 
-/* Recent Activity */
+
 .moreBtn {
   color: rgba(255, 255, 255, 0.5);
   font-size: 18px;
@@ -332,14 +332,14 @@
   color: #ef4444;
 }
 
-/* Bottom Grid */
+
 .bottomGrid {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   gap: 20px;
 }
 
-/* Insights */
+
 .insightsSubtitle {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.5);
@@ -450,7 +450,7 @@
   letter-spacing: 2px;
 }
 
-/* Responsive */
+
 @media (max-width: 1400px) {
   .statsGrid {
     grid-template-columns: repeat(2, 1fr);
