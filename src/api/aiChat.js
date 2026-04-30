@@ -1,56 +1,4 @@
-// // // ❌ NO 'use client'
-// // // ❌ NOT a component
 
-// // const streamChatAPI = async (
-// //   userMessage,
-// //   token,
-// //   onChunk,
-// //   onDone,
-// //   onError
-// // ) => {
-// //   try {
-// //     const response = await fetch("http://localhost:5000/api/chat", {
-// //       method: "POST",
-// //       headers: {
-// //         "Content-Type": "application/json",
-// //         ...(token && { Authorization: `Bearer ${token}` }),
-// //       },
-// //       body: JSON.stringify({
-// //         message: userMessage,
-// //       }),
-// //     });
-
-// //     if (!response.ok || !response.body) {
-// //       throw new Error("Stream request failed");
-// //     }
-
-// //     const reader = response.body.getReader();
-// //     const decoder = new TextDecoder("utf-8");
-
-// //     let accumulatedText = "";
-
-// //     while (true) {
-// //       const { done, value } = await reader.read();
-
-// //       if (done) break;
-
-// //       const chunk = decoder.decode(value, { stream: true });
-
-// //       accumulatedText += chunk;
-
-// //       // 🔥 LIVE UI UPDATE
-// //       if (onChunk) onChunk(accumulatedText);
-// //     }
-
-// //     if (onDone) onDone();
-// //   } catch (error) {
-// //     console.error("STREAM API ERROR:", error.message);
-
-// //     if (onError) onError(error);
-// //   }
-// // };
-
-// // export default streamChatAPI;
 // const streamChatAPI = async (
 //   userMessage,
 //   token,
@@ -68,8 +16,12 @@
 //       body: JSON.stringify({ message: userMessage }),
 //     });
 
-//     if (!response.ok || !response.body) {
+//     if (!response.ok) {
 //       throw new Error("Stream request failed");
+//     }
+
+//     if (!response.body) {
+//       throw new Error("No stream body");
 //     }
 
 //     const reader = response.body.getReader();
@@ -83,6 +35,7 @@
 
 //       const chunk = decoder.decode(value, { stream: true });
 
+//       // ✅ handle SSE properly
 //       const lines = chunk.split("\n");
 
 //       for (let line of lines) {
@@ -95,7 +48,10 @@
 //           return;
 //         }
 
-//         fullText += data + " ";
+//         // ✅ FINAL FIX (NO EXTRA SPACE)
+//         fullText += data;
+
+//         // 🔥 smooth live update
 //         onChunk?.(fullText);
 //       }
 //     }
@@ -106,6 +62,9 @@
 // };
 
 // export default streamChatAPI;
+
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const streamChatAPI = async (
   userMessage,
   token,
@@ -114,7 +73,7 @@ const streamChatAPI = async (
   onError
 ) => {
   try {
-    const response = await fetch("http://localhost:5000/api/chat/stream", {
+    const response = await fetch(`${BASE_URL}/api/chat/stream`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -142,7 +101,6 @@ const streamChatAPI = async (
 
       const chunk = decoder.decode(value, { stream: true });
 
-      // ✅ handle SSE properly
       const lines = chunk.split("\n");
 
       for (let line of lines) {
@@ -155,10 +113,7 @@ const streamChatAPI = async (
           return;
         }
 
-        // ✅ FINAL FIX (NO EXTRA SPACE)
         fullText += data;
-
-        // 🔥 smooth live update
         onChunk?.(fullText);
       }
     }

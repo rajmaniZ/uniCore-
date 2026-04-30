@@ -1,14 +1,35 @@
+// import axios from "axios";
+
+// const API = axios.create({
+//   baseURL: "http://localhost:5000/api", // change if needed
+// });
+
+// // 🔐 Attach token automatically
+// API.interceptors.request.use((config) => {
+//   const token = localStorage.getItem("token");
+
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
+
+//   return config;
+// });
+
+// export default API;
+
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api", // change if needed
+  baseURL: import.meta.env.VITE_API_URL
+    ? `${import.meta.env.VITE_API_URL}/api`
+    : "http://localhost:5000/api",
 });
 
 // 🔐 Attach token automatically
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
 
-  if (token) {
+  if (token && token.split(".").length === 3) {
     config.headers.Authorization = `Bearer ${token}`;
   }
 

@@ -1,8 +1,6 @@
 
 📁 aiChat.js
 --------------------------------
-// // ❌ NO 'use client'
-// // ❌ NOT a component
 
 // const streamChatAPI = async (
 //   userMessage,
@@ -12,48 +10,64 @@
 //   onError
 // ) => {
 //   try {
-//     const response = await fetch("http://localhost:5000/api/chat", {
+//     const response = await fetch("http://localhost:5000/api/chat/stream", {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json",
 //         ...(token && { Authorization: `Bearer ${token}` }),
 //       },
-//       body: JSON.stringify({
-//         message: userMessage,
-//       }),
+//       body: JSON.stringify({ message: userMessage }),
 //     });
 
-//     if (!response.ok || !response.body) {
+//     if (!response.ok) {
 //       throw new Error("Stream request failed");
+//     }
+
+//     if (!response.body) {
+//       throw new Error("No stream body");
 //     }
 
 //     const reader = response.body.getReader();
 //     const decoder = new TextDecoder("utf-8");
 
-//     let accumulatedText = "";
+//     let fullText = "";
 
 //     while (true) {
 //       const { done, value } = await reader.read();
-
 //       if (done) break;
 
 //       const chunk = decoder.decode(value, { stream: true });
 
-//       accumulatedText += chunk;
+//       // ✅ handle SSE properly
+//       const lines = chunk.split("\n");
 
-//       // 🔥 LIVE UI UPDATE
-//       if (onChunk) onChunk(accumulatedText);
+//       for (let line of lines) {
+//         if (!line.startsWith("data: ")) continue;
+
+//         const data = line.replace("data: ", "");
+
+//         if (data === "[DONE]") {
+//           onDone?.(fullText);
+//           return;
+//         }
+
+//         // ✅ FINAL FIX (NO EXTRA SPACE)
+//         fullText += data;
+
+//         // 🔥 smooth live update
+//         onChunk?.(fullText);
+//       }
 //     }
-
-//     if (onDone) onDone();
 //   } catch (error) {
 //     console.error("STREAM API ERROR:", error.message);
-
-//     if (onError) onError(error);
+//     onError?.(error);
 //   }
 // };
 
 // export default streamChatAPI;
+
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const streamChatAPI = async (
   userMessage,
   token,
@@ -62,7 +76,7 @@ const streamChatAPI = async (
   onError
 ) => {
   try {
-    const response = await fetch("http://localhost:5000/api/chat/stream", {
+    const response = await fetch(`${BASE_URL}/api/chat/stream`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,8 +85,12 @@ const streamChatAPI = async (
       body: JSON.stringify({ message: userMessage }),
     });
 
-    if (!response.ok || !response.body) {
+    if (!response.ok) {
       throw new Error("Stream request failed");
+    }
+
+    if (!response.body) {
+      throw new Error("No stream body");
     }
 
     const reader = response.body.getReader();
@@ -98,7 +116,7 @@ const streamChatAPI = async (
           return;
         }
 
-        fullText += data + " ";
+        fullText += data;
         onChunk?.(fullText);
       }
     }
@@ -201,83 +219,132 @@ export const markAttendance = async (data) => {
 
 📁 axios.js
 --------------------------------
+// 
+// import axios from "axios";
+
+// const normalizeBaseUrl = (raw) => {
+//   if (!raw) return "http://localhost:5000/api";
+//   const cleaned = String(raw).trim().replace(/;$/, "");
+//   if (/^https?:\/\//i.test(cleaned)) return cleaned;
+//   return `http://${cleaned}`;
+// };
+
+// const API = axios.create({
+//   baseURL: normalizeBaseUrl(
+//     import.meta.env.VITE_API_URL ||
+//     import.meta.env.REACT_APP_API_URL ||
+//     "http://localhost:5000/api"
+//   ),
+//   timeout: 15000,
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// });
+
+// API.interceptors.request.use(
+//   (config) => {
+//     try {
+//       const token = localStorage.getItem("token");
+//       const cleanedToken = typeof token === "string" ? token.trim() : "";
+//       const isUsableToken =
+//         cleanedToken &&
+//         cleanedToken !== "undefined" &&
+//         cleanedToken !== "null" &&
+//         cleanedToken.split(".").length === 3;
+
+//       if (isUsableToken) {
+//         config.headers = config.headers || {};
+//         config.headers.Authorization = `Bearer ${cleanedToken}`;
+//       } else if (token) {
+//         localStorage.removeItem("token");
+//         localStorage.removeItem("user");
+//       }
+//     } catch (_) {}
+//     return config;
+//   },
+//   (error) => Promise.reject(error)
+// );
+
+// API.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     const status = error.response?.status;
+//     if (status === 401) {
+//       localStorage.removeItem("token");
+//       localStorage.removeItem("user");
+//       if (window.location.pathname !== "/login") {
+//         window.location.href = "/login";
+//       }
+//     }
+//     return Promise.reject(error);
+//   }
+// );
+
+// export default API;
+
+
 import axios from "axios";
 
-const normalizeBaseUrl = (raw) => {
-  if (!raw) return "http://localhost:5000/api";
-  const cleaned = String(raw).trim().replace(/;$/, "");
-  if (/^https?:\/\//i.test(cleaned)) return cleaned;
-  return `http://${cleaned}`;
+const getBaseURL = () => {
+  const url = import.meta.env.VITE_API_URL;
+  return url ? `${url}/api` : "http://localhost:5000/api";
 };
 
 const API = axios.create({
-  baseURL: normalizeBaseUrl(
-    import.meta.env.VITE_API_URL ||
-    import.meta.env.REACT_APP_API_URL ||
-    "http://localhost:5000/api"
-  ),
+  baseURL: getBaseURL(),
   timeout: 15000,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-API.interceptors.request.use(
-  (config) => {
-    try {
-      const token = localStorage.getItem("token");
-      const cleanedToken = typeof token === "string" ? token.trim() : "";
-      const isUsableToken =
-        cleanedToken &&
-        cleanedToken !== "undefined" &&
-        cleanedToken !== "null" &&
-        cleanedToken.split(".").length === 3;
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
 
-      if (isUsableToken) {
-        config.headers = config.headers || {};
-        config.headers.Authorization = `Bearer ${cleanedToken}`;
-      } else if (token) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-      }
-    } catch (_) {}
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
-API.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    const status = error.response?.status;
-    if (status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      if (window.location.pathname !== "/login") {
-        window.location.href = "/login";
-      }
-    }
-    return Promise.reject(error);
+  if (token && token.split(".").length === 3) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-);
+
+  return config;
+});
 
 export default API;
 
 
-
 📁 chatApi.js
 --------------------------------
+// import axios from "axios";
+
+// const API = axios.create({
+//   baseURL: "http://localhost:5000/api", // change if needed
+// });
+
+// // 🔐 Attach token automatically
+// API.interceptors.request.use((config) => {
+//   const token = localStorage.getItem("token");
+
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
+
+//   return config;
+// });
+
+// export default API;
+
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api", // change if needed
+  baseURL: import.meta.env.VITE_API_URL
+    ? `${import.meta.env.VITE_API_URL}/api`
+    : "http://localhost:5000/api",
 });
 
 // 🔐 Attach token automatically
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
 
-  if (token) {
+  if (token && token.split(".").length === 3) {
     config.headers.Authorization = `Bearer ${token}`;
   }
 
