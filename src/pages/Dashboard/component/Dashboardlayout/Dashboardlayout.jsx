@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from './../dSidebar/dSidebar';
 import Navbar from './../navbar/navbar';
 import styles from './Dashboardlayout.module.css';
-import chatAI from "chatWithAI.png"
+import chatAI from "/chatWithAi.png"
 
 
 function DashboardLayout() {
