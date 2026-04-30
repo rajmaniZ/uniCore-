@@ -5,6 +5,8 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from './../dSidebar/dSidebar';
 import Navbar from './../navbar/navbar';
 import styles from './Dashboardlayout.module.css';
+import chatAI from "./../../../../assets/chatWithAI.png"
+
 
 function DashboardLayout() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -18,7 +20,9 @@ function DashboardLayout() {
 
       <div className={`${styles.mainContent} ${sidebarCollapsed ? styles.expanded : ''}`}>
         <Navbar onMenuToggle={() => setSidebarCollapsed(!sidebarCollapsed)} />
-        <a  className={styles.Ai} href="/aiChat">Ask?</a>
+        <a  className={styles.Ai} href="/aiChat">
+      <img src={chatAI} alt="Ask?" />
+        </a>
         <main className={styles.content}>
 
           <Outlet /> {}

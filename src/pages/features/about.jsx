@@ -94,7 +94,7 @@
 
 import { useParams } from 'react-router-dom';
 import styles from './about.module.css';
-import { featuresData } from './Features'; 
+import { featuresData } from './features'; 
 
 function AboutFeature() {
     const { id } = useParams();

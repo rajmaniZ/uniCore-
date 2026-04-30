@@ -1,64 +1,121 @@
-
-
+/* Container */
 .container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background:rgba(red, green, blue, 0.5);
+
+  background: #0f172a;
   color: white;
 }
 
+/* Chat area */
 .chatBox {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  padding: 16px;
+
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
+/* Empty state */
+.emptyState {
+  text-align: center;
+  color: #94a3b8;
+  margin-top: 20px;
+}
+
+/* Message */
 .message {
   max-width: 70%;
-  padding: 12px 16px;
-  border-radius: 12px;
-  line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: 10px;
   font-size: 14px;
-  word-wrap: break-word;
+  line-height: 1.6;
 }
 
+/* User message */
 .user {
   align-self: flex-end;
-  background: #818fad;
+  background: #2563eb;
 }
 
+/* Assistant message */
 .assistant {
   align-self: flex-start;
   background: #1e293b;
 }
 
+/* Markdown content */
+.markdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Headings */
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  margin-top: 10px;
+  color: #60a5fa;
+}
+
+/* Paragraph */
+.markdown p {
+  margin-bottom: 8px;
+}
+
+/* Lists */
+.markdown ul {
+  padding-left: 18px;
+}
+
+/* Code block */
+.markdown pre {
+  background: #020617;
+  padding: 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+/* Inline code */
+.markdown code {
+  background: #1e293b;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+/* Input area */
 .inputBox {
   display: flex;
-  padding: 12px;
+  padding: 10px;
   border-top: 1px solid #1e293b;
-  background: #6e707a1b;
+  background: #020617;
 }
 
 .inputBox input {
   flex: 1;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 8px;
   border: none;
   outline: none;
-  background: #20293732;
+  border-radius: 6px;
+  background: #1e293b;
   color: white;
 }
 
 .inputBox button {
-  margin-left: 10px;
-  padding: 10px 16px;
-  background: #2563eb;
+  margin-left: 8px;
+  padding: 8px 14px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
+  background: #2563eb;
   color: white;
   cursor: pointer;
 }
@@ -66,13 +123,4 @@
 .inputBox button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-}
-
-.message {
-  white-space: pre-wrap;
-  line-height: 1.6;
-}
-
-.assistant {
-  font-family: "Inter", sans-serif;
 }
