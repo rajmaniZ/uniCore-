@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 
 import chatAI from "./../../../src/assets/chatWithAi.png";
-import attendanceIcon from "./../../../src/assets/attendanceIcon.png";
+import attendanceIcon from "./../../../src/assets/attendanceIcon.jpg";
 import dashboardImg from "./../../../src/assets/dashboard-svg-icon-free-dashboard-icon-11553444664o1utwdkesz.png";
 import liveChatImg from "./../../../src/assets/Screenshot 2026-03-23 064621.png";
 

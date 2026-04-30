@@ -2,13 +2,22 @@
     display:flex;
     
 }
-.loginImg{
+/* .loginImg{
     min-height:100vh;
     
     flex:1;
     position:relative;
     background:linear-gradient(to left,rgba(240,248,255,.7),transparent),
-    url('src/assets/loginImg.jpg') center/cover ;}
+    url('src/assets/loginImg.jpg') center/cover ;} */
+
+
+.loginImg {
+  min-height: 100vh;
+  flex: 1;
+  position: relative;
+  background: linear-gradient(to left, rgba(240,248,255,.7), transparent),
+              url('/loginImg.jpg') center/cover;
+}
 
 .loginImg::after{
     content:"";

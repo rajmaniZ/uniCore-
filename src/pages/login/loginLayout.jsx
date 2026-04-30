@@ -4,6 +4,9 @@ import {Link } from 'react-router-dom';
 
 
 import {Outlet} from 'react-router-dom';
+// import loginImg from './../../assets/'
+
+
 import styles from './loginLayout.module.css';
 function Login() {
     return (
