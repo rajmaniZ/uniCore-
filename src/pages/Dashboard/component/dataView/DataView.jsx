@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../context/authContext";
 import styles from "./DataView.module.css";
+import Loader from './../../../../component/loader/loader';
 
 import { getUsers } from "../../../../api/userAPI";
 import { getClasses } from "../../../../api/classApi";
@@ -110,7 +111,7 @@ function DataView({ type = "students" }) {
     page * itemsPerPage
   );
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader className={styles.loading} />;
 
   return (
     <div className={styles.container}>

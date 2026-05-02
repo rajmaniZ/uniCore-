@@ -1,6 +1,5 @@
 import style from './contact.module.css';
 
-
 function Contact(){
     return(
         <>
@@ -17,7 +16,6 @@ function Contact(){
                         <textarea placeholder="Your message" row="10"></textarea>
                         <button type="submit">Send Message</button>
                         
-
                     </form>
                 </div>
                 <div className={style.contactdetails}>

@@ -6,7 +6,6 @@
         circle at right,rgba(15, 70, 72, 0.2) transparent 50%);
 }
 
-
 .heroImage{
     width:60vw;
     min-height: 80vh;   
@@ -30,7 +29,6 @@
     padding-left:10vw;
 }
 
-
 .heroContent h1,
 .heroContent h2,
 .heroContent p{
@@ -53,7 +51,6 @@
     margin-right:20px;
 }
 
-
 .register,
 .login{
     border-radius: 10px;
@@ -73,7 +70,6 @@
     border:.5px solid rgb(51, 124, 201);
 }
 
-
 .hrFaded{
     height:2px;
     border:none;
@@ -86,15 +82,15 @@
     );
 }
 
-
 @media (max-width:900px) {
     .heroImage{
         display:none;
     }
 
     .heroContent{
-        width:80vw;
-        padding-top:50vh;
+        width:100vw;
+        height: 100vh;
+        padding-top:40vh;
         padding-left:10vw;
     }
 }

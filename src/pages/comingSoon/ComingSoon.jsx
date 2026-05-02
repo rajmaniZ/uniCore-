@@ -1,5 +1,4 @@
 
-
 import styles from './ComingSoon.module.css'
 
 const ComingSoon=({pageName})=>{

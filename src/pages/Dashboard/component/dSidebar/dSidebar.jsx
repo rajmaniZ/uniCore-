@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../../../../context/authContext";
 import { roleConfig } from "../../config/roleConfig";
 import styles from "./dSidebar.module.css";
+import Logo from './../../../../component/logo/logo';
 
 const Icons = {
   dashboard: () => <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10Zm0 8h8v-6H3v6Zm10 0h8V11h-8v10Zm0-18v6h8V3h-8Z" /></svg>,
@@ -30,10 +31,26 @@ function Sidebar({ collapsed, onToggle }) {
   };
 
   return (
+    <>
+    <svg width="0" height="0">
+                <defs>
+                    <linearGradient id="uniGradient" x1="60%" y1="90%" x2="0%" y2="30%">
+                        <stop offset="10%" stopColor="#ff6ec4" />
+                        <stop offset="20%" stopColor="#ff9a44" />
+                        <stop offset="40%" stopColor="#f9c449" />
+                        <stop offset="60%" stopColor="#4cd964" />
+                        <stop offset="80%" stopColor="#5ac8fa" />
+                        <stop offset="100%" stopColor="#5856d6" />
+                    </linearGradient>
+                </defs>
+            </svg>
+   
     <aside className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""}`}>
       <div className={styles.logoSection}>
         <div className={styles.logoDiv}>
-          <img src="/logo.png" alt="Logo" className={styles.logo} />
+          <Logo className={styles.logo} />
+                    
+          {}
           {!collapsed && <h1>uniCore</h1>}
         </div>
       </div>
@@ -82,6 +99,7 @@ function Sidebar({ collapsed, onToggle }) {
         </button>
       </div>
     </aside>
+     </>
   );
 }
 

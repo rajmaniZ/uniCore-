@@ -4,7 +4,6 @@
   color: white;
 }
 
-
 .card {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
@@ -16,14 +15,12 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-
 .header {
   display: flex;
   align-items: center;
   gap: 16px;
   margin-bottom: 24px;
 }
-
 
 .avatar {
   width: 60px;
@@ -42,13 +39,11 @@
   color: white;
 }
 
-
 .title {
   font-size: 24px;
   font-weight: 700;
   margin: 0;
 }
-
 
 .subtitle {
   font-size: 14px;
@@ -56,13 +51,11 @@
   margin-top: 4px;
 }
 
-
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
-
 
 .field {
   background: rgba(255, 255, 255, 0.04);
@@ -83,7 +76,6 @@
   background: rgba(255, 255, 255, 0.07);
 }
 
-
 .label {
   font-size: 11px;
   text-transform: uppercase;
@@ -92,7 +84,6 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-
 .value {
   font-size: 14px;
   font-weight: 500;
@@ -100,7 +91,6 @@
 
   word-break: break-word;
 }
-
 
 .notFound {
   color: white;

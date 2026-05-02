@@ -23,20 +23,17 @@
   margin: 0;
 }
 
-
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
-
 .mainGrid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 20px;
 }
-
 
 .chartCard,
 .tableCard,
@@ -79,7 +76,6 @@
   color: rgba(255, 255, 255, 0.5);
   margin: 0 0 20px 0;
 }
-
 
 .chart {
   display: flex;
@@ -149,7 +145,6 @@
   font-weight: 600;
 }
 
-
 .teacherList {
   display: flex;
   flex-direction: column;
@@ -214,7 +209,6 @@
   font-weight: 600;
 }
 
-
 .tableCard {
   margin-top: 0;
 }
@@ -271,13 +265,11 @@
   color: white;
 }
 
-
 .bottomGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
-
 
 .leaderList {
   display: flex;
@@ -340,7 +332,6 @@
   color: #22c55e;
   font-size: 12px;
 }
-
 
 .distributionContent {
   display: flex;
@@ -447,7 +438,6 @@
   font-size: 11px;
   color: #22c55e;
 }
-
 
 @media (max-width: 1400px) {
   .statsGrid {

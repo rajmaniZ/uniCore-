@@ -27,7 +27,6 @@ export const colleges = [
 
     joinedAt: new Date("2024-01-10"),
 
-    
     structure: {
       CSE: {
         hod: {
@@ -164,7 +163,6 @@ export const subjectsMap = {
   ],
 };
 
-
 export const users = [
   {
     _id: "super1",
@@ -257,7 +255,6 @@ export const users = [
     joinedAt: new Date("2024-01-20"),
   },
 ];
-
 
 export const students = [];
 const classes = ["CSE-1", "CSE-2", "CSE-3", "ECE-1", "ECE-2", "ME-1", "ME-2"];

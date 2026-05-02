@@ -13,8 +13,6 @@ function SettingsPage() {
 
   const role = user?.role?.toLowerCase();
 
-  
-
   const [settings, setSettings] = useState({
     theme: user?.theme || "light",
     notifications: user?.notifications ?? true,
@@ -29,8 +27,6 @@ function SettingsPage() {
   const [loading, setLoading] = useState(false);
 
   if (!user) return <div>Loading...</div>;
-
-  
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -50,13 +46,10 @@ function SettingsPage() {
     }));
   };
 
-  
-
   const handleSave = async () => {
     try {
       setLoading(true);
 
-      
       await updateUser(user._id, settings);
 
       alert("Settings updated");
@@ -69,8 +62,6 @@ function SettingsPage() {
     }
   };
 
-  
-
   const handlePasswordSave = async () => {
     try {
       if (!passwords.newPassword) {
@@ -80,7 +71,6 @@ function SettingsPage() {
 
       setLoading(true);
 
-      
       await setupPassword({
         password: passwords.newPassword,
       });
@@ -96,8 +86,6 @@ function SettingsPage() {
       setLoading(false);
     }
   };
-
-  
 
   return (
     <div className={styles.container}>

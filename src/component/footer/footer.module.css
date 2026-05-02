@@ -1,14 +1,11 @@
 .footer{
     margin-top: 40px;
     
-    
     padding-top:-10%;
     padding-left:10%;
     padding-right:10%;
     
 }
-
-
 
 .logoDiv{
 
@@ -17,7 +14,6 @@
     justify-content: center;
     align-items: center;
 }
-
 
 .hrFaded{
     height:1px;
@@ -38,7 +34,6 @@
         transparent 100%
     );
 }
-
 
 .logoDiv h1{
     font-size: 60px;
@@ -63,12 +58,10 @@ li{
     color:azure;
     display:flex;
 
-    
     justify-content: space-between;
     flex-wrap:wrap;
     gap:30px;
 }
-
 
 .footer a{
     color:white;
@@ -81,13 +74,9 @@ li{
 }
 .footer a:hover{
     
-    
     color: rgb(75, 196, 181);
     
-    
-    
 }
-
 
 .companyDiv , .resourcesDiv , .supportDiv, .subscribe {
     display:flex;
@@ -95,17 +84,14 @@ li{
     gap:20px;
 }
 
-
 .companyDiv h1, .resourcesDiv h1 , .supportDiv h1, .subscribe h1{
     font-size:20px;
     color:aqua;
 }
 
-
 .companyDiv li, .resourcesDiv li , .supportDiv li, .subscribe li {
     font-size:16px;
     padding-bottom:10px;
-    
     
 }
 
@@ -115,7 +101,6 @@ li{
     background-color: transparent  ;
     border: 1px solid lightblue;
 }
-
 
 .subscribe input:hover{
     background-color: #cb80dc;
@@ -136,20 +121,15 @@ li{
     background-color: #c6361a94;
 }
 
-
-
 .copyright{
     height:40px;
     text-align: center;
-    
     
     display: flex;
     justify-content: space-between;
     padding-bottom:20px;
     
 }
-
-
 
 .copyright p{
     color:antiquewhite;

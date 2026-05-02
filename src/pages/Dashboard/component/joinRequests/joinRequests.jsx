@@ -1,111 +1,7 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { useEffect, useState } from "react";
 import styles from "./joinRequests.module.css";
+import Loader from "../../../../component/loader/loader";
 
 import {
   getRequests,
@@ -119,7 +15,6 @@ function JoinRequests() {
   const [processing, setProcessing] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  
   const loadRequests = async () => {
     try {
       const data = await getRequests();
@@ -135,7 +30,6 @@ function JoinRequests() {
     loadRequests();
   }, []);
 
-  
   const handleApprove = async (id) => {
     try {
       setProcessing(id);
@@ -160,10 +54,8 @@ function JoinRequests() {
     }
   };
 
-  
   const filtered = requests.filter((r) => r.status === activeTab);
 
-  
   const formatTime = (date) => {
     const diff = Date.now() - new Date(date).getTime();
     const minutes = Math.floor(diff / 60000);
@@ -173,7 +65,7 @@ function JoinRequests() {
     return `${Math.floor(hours / 24)}d ago`;
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader/>;
 
   return (
     <div className={styles.container}>

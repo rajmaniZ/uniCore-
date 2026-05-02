@@ -1,93 +1,5 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import API from "./axios";
-
-
 
 export const getCourses = async (params = {}) => {
   const { instituteId, departmentId } = params;
@@ -106,7 +18,6 @@ export const getCourses = async (params = {}) => {
   return res.data;
 };
 
-
 export const createCourse = async (data) => {
   if (!data?.name || !data?.departmentId || !data?.instituteId) {
     throw new Error("name, departmentId, instituteId are required");
@@ -116,14 +27,12 @@ export const createCourse = async (data) => {
   return res.data;
 };
 
-
 export const updateCourse = async (id, data) => {
   if (!id) throw new Error("Course ID required");
 
   const res = await API.put(`/course/${id}`, data);
   return res.data;
 };
-
 
 export const deleteCourse = async (id) => {
   if (!id) throw new Error("Course ID required");

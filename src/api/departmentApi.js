@@ -1,41 +1,12 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import API from "./axios";
 
-
-// protected
 export const getDepartments = async (instituteId) => {
   const res = await API.get("/department", {
     params: { instituteId },
   });
   return res.data;
 };
-
-//protected
 
 export const getDepartmentById = async (id) => {
   const res = await API.get(`/department/${id}`);

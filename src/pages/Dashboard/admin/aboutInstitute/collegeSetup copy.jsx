@@ -16,9 +16,6 @@ import { createHod, createTeacher, getUsers } from "../../../../api/userAPI";
 import { getMyInstitute } from "../../../../api/instituteApi";
 import styles from "./collegeSetup.module.css";
 
-/* ─────────────────────────────────────────────
-   CONSTANTS
-───────────────────────────────────────────── */
 const COURSE_TYPES = ["semester", "annual"];
 const DURATION_OPTIONS = [1, 2, 3, 4, 5, 6];
 const SUBJECT_TYPES = ["compulsory", "elective", "optional"];
@@ -55,9 +52,6 @@ const emptyDept = () => ({
   _isNew: true,
 });
 
-/* ─────────────────────────────────────────────
-   ERROR PARSER
-───────────────────────────────────────────── */
 const parseError = (err) => {
   if (!err) return "Unknown error";
   return (
@@ -69,9 +63,6 @@ const parseError = (err) => {
   );
 };
 
-/* ─────────────────────────────────────────────
-   SMALL UI HELPERS
-───────────────────────────────────────────── */
 function Pill({ label, color = "blue" }) {
   return <span className={`${styles.pill} ${styles[`pill_${color}`]}`}>{label}</span>;
 }
@@ -118,9 +109,6 @@ function StepBadge({ step, label, active, done }) {
   );
 }
 
-/* ─────────────────────────────────────────────
-   MODAL
-───────────────────────────────────────────── */
 function Modal({ open, onClose, title, children, size = "md" }) {
   const ref = useRef();
   useEffect(() => {
@@ -147,9 +135,6 @@ function Modal({ open, onClose, title, children, size = "md" }) {
   );
 }
 
-/* ─────────────────────────────────────────────
-   CONFIRM DIALOG
-───────────────────────────────────────────── */
 function Confirm({ open, message, onConfirm, onCancel }) {
   if (!open) return null;
   return (
@@ -173,9 +158,6 @@ function Confirm({ open, message, onConfirm, onCancel }) {
   );
 }
 
-/* ─────────────────────────────────────────────
-   TOAST
-───────────────────────────────────────────── */
 function Toast({ toasts }) {
   return (
     <div className={styles.toastContainer}>
@@ -188,9 +170,6 @@ function Toast({ toasts }) {
   );
 }
 
-/* ─────────────────────────────────────────────
-   SUBJECT ROW
-───────────────────────────────────────────── */
 function SubjectRow({ subject, sIdx, dIdx, cIdx, semIdx, updateField, deleteSubjectRow, allTeachers }) {
   return (
     <tr className={styles.subjectRow}>
@@ -256,9 +235,6 @@ function SubjectRow({ subject, sIdx, dIdx, cIdx, semIdx, updateField, deleteSubj
   );
 }
 
-/* ─────────────────────────────────────────────
-   SEMESTER / YEAR ACCORDION
-───────────────────────────────────────────── */
 function StructureBlock({ sem, semIdx, dIdx, cIdx, updateField, deleteSubjectRow, addSubjectRow, allTeachers }) {
   const [open, setOpen] = useState(semIdx === 0);
   return (
@@ -324,9 +300,6 @@ function StructureBlock({ sem, semIdx, dIdx, cIdx, updateField, deleteSubjectRow
   );
 }
 
-/* ─────────────────────────────────────────────
-   COURSE CARD
-───────────────────────────────────────────── */
 function CourseCard({ course, cIdx, dIdx, updateField, deleteCourseRow, addSubjectRow, deleteSubjectRow, allTeachers }) {
   const [open, setOpen] = useState(true);
 
@@ -434,9 +407,6 @@ function CourseCard({ course, cIdx, dIdx, updateField, deleteCourseRow, addSubje
   );
 }
 
-/* ─────────────────────────────────────────────
-   TEACHER ROW
-───────────────────────────────────────────── */
 function TeacherRow({ teacher, tIdx, dIdx, updateField, onDelete }) {
   return (
     <div className={styles.personRow}>
@@ -463,9 +433,6 @@ function TeacherRow({ teacher, tIdx, dIdx, updateField, onDelete }) {
   );
 }
 
-/* ─────────────────────────────────────────────
-   DEPARTMENT CARD
-───────────────────────────────────────────── */
 function DeptCard({
   dept, dIdx, updateField, deleteDeptRow,
   addCourseRow, deleteCourseRow, addSubjectRow, deleteSubjectRow,
@@ -639,9 +606,6 @@ function DeptCard({
   );
 }
 
-/* ─────────────────────────────────────────────
-   PROGRESS BAR
-───────────────────────────────────────────── */
 function SaveProgress({ current, total, label }) {
   const pct = total ? Math.round((current / total) * 100) : 0;
   return (
@@ -657,9 +621,6 @@ function SaveProgress({ current, total, label }) {
   );
 }
 
-/* ─────────────────────────────────────────────
-   MAIN COMPONENT
-───────────────────────────────────────────── */
 export default function CollegeSetup() {
   const [data, setData] = useState({ departments: [] });
   const [loading, setLoading] = useState(true);
@@ -673,14 +634,12 @@ export default function CollegeSetup() {
   const [newDeptName, setNewDeptName] = useState("");
   const [newDeptCode, setNewDeptCode] = useState("");
 
-  /* ── Toast ── */
   const toast = useCallback((message, type = "success") => {
     const id = Date.now();
     setToasts((p) => [...p, { id, message, type }]);
     setTimeout(() => setToasts((p) => p.filter((t) => t.id !== id)), 4000);
   }, []);
 
-  /* ── Confirm ── */
   const askConfirm = (message) =>
     new Promise((resolve) => {
       setConfirm({
@@ -690,7 +649,6 @@ export default function CollegeSetup() {
       });
     });
 
-  /* ── Load existing config from backend ── */
   const load = useCallback(async () => {
     try {
       setLoading(true);
@@ -701,7 +659,6 @@ export default function CollegeSetup() {
       const res = await API.get("/config/protected");
       const cfg = res.data;
 
-      // Reload teachers list
       try {
         const teachers = await getUsers({ role: "teacher" });
         setAllTeachers(Array.isArray(teachers) ? teachers : []);
@@ -751,7 +708,6 @@ export default function CollegeSetup() {
 
   useEffect(() => { load(); }, [load]);
 
-  /* ── Generic deep updateField ── */
   const updateField = useCallback((path, value) => {
     setData((prev) => {
       const copy = structuredClone(prev);
@@ -762,7 +718,6 @@ export default function CollegeSetup() {
     });
   }, []);
 
-  /* ── Dept CRUD ── */
   const addDepartment = () => {
     if (!newDeptName.trim()) return;
     setData((p) => ({
@@ -780,10 +735,9 @@ export default function CollegeSetup() {
     await askConfirm("Delete this department and all its courses, subjects, and teachers?");
     const dept = data.departments[dIdx];
 
-    // If saved to DB, delete from backend
     if (dept._id) {
       try {
-        // Remove from config first
+        
         await removeDeptFromConfig({ departmentId: dept._id }).catch(() => {});
         await deleteDepartment(dept._id);
         toast("Department deleted from server", "info");
@@ -800,7 +754,6 @@ export default function CollegeSetup() {
     });
   };
 
-  /* ── Course CRUD ── */
   const addCourseRow = (dIdx) => {
     setData((p) => {
       const copy = structuredClone(p);
@@ -832,7 +785,6 @@ export default function CollegeSetup() {
     });
   };
 
-  /* ── Subject CRUD ── */
   const addSubjectRow = (dIdx, cIdx, semIdx) => {
     setData((p) => {
       const copy = structuredClone(p);
@@ -871,7 +823,6 @@ export default function CollegeSetup() {
     });
   };
 
-  /* ── Teacher CRUD ── */
   const addTeacherRow = (dIdx) => {
     setData((p) => {
       const copy = structuredClone(p);
@@ -888,7 +839,6 @@ export default function CollegeSetup() {
     });
   };
 
-  /* ── VALIDATE ── */
   const validate = () => {
     for (const dept of data.departments) {
       if (!dept.name.trim()) { toast("Every department must have a name", "error"); return false; }
@@ -911,7 +861,6 @@ export default function CollegeSetup() {
     return true;
   };
 
-  /* ── SAVE ALL ── */
   const handleSave = async () => {
     if (!validate()) return;
     setSaving(true);
@@ -924,7 +873,6 @@ export default function CollegeSetup() {
       for (const dept of data.departments) {
         setSaveProgress({ current: done, total: totalDepts, label: `Saving ${dept.name}…` });
 
-        /* 1. UPSERT Department */
         let departmentId = dept._id;
         let isNewDept = !departmentId;
 
@@ -944,12 +892,10 @@ export default function CollegeSetup() {
           }).catch(() => {});
         }
 
-        /* 2. Add dept to config only if new */
         if (isNewDept) {
           await addDeptToConfig({ departmentId }).catch(() => {});
         }
 
-        /* 3. HOD — check duplicate by email before creating */
         if (dept.hod?.email && dept.hod?.name && dept.hod?.employeeId) {
           try {
             const existing = await getUsers({ email: dept.hod.email, role: "hod" });
@@ -968,7 +914,6 @@ export default function CollegeSetup() {
           }
         }
 
-        /* 4. Teachers — check duplicate by email before creating */
         for (const teacher of dept.teachers) {
           if (!teacher.name || !teacher.email || !teacher.employeeId) continue;
           try {
@@ -988,7 +933,6 @@ export default function CollegeSetup() {
           }
         }
 
-        /* 5. Courses */
         const updatedCourses = [];
 
         for (const course of dept.courses) {
@@ -1018,7 +962,6 @@ export default function CollegeSetup() {
             }).catch(() => {});
           }
 
-          /* Add course to config only if new */
           if (isNewCourse) {
             await addCourseToConfig({
               departmentId,
@@ -1028,7 +971,6 @@ export default function CollegeSetup() {
             }).catch(() => {});
           }
 
-          /* 6. Subjects */
           const updatedStructure = [];
 
           for (const sem of course.structure) {
@@ -1041,13 +983,13 @@ export default function CollegeSetup() {
               let isNewSubject = !subjectId;
 
               if (!subjectId) {
-                // createSubject expects: name, code, departmentId, courseId, semester, instituteId
+                
                 const res = await createSubject({
                   name: sub.name,
                   code: sub.code,
                   instituteId,
-                  department: departmentId,   // backend field name
-                  course: courseId,           // backend field name
+                  department: departmentId,   
+                  course: courseId,           
                   semester: sem.number,
                   type: sub.subjectType || "compulsory",
                 });
@@ -1060,7 +1002,6 @@ export default function CollegeSetup() {
                 }).catch(() => {});
               }
 
-              /* Add subject to config only if new */
               if (isNewSubject) {
                 await addSubjectToConfig({
                   departmentId,
@@ -1070,7 +1011,7 @@ export default function CollegeSetup() {
                   teacherId: sub.teacherId || null,
                 }).catch(() => {});
               } else if (sub.teacherId) {
-                /* Update teacher assignment via config */
+                
                 await API.put("/config/subject/teacher", {
                   departmentId,
                   courseId,
@@ -1094,10 +1035,8 @@ export default function CollegeSetup() {
         setSaveProgress({ current: done, total: totalDepts, label: `${dept.name} saved ✓` });
       }
 
-      // Update local state with new IDs so subsequent saves use UPDATE not CREATE
       setData((prev) => ({ ...prev, departments: updatedDepts }));
 
-      // Reload teachers list to pick up newly created ones
       try {
         const teachers = await getUsers({ role: "teacher" });
         setAllTeachers(Array.isArray(teachers) ? teachers : []);
@@ -1113,20 +1052,15 @@ export default function CollegeSetup() {
     }
   };
 
-  /* ── Summary stats ── */
   const totalCourses = data.departments.reduce((a, d) => a + d.courses.length, 0);
   const totalSubjects = data.departments.reduce(
     (a, d) => a + d.courses.reduce((b, c) => b + c.structure.reduce((x, s) => x + s.subjects.length, 0), 0), 0
   );
   const totalTeachers = data.departments.reduce((a, d) => a + d.teachers.length, 0);
 
-  /* ── RENDER ── */
   if (loading) {
     return (
-      <div className={styles.loadingScreen}>
-        <div className={styles.loadingSpinner} />
-        <p>Loading academic structure…</p>
-      </div>
+      <loader/>
     );
   }
 
@@ -1140,7 +1074,7 @@ export default function CollegeSetup() {
         onCancel={() => setConfirm({ open: false })}
       />
 
-      {/* NEW DEPT MODAL */}
+      {}
       <Modal open={newDeptModal} onClose={() => setNewDeptModal(false)} title="Add Department" size="sm">
         <Field label="Department Name" required>
           <input className={styles.input} placeholder="e.g. Computer Science & Engineering"
@@ -1163,7 +1097,7 @@ export default function CollegeSetup() {
         </div>
       </Modal>
 
-      {/* PAGE HEADER */}
+      {}
       <div className={styles.pageHeader}>
         <div className={styles.pageHeaderLeft}>
           <div className={styles.pageHeaderIcon}>
@@ -1200,7 +1134,7 @@ export default function CollegeSetup() {
         </div>
       </div>
 
-      {/* STEP PROGRESS */}
+      {}
       <div className={styles.stepsRow}>
         <StepBadge step={1} label="Departments" active={data.departments.length === 0} done={data.departments.length > 0} />
         <div className={styles.stepLine} />
@@ -1211,9 +1145,9 @@ export default function CollegeSetup() {
         <StepBadge step={4} label="HOD & Faculty" active={totalSubjects > 0 && totalTeachers === 0} done={totalTeachers > 0} />
       </div>
 
-      {/* BODY */}
+      {}
       <div className={styles.body}>
-        {/* SIDEBAR */}
+        {}
         <aside className={styles.sidebar}>
           <div className={styles.sidebarHeader}>
             <span>Departments</span>
@@ -1250,7 +1184,7 @@ export default function CollegeSetup() {
           </div>
         </aside>
 
-        {/* MAIN CONTENT */}
+        {}
         <main className={styles.main}>
           {data.departments.length === 0 ? (
             <div className={styles.bigEmptyState}>
@@ -1301,7 +1235,7 @@ export default function CollegeSetup() {
         </main>
       </div>
 
-      {/* FOOTER SAVE BAR */}
+      {}
       <div className={styles.footerBar}>
         {saving && <SaveProgress current={saveProgress.current} total={saveProgress.total} label={saveProgress.label} />}
         <div className={styles.footerActions}>

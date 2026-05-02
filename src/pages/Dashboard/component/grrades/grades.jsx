@@ -6,7 +6,6 @@ export default function Grades() {
   const { getStudentGrades } = useData(); 
   const { currentUser } = useAuth();
 
-  
   const studentGrades = getStudentGrades(currentUser?.id) || [];
 
   return (
@@ -45,7 +44,6 @@ export default function Grades() {
     </div>
   );
 }
-
 
 function getGradeClass(grade) {
   switch (grade) {

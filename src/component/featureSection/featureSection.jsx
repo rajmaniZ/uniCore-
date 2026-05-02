@@ -1,5 +1,4 @@
 
-
 import styles from "./featureSection.module.css"
 
 function FeatureSection(){
@@ -28,11 +27,6 @@ function FeatureSection(){
             highlight:'',
             image:''
         },
-        
-        
-        
-        
-        
         
     ]
     return (

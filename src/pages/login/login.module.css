@@ -28,7 +28,6 @@
     color:rgba(4, 92, 215, 0.959);
 }
 
-
 .h2{
     
     font-size:30px;
@@ -38,8 +37,6 @@
 .title img{
     width:50px;
 }
-
-
 
 .loginForm{
     gap:70px;
@@ -83,13 +80,11 @@
 }
 .loginBtn button:hover{
     
-
     background-color: rgba(12, 194, 93, 0.515);
     
 }
 .loginBtn button:disabled:hover{
     
-
     background-color: rgb(201, 204, 204);
     
 }
@@ -105,8 +100,6 @@
     gap:20px;
 }
 
-
-
 .demoSection{
     gap:20px;
 }
@@ -115,8 +108,6 @@
     border-radius: 10px;
     
 }
-
-
 
 @media (max-width:900px){
 .page{
@@ -132,15 +123,9 @@
 }
 }
 
-
-
-
-
-
 .forgetBtn{
     display:flex;
     flex-direction: column;
-    
     
     gap:20px;
     align-items: center;
@@ -157,4 +142,21 @@
 
 .titleForget{
     padding-bottom: 50px;
+}
+.verifyButton{
+    width: 40%;
+    height:40px;
+    border-radius: 30px;
+    text-align: center;
+    margin: auto;
+}
+
+.logoDiv{
+    font-size: 60px;
+    background:linear-gradient(120deg,#ff6ec4,#ff9a44,#f9c449,#4cd964,#34c759,#5ac8fa,#5856d6);
+    background-size:200% auto;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color:transparent ;
+    
 }

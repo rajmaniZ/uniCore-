@@ -1,12 +1,10 @@
 import styles from './features.module.css';
 import { Link } from "react-router-dom";
 
-
 import chatAI from "./../../assets/chatWithAI.png";
 import attendanceIcon from "./../../assets/attendanceIcon.jpg";
 import dashboardImg from "./../../assets/dashboard-svg-icon-free-dashboard-icon-11553444664o1utwdkesz.png";
 import liveChatImg from "./../../assets/Screenshot 2026-03-23 064621.png";
-
 
 export const featuresData = [
     {

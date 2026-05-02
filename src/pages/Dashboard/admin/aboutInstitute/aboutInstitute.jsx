@@ -3,6 +3,7 @@ import SchoolSetup from "./schoolSetup";
 import CollegeSetup from "./collegeSetup";
 import ImageUploader from "./ImageUploader";
 import About from "./../about/about";
+import Loader from "../../../../component/loader/loader";
 
 import {
   getMyInstitute,
@@ -27,7 +28,6 @@ function AboutInstitute() {
 
   const [loading, setLoading] = useState(true);
 
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,7 +36,6 @@ function AboutInstitute() {
         if (d) {
           setData(d);
 
-          
           setName(d.name || "");
           setAbout(d.address || "");
           setType(d.type || "");
@@ -55,14 +54,12 @@ function AboutInstitute() {
     fetchData();
   }, []);
 
-  
   const validate = () => {
     if (!name.trim()) return "Institute name required";
     if (!type) return "Select institute type";
     return null;
   };
 
-  
   const handleSubmit = async () => {
     const error = validate();
     if (error) {
@@ -84,7 +81,6 @@ function AboutInstitute() {
 
       const updated = res;
 
-      
       setData(updated);
       setEditMode(false);
 
@@ -101,12 +97,10 @@ function AboutInstitute() {
     }
   };
 
-  
   if (loading) {
-    return <p style={{ padding: "20px" }}>Loading...</p>;
+    return <Loader/>;
   }
 
-  
   if (data && !editMode) {
     return (
       <div>
@@ -124,7 +118,6 @@ function AboutInstitute() {
     );
   }
 
-  
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>

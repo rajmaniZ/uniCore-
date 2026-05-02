@@ -5,5 +5,4 @@ function TermsOfservice(){
     )
 }
 
-
 export default TermsOfservice;

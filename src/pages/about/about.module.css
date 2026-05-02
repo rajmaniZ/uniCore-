@@ -1,40 +1,41 @@
-
 .aboutcontainer {
   font-family: Arial, sans-serif;
   padding: 20px;
-  background: #f9f9ff;
+  
+  max-width: 1200px;
+  margin: auto;
+  color: #b5b5c8;
+  min-height:100vh ;
+  
 }
-
 
 .abouthero {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
   margin-bottom: 40px;
 }
 
 .abouttext {
-  max-width: 50%;
+  max-width: 700px;
+  text-align: center;
 }
 
 .abouttext h1 {
-  font-size: 40px;
-  color: #4b4bff;
+  font-size: 36px;
+  color: #e3e3f6;
+  margin-bottom: 10px;
 }
 
 .tagline {
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #d9e0deed;
 }
-
-.aboutimage img {
-  width: 250px;
-}
-
 
 .sectiontitle {
   text-align: center;
-  margin: 30px 0;
+  margin: 40px 0 20px;
 }
 
 .features {
@@ -43,69 +44,80 @@
   gap: 20px;
 }
 
-.card1 {
-  background: rgb(221, 248, 221);
+.card {
+  background: rgba(168, 146, 146, 0.059);
   padding: 20px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.card2{
-   background:  rgb(162, 162, 243);
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(134, 192, 255, 0.588);
+  transition: 0.2s;
 }
 
-.card3{
-   background: rgb(238, 216, 194);
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.card:hover {
+  transform: translateY(-5px);
 }
-.card4{
-   background: rgb(245, 216, 245);
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
 
 .why {
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
+  gap: 20px;
+  margin-top: 50px;
 }
 
 .whytext {
-  width: 50%;
+  flex: 1;
+}
+
+.whytext ul {
+  margin-top: 10px;
+  padding-left: 20px;
 }
 
 .mission {
-  width: 40%;
-  background: #eaeaff;
+  flex: 1;
+  background: #9595e423;
   padding: 20px;
   border-radius: 10px;
 }
 
-
 .cta {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 50px;
 }
 
 .ctabutton {
+
   background: #4b4bff;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  
+  position: relative;
+  top:40px;
 }
 
-.aboutimage{
+.ctabutton:hover {
+  background: #3a3ad1;
+}
 
+@media (max-width: 992px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .why {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .abouttext h1 {
+    font-size: 28px;
+  }
 }

@@ -1,97 +1,4 @@
 
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { useParams } from 'react-router-dom';
 import styles from './about.module.css';
 import { featuresData } from './features'; 
@@ -99,7 +6,6 @@ import { featuresData } from './features';
 function AboutFeature() {
     const { id } = useParams();
 
-    
     const feature = featuresData.find(item => item.id === id);
 
     if (!feature) {

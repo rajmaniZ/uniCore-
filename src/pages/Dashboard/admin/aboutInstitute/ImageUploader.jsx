@@ -1,108 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { useState } from "react";
 import styles from "./AboutInstitute.module.css";
 import { uploadImageFile } from "../../../../api/uploadApi";
@@ -113,7 +9,6 @@ function ImageUploader({ image, setImage, id, label }) {
   const handleChange = async (e) => {
     const file = e.target.files[0];
 
-    
     if (!file || !file.type.startsWith("image/")) {
       alert("Please select a valid image file");
       return;
@@ -122,7 +17,6 @@ function ImageUploader({ image, setImage, id, label }) {
     try {
       setLoading(true);
 
-      
       const preview = URL.createObjectURL(file);
       setImage(preview);
 

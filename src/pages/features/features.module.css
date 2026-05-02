@@ -16,7 +16,6 @@
     gap: 10px;
 }
 
-
 .card {
     background: rgba(255,255,255,0.05);
     border-radius: 16px;
@@ -33,7 +32,6 @@
     border-top-right-radius: 10px;;
 }
 
-
 .card h3 {
     font-size: 20px;
     margin-bottom: 10px;
@@ -44,19 +42,15 @@
     color: rgba(255,255,255,0.7);
 }
 
-
 .card:hover {
     transform: translateY(-10px) scale(1.02);
     background: rgba(255,255,255,0.1);
     box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
-
 .card:active {
     transform: scale(0.97);
 } 
-
-
 
 a{
     text-decoration: none;

@@ -1,274 +1,4 @@
 
-
-// // import { useEffect, useState } from "react";
-// // import { useParams } from "react-router-dom";
-// // import styles from "./aboutInstitute.module.css";
-
-// // import API from "./../../api/axios";
-// // import { getDepartments } from "./../../api/departmentApi";
-// // import { getCourses } from "./../../api/courseApi";
-// // import { getSubjects } from "./../../api/subjectApi";
-
-// // function PublicAbout() {
-// //   const { id } = useParams();
-
-// //   const [institute, setInstitute] = useState(null);
-// //   const [departments, setDepartments] = useState([]);
-// //   const [coursesMap, setCoursesMap] = useState({});
-// //   const [subjectsMap, setSubjectsMap] = useState({});
-
-
-// // useEffect(() => {
-// //   const fetchAll = async () => {
-// //     try {
-// //       const res = await API.get(`/institute/${id}`);
-// //       const inst = res.data;
-
-// //       setInstitute(inst);
-
-// //       if (inst?.type === "college") {
-
-// //         const depts = await getDepartments({
-// //           instituteId: inst._id
-// //         });
-
-// //         setDepartments(depts);
-
-// //         const coursesTemp = {};
-// //         const subjectsTemp = {};
-
-// //         for (let dept of depts) {
-
-// //           const courses = await getCourses({
-// //             instituteId: inst._id,
-// //             departmentId: dept._id
-// //           });
-
-// //           const subjects = await getSubjects({
-// //             instituteId: inst._id,
-// //             departmentId: dept._id
-// //           });
-
-// //           coursesTemp[dept._id] = courses;
-// //           subjectsTemp[dept._id] = subjects;
-// //         }
-
-// //         setCoursesMap(coursesTemp);
-// //         setSubjectsMap(subjectsTemp);
-// //       }
-
-// //     } catch (err) {
-// //       console.error("PUBLIC PAGE ERROR:", err);
-// //     }
-// //   };
-
-// //   if (id) fetchAll();
-// // }, [id]);
-
-// //   if (!institute) return <p>Loading...</p>;
-
-// //   const { name, address, logo, buildingImage, type } = institute;
-
-// //   return (
-// //     <div className={styles.container}>
-
-// //       {}
-// //       <div
-// //         className={styles.hero}
-// //         style={{ backgroundImage: `url(${buildingImage})` }}
-// //       >
-// //         <div className={styles.overlay}>
-// //           <img src={logo} alt="logo" className={styles.logo} />
-// //           <h1>{name}</h1>
-// //           <p>{address}</p>
-// //         </div>
-// //       </div>
-
-// //       <div className={styles.content}>
-// //         <h2 className={styles.heading}>Academic Structure</h2>
-
-// //         {}
-// //         {type === "college" &&
-// //           departments.map((dept) => (
-// //             <div key={dept._id} className={styles.card}>
-// //               <div className={styles.cardHeader}>
-// //                 <div>
-// //                   <h3>{dept.name}</h3>
-// //                   <p className={styles.desc}>
-// //                     {dept.about || "No description"}
-// //                   </p>
-// //                 </div>
-
-// //                 <span className={styles.hod}>
-// //                   HOD: {dept.hod?.name || "N/A"}
-// //                 </span>
-// //               </div>
-
-// //               {(coursesMap[dept._id] || []).map((course) => (
-// //                 <div key={course._id} className={styles.course}>
-// //                   <h4>{course.name}</h4>
-
-// //                   <div className={styles.semGrid}>
-// //                     {(subjectsMap[dept._id] || []).map((sub) => (
-// //                       <div key={sub._id} className={styles.semCard}>
-// //                         <h5>{sub.name}</h5>
-// //                         <p>Code: {sub.code || "N/A"}</p>
-// //                       </div>
-// //                     ))}
-// //                   </div>
-// //                 </div>
-// //               ))}
-// //             </div>
-// //           ))}
-
-// //         {}
-// //         {type === "school" && (
-// //           <div className={styles.card}>
-// //             <h3>School Structure</h3>
-// //             <p>Classes and subjects managed via config.</p>
-// //           </div>
-// //         )}
-// //       </div>
-// //     </div>
-// //   );
-// // }
-
-// // export default PublicAbout;
-// import { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import styles from "./aboutInstitute.module.css";
-
-// import API from "./../../api/axios";
-// import { getDepartments } from "./../../api/departmentApi";
-// import { getCourses } from "./../../api/courseApi";
-// import { getSubjects } from "./../../api/subjectApi";
-
-// function PublicAbout() {
-//   const { id } = useParams();
-
-//   const [institute, setInstitute] = useState(null);
-//   const [departments, setDepartments] = useState([]);
-//   const [coursesMap, setCoursesMap] = useState({});
-//   const [subjectsMap, setSubjectsMap] = useState({});
-
-//   useEffect(() => {
-//     const fetchAll = async () => {
-//       try {
-//         const res = await API.get(`/institute/${id}`);
-//         const inst = res.data;
-
-//         setInstitute(inst);
-
-//         if (inst?.type === "college") {
-
-//           // ✅ FIX: pass string not object
-//           const depts = await getDepartments(inst._id);
-//           setDepartments(depts || []);
-
-//           const coursesTemp = {};
-//           const subjectsTemp = {};
-
-//           for (let dept of depts || []) {
-//             try {
-//               const courses = await getCourses({
-//                 instituteId: inst._id,
-//                 departmentId: dept._id,
-//               });
-
-//               coursesTemp[dept._id] = courses || [];
-//             } catch {
-//               coursesTemp[dept._id] = [];
-//             }
-
-//             try {
-//               const subjects = await getSubjects({
-//                 instituteId: inst._id,
-//                 departmentId: dept._id,
-//               });
-
-//               subjectsTemp[dept._id] = subjects || [];
-//             } catch {
-//               subjectsTemp[dept._id] = [];
-//             }
-//           }
-
-//           setCoursesMap(coursesTemp);
-//           setSubjectsMap(subjectsTemp);
-//         }
-
-//       } catch (err) {
-//         console.error("PUBLIC PAGE ERROR:", err.message);
-//       }
-//     };
-
-//     if (id) fetchAll();
-//   }, [id]);
-
-//   if (!institute) return <p>Loading...</p>;
-
-//   const { name, address, logo, buildingImage, type } = institute;
-
-//   return (
-//     <div className={styles.container}>
-//       <div
-//         className={styles.hero}
-//         style={{ backgroundImage: `url(${buildingImage})` }}
-//       >
-//         <div className={styles.overlay}>
-//           <img src={logo} alt="logo" className={styles.logo} />
-//           <h1>{name}</h1>
-//           <p>{address}</p>
-//         </div>
-//       </div>
-
-//       <div className={styles.content}>
-//         <h2 className={styles.heading}>Academic Structure</h2>
-
-//         {type === "college" &&
-//           departments.map((dept) => (
-//             <div key={dept._id} className={styles.card}>
-//               <div className={styles.cardHeader}>
-//                 <div>
-//                   <h3>{dept.name}</h3>
-//                   <p className={styles.desc}>
-//                     {dept.about || "No description"}
-//                   </p>
-//                 </div>
-
-//                 <span className={styles.hod}>
-//                   HOD: {dept.hod?.name || "N/A"}
-//                 </span>
-//               </div>
-
-//               {(coursesMap[dept._id] || []).map((course) => (
-//                 <div key={course._id} className={styles.course}>
-//                   <h4>{course.name}</h4>
-
-//                   <div className={styles.semGrid}>
-//                     {(subjectsMap[dept._id] || []).map((sub) => (
-//                       <div key={sub._id} className={styles.semCard}>
-//                         <h5>{sub.name}</h5>
-//                         <p>Code: {sub.code || "N/A"}</p>
-//                       </div>
-//                     ))}
-//                   </div>
-//                 </div>
-//               ))}
-//             </div>
-//           ))}
-
-//         {type === "school" && (
-//           <div className={styles.card}>
-//             <h3>School Structure</h3>
-//             <p>Classes and subjects managed via config.</p>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default PublicAbout;
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./aboutInstitute.module.css";
@@ -302,7 +32,6 @@ function PublicAbout() {
 
         setInstitute(inst);
 
-        // ================= COLLEGE =================
         if (inst.type === "college") {
           const depts = await getDepartments(inst._id);
           setDepartments(depts || []);
@@ -336,7 +65,6 @@ function PublicAbout() {
           setSubjectsMap(subjectsTemp);
         }
 
-        // ================= SCHOOL =================
         else if (inst.type === "school") {
           const cls = await getClasses(inst._id);
           setClasses(cls || []);
@@ -359,7 +87,7 @@ function PublicAbout() {
 
   return (
     <div className={styles.container}>
-      {/* HERO */}
+      {}
       <div
         className={styles.hero}
         style={{
@@ -376,7 +104,7 @@ function PublicAbout() {
       <div className={styles.content}>
         <h2 className={styles.heading}>Academic Structure</h2>
 
-        {/* ================= COLLEGE ================= */}
+        {}
         {type === "college" &&
           departments.map((dept) => (
             <div key={dept._id} className={styles.card}>
@@ -410,7 +138,7 @@ function PublicAbout() {
             </div>
           ))}
 
-        {/* ================= SCHOOL ================= */}
+        {}
         {type === "school" && (
           <div className={styles.card}>
             <h3>School Structure</h3>

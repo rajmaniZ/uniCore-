@@ -20,7 +20,7 @@
 
 .content {
   flex: 1;
-  padding: 24px;
+  
   overflow-y: auto;
 }
 
@@ -29,7 +29,6 @@
     margin-left: 0;
   }
 }
-
 
 .Ai{
   position:fixed;
@@ -52,7 +51,6 @@
   animation: aiFloat 3s ease-in-out infinite;
 }
 
-/* Animation */
 @keyframes aiFloat {
   0% {
     transform: translateY(0px) rotate(0deg) scale(1);

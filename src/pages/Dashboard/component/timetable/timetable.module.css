@@ -3,7 +3,6 @@
   color: white;
 }
 
-
 .createBox {
   
   padding: 15px;
@@ -33,7 +32,6 @@
   color: white;
   cursor: pointer;
 }
-
 
 .grid {
   display: grid;
@@ -83,7 +81,6 @@
   color: rgba(255,255,255,0.3);
 }
 
-
 .createBtn {
   padding: 10px 16px;
   
@@ -93,7 +90,6 @@
   cursor: pointer;
   margin-bottom: 15px;
 }
-
 
 .meta {
   display: flex;
@@ -109,14 +105,12 @@
   flex: 1;
 }
 
-
 .cellInput {
   padding: 6px;
   border: 1px solid rgba(255,255,255,0.1);
   background: rgba(255,255,255,0.05);
   color: white;
 }
-
 
 .tableBox {
   margin-top: 30px;
@@ -130,9 +124,6 @@
   gap: 10px;
   align-items: center;
 }
-
-
-
 
 @media (max-width: 768px) {
   .container {
@@ -169,7 +160,6 @@
   }
 }
 
-
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: 90px repeat(6, 1fr);
@@ -179,7 +169,6 @@
     min-height: 70px;
   }
 }
-
 
 @media (min-width: 1400px) {
   .grid {

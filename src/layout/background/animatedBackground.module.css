@@ -24,7 +24,6 @@
   100% { background-position: 0% 50%; }
 }
 
-
 .cloudLayer {
   position: fixed;
   inset: 0;
@@ -46,7 +45,6 @@
   50% { transform: translateY(-40px) scale(1.1); }
   100% { transform: translateY(0px) scale(1); }
 }
-
 
 .canvasLayer {
   position: fixed;

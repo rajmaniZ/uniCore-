@@ -1,19 +1,6 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
 import { useState, useEffect } from "react";
 import styles from "./schoolSetup.module.css";
-
 
 const SUBJECTS = [
   { _id: "1", name: "Mathematics", code: "MTH101" },
@@ -21,7 +8,6 @@ const SUBJECTS = [
   { _id: "3", name: "Chemistry", code: "CHM101" },
   { _id: "4", name: "Computer Science", code: "CSE101" },
 ];
-
 
 const streamSubjectsMap = {
   PCM: [
@@ -46,14 +32,12 @@ function Blog({ config = {}, setConfig }) {
   const [classConfig, setClassConfig] = useState({});
   const [schoolType, setSchoolType] = useState("");
 
-  
   const [teachers, setTeachers] = useState([]);
   const [teacherInput, setTeacherInput] = useState({
     name: "",
     email: ""
   });
 
-  
   useEffect(() => {
     if (config && Object.keys(config).length > 0) {
       setClassConfig(config);
@@ -67,7 +51,6 @@ function Blog({ config = {}, setConfig }) {
   }
 }, [classConfig]);
 
-  
   const generateClasses = () => {
     let max = 0;
 
@@ -83,7 +66,6 @@ function Blog({ config = {}, setConfig }) {
     setClasses(arr);
   };
 
-  
   const updateClass = (cls, updater) => {
     setClassConfig(prev => {
       const base = {
@@ -261,7 +243,6 @@ function Blog({ config = {}, setConfig }) {
     </div>
   );
 }
-
 
 function SubjectUI({ title, base, stored, teachers, onAdd }) {
 

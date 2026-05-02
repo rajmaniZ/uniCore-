@@ -1,6 +1,6 @@
 .container {
   padding: 24px;
-  color: white;
+  color: black;
 }
 
 .title {
@@ -9,7 +9,7 @@
 }
 
 .section {
-  background: rgba(25, 25, 50, 0.85);
+  background: rgba(106, 106, 212, 0.295);
   padding: 20px;
   border-radius: 16px;
   margin-bottom: 20px;
@@ -29,12 +29,15 @@
 
 .row label {
   font-size: 14px;
+  background-color: transparent;
+  
 }
 
 select {
   padding: 6px;
   border-radius: 6px;
   border: none;
+  background-color: #b9bee369;
 }
 
 .input {
@@ -43,6 +46,7 @@ select {
   margin-top: 10px;
   border-radius: 8px;
   border: none;
+  background-color: #ecf0fe66;
 }
 
 .saveBtn {

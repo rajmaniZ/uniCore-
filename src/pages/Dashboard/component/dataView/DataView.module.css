@@ -47,13 +47,11 @@
   box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
 }
 
-
 .filters {
   display: flex;
   gap: 10px;
   align-items: center;
 }
-
 
 .searchInput {
   flex: 1;
@@ -76,11 +74,9 @@
   
 }
 
-
 .filters select option{
   font-size: large;
   color:black;
-  
   
 }
 .filterSelect {
@@ -102,12 +98,10 @@
   appearance: none;           
 }
 
-
 .filterSelect option {
   background: #1a1a2e;
   color: white;
 }
-
 
 @media (max-width: 768px) {
   .filters {
@@ -292,7 +286,6 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-
 .pagination {
   display: flex;
   justify-content: space-between;
@@ -335,3 +328,9 @@
   border-color: rgba(102, 126, 234, 0.5);
   color: white;
 }
+
+.loading{
+ position: relative;
+ margin-top: 50%;
+}
+  

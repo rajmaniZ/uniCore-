@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import styles from "./login.module.css";
-
+import Logo from './../../component/logo/logo'
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,10 +32,24 @@ function Login() {
   };
 
   return (
+    <>
+    <svg width="0" height="0">
+                <defs>
+                    <linearGradient id="uniGradient" x1="60%" y1="90%" x2="0%" y2="30%">
+                    <stop offset="10%" stopColor="#ff6ec4" />
+                    <stop offset="10%" stopColor="#ff9a44" />
+                    <stop offset="30%" stopColor="#f9c449" />
+                    <stop offset="60%" stopColor="#4cd964" />
+                    <stop offset="10%" stopColor="#5ac8fa" />
+                    <stop offset="90%" stopColor="#5856d6" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        
     <div className={styles.page}>
       <div className={styles.title}>
-        <img src="/uniCore.png" alt="logo" className={styles.logo} />
-        <h1>uniCore</h1>
+        <Logo className={styles.logo} />
+        <h1 className={styles.logoDiv}>uniCore</h1>
       </div>
 
       <h2 className={styles.h2}>Welcome Back</h2>
@@ -81,6 +95,8 @@ function Login() {
         </div>
       </form>
     </div>
+
+    </>
   );
 }
 

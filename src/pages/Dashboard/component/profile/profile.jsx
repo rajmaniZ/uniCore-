@@ -38,27 +38,7 @@ function Profile() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        {/* <div className={styles.avatarWrapper}>
-          <img
-            src={
-              formData.avatar ||
-              "https://via.placeholder.com/150"
-            }
-            alt="profile"
-            className={styles.avatar}
-          />
-
-          {isEditing && (
-            <input
-              type="text"
-              name="avatar"
-              placeholder="Avatar URL"
-              value={formData.avatar}
-              onChange={handleChange}
-              className={styles.input}
-            />
-          )}
-        </div> */}
+        {}
         <div className={styles.avatarWrapper}>
   {formData.avatar ? (
     <img
@@ -134,25 +114,25 @@ function Profile() {
 
         <div className={styles.grid}>
           <div>
-            <label>Email</label>
-            <span>{user.email}</span>
+            <span>E-mail</span>
+            <label>{user.email}</label>
           </div>
 
           {role === "student" && (
             <>
               <div>
-                <label>Roll No</label>
-                <span>{user.rollNumber || "-"}</span>
+                <span>Roll No</span>
+                <label>{user.rollNumber || "-"}</label>
               </div>
 
               <div>
-                <label>Course</label>
-                <span>{user.courseId?.name || "-"}</span>
+                <span>Course</span>
+                <label>{user.courseId?.name || "-"}</label>
               </div>
 
               <div>
-                <label>Semester</label>
-                <span>{user.semester || "-"}</span>
+                <span>Semester</span>
+                <label>{user.semester || "-"}</label>
               </div>
 
               <div>
@@ -161,8 +141,8 @@ function Profile() {
               </div>
 
               <div>
-                <label>Section</label>
-                <span>{user.section || "-"}</span>
+                <span>Section</span>
+                <label>{user.section || "-"}</label>
               </div>
             </>
           )}
@@ -170,22 +150,21 @@ function Profile() {
           {role === "teacher" && (
             <>
               <div>
-                <label>Employee ID</label>
-                <span>{user.employeeId || "-"}</span>
+                <span>Employee ID</span>
+                <label>{user.employeeId || "-"}</label>
               </div>
 
               <div>
-                <label>Subjects</label>
-                <span>
+                  <span>Subjects    </span>
+                <label>
                   {user.subjects?.length
                     ? user.subjects.map((s) => s.name).join(", ")
-                    : "-"}
-                </span>
+                    : "-"}</label>
               </div>
 
               <div>
-                <label>Department</label>
-                <span>{user.departmentId?.name || "-"}</span>
+                <span>Department</span>
+                <label>{user.departmentId?.name || "-"}</label>
               </div>
             </>
           )}
@@ -193,13 +172,13 @@ function Profile() {
           {(role === "admin" || role === "hod") && (
             <>
               <div>
-                <label>Employee ID</label>
-                <span>{user.employeeId || "-"}</span>
+                <span>Employee ID</span>
+                <label>{user.employeeId || "-"}</label>
               </div>
 
               <div>
-                <label>Department</label>
-                <span>{user.departmentId?.name || "-"}</span>
+                <span>Department</span>
+                <label>{user.departmentId?.name || "-"}</label>
               </div>
             </>
           )}

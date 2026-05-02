@@ -1,4 +1,4 @@
-/* Container */
+
 .container {
   position: fixed;
   top: 0;
@@ -13,7 +13,6 @@
   color: white;
 }
 
-/* Chat area */
 .chatBox {
   flex: 1;
   overflow-y: auto;
@@ -24,14 +23,12 @@
   gap: 12px;
 }
 
-/* Empty state */
 .emptyState {
   text-align: center;
   color: #94a3b8;
   margin-top: 20px;
 }
 
-/* Message */
 .message {
   max-width: 70%;
   padding: 10px 14px;
@@ -40,26 +37,22 @@
   line-height: 1.6;
 }
 
-/* User message */
 .user {
   align-self: flex-end;
   background: #2563eb;
 }
 
-/* Assistant message */
 .assistant {
   align-self: flex-start;
   background: #1e293b;
 }
 
-/* Markdown content */
 .markdown {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-/* Headings */
 .markdown h1,
 .markdown h2,
 .markdown h3 {
@@ -67,17 +60,14 @@
   color: #60a5fa;
 }
 
-/* Paragraph */
 .markdown p {
   margin-bottom: 8px;
 }
 
-/* Lists */
 .markdown ul {
   padding-left: 18px;
 }
 
-/* Code block */
 .markdown pre {
   background: #020617;
   padding: 10px;
@@ -85,14 +75,12 @@
   overflow-x: auto;
 }
 
-/* Inline code */
 .markdown code {
   background: #1e293b;
   padding: 2px 5px;
   border-radius: 4px;
 }
 
-/* Input area */
 .inputBox {
   display: flex;
   padding: 10px;

@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin:10px;
+  margin-left: 20px;
 }
 
 .header {
@@ -21,20 +23,17 @@
   margin: 0;
 }
 
-
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
-
 .mainGrid {
   display: grid;
   grid-template-columns: 2fr 1.5fr 1fr;
   gap: 20px;
 }
-
 
 .card {
   background: rgba(255, 255, 255, 0.05);
@@ -80,7 +79,7 @@
 }
 
 .tabActive {
-  color: white !important;
+  color: white;
   font-weight: 500;
 }
 
@@ -97,7 +96,6 @@
   text-align: right;
   margin-bottom: 8px;
 }
-
 
 .chart {
   display: flex;
@@ -117,7 +115,7 @@
 
 .bar {
   width: 28px;
-  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+  
   border-radius: 6px 6px 0 0;
   transition: height 0.3s ease;
 }
@@ -155,7 +153,6 @@
   font-size: 13px;
 }
 
-
 .performanceHeader {
   display: flex;
   justify-content: space-between;
@@ -192,14 +189,14 @@
   align-items: center;
   gap: 12px;
   padding: 12px;
-  background: rgba(255, 255, 255, 0.03);
+  
   border-radius: 12px;
   cursor: pointer;
   transition: background 0.2s;
 }
 
 .studentItem:hover {
-  background: rgba(255, 255, 255, 0.06);
+  
 }
 
 .studentAvatar {
@@ -263,7 +260,6 @@
   font-size: 14px;
   cursor: pointer;
 }
-
 
 .moreBtn {
   color: rgba(255, 255, 255, 0.5);
@@ -332,13 +328,11 @@
   color: #ef4444;
 }
 
-
 .bottomGrid {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   gap: 20px;
 }
-
 
 .insightsSubtitle {
   font-size: 14px;
@@ -449,7 +443,6 @@
   color: rgba(255, 255, 255, 0.3);
   letter-spacing: 2px;
 }
-
 
 @media (max-width: 1400px) {
   .statsGrid {

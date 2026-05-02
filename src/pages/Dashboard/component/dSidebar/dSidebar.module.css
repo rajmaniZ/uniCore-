@@ -19,7 +19,6 @@
   width: 90px;
 }
 
-
 .logoSection {
   padding: 10px;
   height: 72px;
@@ -66,7 +65,6 @@
   
   background-color: transparent;
   
-  
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -74,13 +72,9 @@
   transition: all 0.2s;
 }
 
-
-
-
 ::-webkit-scrollbar {
     display: none;
 }
-
 
 .toggleBtn svg {
   width: 35px;
@@ -88,7 +82,6 @@
   
   fill: rgba(244, 236, 236, 0.953);
 }
-
 
 .nav {
   
@@ -103,6 +96,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
+  gap:15px;
   
 }
 
@@ -110,7 +104,6 @@
   display: flex;
   align-items: center;
   padding-left: 10px;
-  
   
   border-radius: 12px;
   color: rgba(255, 255, 255, 0.7);
@@ -163,7 +156,6 @@
   background: #667eea;
   border-radius: 50%;
 }
-
 
 .userSection {
   padding: 10px ;
@@ -237,9 +229,6 @@
   background: rgba(239, 68, 68, 0.2);
 }
 
-
-
-
 .collapsed .toggleBtn{
     margin-top: 15px;
     margin-left:25px;
@@ -270,6 +259,17 @@
   display: none;
 }
 
+.logoDiv{
+  text-align: center;
 
+    background:linear-gradient(120deg,#ff6ec4,#ff9a44,#f9c449,#4cd964,#34c759,#5ac8fa,#5856d6);
+    background-size:200% auto;
+    gap:10px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color:transparent ;
+    
+}
+.logoDiv h1{
+  margin-top:10px;
 
-
+}

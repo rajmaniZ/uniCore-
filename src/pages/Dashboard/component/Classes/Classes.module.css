@@ -9,7 +9,6 @@
   margin: auto;
 }
 
-
 .topBar {
   display: flex;
   justify-content: space-between;
@@ -23,7 +22,6 @@
   border-radius: 8px;
   border: 1px solid #ddd;
 }
-
 
 .cardGrid {
   display: grid;
@@ -60,7 +58,6 @@
   border-radius: 10px;
 }
 
-
 .cardHeader {
   display: flex;
   gap: 10px;
@@ -96,7 +93,6 @@
   cursor: pointer;
 }
 
-
 .bottomSection {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -117,7 +113,6 @@
   margin: 10px 0;
 }
 
-
 .box ul {
   list-style: none;
   padding: 0;
@@ -133,7 +128,6 @@
   color: red;
   font-weight: bold;
 }
-
 
 @media (max-width: 768px) {
   .topBar {

@@ -14,19 +14,17 @@ const ChatPage = () => {
   const chatEndRef = useRef(null);
   const token = localStorage.getItem("token");
 
-  // ✅ Auto scroll
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // ✅ Normalize Markdown (VERY IMPORTANT)
   const formatMarkdown = (text) => {
     if (!text) return "";
 
     return text
       .replace(/\r/g, "")
-      .replace(/\n{1}/g, "\n\n") // spacing
-      .replace(/(##|###)/g, "\n\n$1") // fix headings
+      .replace(/\n{1}/g, "\n\n") 
+      .replace(/(##|###)/g, "\n\n$1") 
       .replace(/```/g, "\n```"); // fix code block start
   };
 

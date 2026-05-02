@@ -48,7 +48,6 @@ function ShowList() {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
 
-  
   const handleCreate = () => {
     if (!newUser.name) return alert("Enter name");
 

@@ -8,7 +8,6 @@ function InstituteDetail() {
   const { currentUser } = useAuth();
   const { institutes, users } = useData();
 
-  
   const filteredInstitutes =
     currentUser.role === "superadmin"
       ? institutes

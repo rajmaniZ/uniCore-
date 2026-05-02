@@ -4,6 +4,7 @@ import { getInstituteConfig } from "../../../../api/configApi";
 import { getMyInstitute } from "../../../../api/instituteApi";
 import { getRoleSubjects } from "../../utils/configRuntime";
 import styles from "./subjects.module.css";
+import Loader from "../../../../component/loader/loader";
 
 function Subjects() {
   const { user, token } = useAuth();
@@ -46,7 +47,7 @@ function Subjects() {
     [activeSubjectId, subjects]
   );
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader/>;
 
   return (
     <div className={styles.container}>

@@ -7,7 +7,6 @@
   margin-bottom: 20px;
 }
 
-
 .notifications {
   margin-bottom: 15px;
 }
@@ -18,7 +17,6 @@
   border-radius: 6px;
   margin-bottom: 5px;
 }
-
 
 .card {
   background: #111;
@@ -41,7 +39,6 @@
 .important { background: orange; }
 .must { background: red; }
 
-
 .meta {
   display: flex;
   gap: 10px;
@@ -52,13 +49,11 @@
   color: #22c55e;
 }
 
-
 .preview {
   width: 100%;
   height: 200px;
   margin-top: 10px;
 }
-
 
 .status {
   margin-top: 10px;
@@ -84,7 +79,6 @@ button {
   border-radius: 6px;
   border: none;
 }
-
 
 .empty {
   text-align: center;

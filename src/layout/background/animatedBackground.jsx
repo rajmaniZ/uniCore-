@@ -43,17 +43,14 @@ const Background = () => {
         p.x += p.dx;
         p.y += p.dy;
 
-        
         if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
 
-        
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = "rgba(255,255,255,0.8)";
         ctx.fill();
 
-        
         if (mouse.x && mouse.y) {
           let dx = mouse.x - p.x;
           let dy = mouse.y - p.y;
@@ -66,7 +63,6 @@ const Background = () => {
         }
       });
 
-      
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           let dx = particles[i].x - particles[j].x;

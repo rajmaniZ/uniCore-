@@ -1,56 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import API from "./axios";
 import { handle } from "./utils";
 
@@ -67,7 +15,6 @@ const configPath = (path = "") => {
 export const getInstituteConfig = () =>
   handle(API.get(configPath("/protected")));
 
-
 export const addDeptToConfig = (data) =>
   handle(API.post(configPath("/department"), data));
 
@@ -77,13 +24,11 @@ export const updateDeptHod = (data) =>
 export const removeDeptFromConfig = (data) =>
   handle(API.delete(configPath("/department"), { data }));
 
-
 export const addCourseToConfig = (data) =>
   handle(API.post(configPath("/course"), data));
 
 export const removeCourseFromConfig = (data) =>
   handle(API.delete(configPath("/course"), { data }));
-
 
 export const addSubjectToConfig = (data) =>
   handle(API.post(configPath("/subject"), data));
@@ -93,7 +38,6 @@ export const updateSubjectTeacher = (data) =>
 
 export const removeSubjectFromConfig = (data) =>
   handle(API.delete(configPath("/subject"), { data }));
-
 
 export const updateStructureOrder = (data) =>
   handle(API.put(configPath("/reorder"), { data }));

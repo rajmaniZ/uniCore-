@@ -47,7 +47,6 @@
   box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
 }
 
-
 .filters {
   display: flex;
   gap: 12px;
@@ -91,7 +90,6 @@
   background: #1a1a4a;
   color: white;
 }
-
 
 .tableCard {
   background: rgba(255, 255, 255, 0.05);
@@ -264,7 +262,6 @@
   padding: 40px;
   color: rgba(255, 255, 255, 0.4);
 }
-
 
 .pagination {
   display: flex;

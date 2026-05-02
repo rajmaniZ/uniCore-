@@ -20,7 +20,6 @@ export function DataProvider({ children }) {
   const [announcements, setAnnouncements] = useState(initialAnnouncements);
   const [submissions, setSubmissions] = useState(initialSubmissions);
 
-  
   const markAttendance = (attendanceData) => {
     setAttendance(prev => [
       ...prev,
@@ -40,7 +39,6 @@ export function DataProvider({ children }) {
     );
   };
 
-  
   const createAssignment = (assignmentData) => {
     const newAssignment = {
       ...assignmentData,
@@ -72,7 +70,6 @@ export function DataProvider({ children }) {
     );
   };
 
-  
   const calculateGrade = (marks) => {
     if (marks >= 90) return "A";
     if (marks >= 75) return "B";
@@ -94,7 +91,6 @@ export function DataProvider({ children }) {
       }));
   };
 
-  
   const createAnnouncement = (announcementData) => {
     const newAnnouncement = {
       ...announcementData,
@@ -105,7 +101,6 @@ export function DataProvider({ children }) {
     return newAnnouncement;
   };
 
-  
   const value = {
     students,
     setStudents,
@@ -125,7 +120,6 @@ export function DataProvider({ children }) {
     announcements,
     createAnnouncement,
 
-    
     getStudentGrades
   };
 
@@ -135,7 +129,6 @@ export function DataProvider({ children }) {
     </DataContext.Provider>
   );
 }
-
 
 export const useData = () => {
   const context = useContext(DataContext);

@@ -6,7 +6,6 @@
   min-height:93vh;
 }
 
-
 .hero {
   height: 50vh;
   background-size: cover;
@@ -38,7 +37,6 @@
   padding: 5px;
 }
 
-
 .content {
   padding: 30px;
 }
@@ -48,7 +46,6 @@
   font-size: 26px;
   color: #111827;
 }
-
 
 .card {
   background: #ffffff;
@@ -63,7 +60,6 @@
   transform: translateY(-3px);
 }
 
-
 .cardHeader {
   display: flex;
   justify-content: space-between;
@@ -74,7 +70,6 @@
   font-size: 13px;
   color: #6b7280;
 }
-
 
 .course {
   margin-top: 18px;
@@ -93,13 +88,11 @@
   color: #6b7280;
 }
 
-
 .semGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 14px;
 }
-
 
 .semCard {
   background: #f9fafb;
@@ -114,7 +107,6 @@
   color: #374151;
 }
 
-
 .semCard ul {
   list-style: none;
   padding: 0;
@@ -128,7 +120,6 @@
   margin-bottom: 5px;
   color: #111827;
 }
-
 
 .subjectGrid {
   display: flex;
@@ -145,7 +136,6 @@
   font-size: 12px;
 }
 
-
 .desc {
   font-size: 13px;
   color: #6b7280;
@@ -158,9 +148,6 @@
   margin-left: 8px;
 }
 
-
-
-
 .classTitle {
   font-size: 20px;
   margin-bottom: 10px;
@@ -171,7 +158,6 @@
   font-size: 14px;
   color: #4b5563;
 }
-
 
 .subjectWrapper {
   margin-top: 15px;
@@ -192,9 +178,6 @@
   color: #374151;
 }
 
-
-
-
 .subjectTagCommon {
   background: #6366f1;
   color: white;
@@ -202,7 +185,6 @@
   border-radius: 20px;
   font-size: 12px;
 }
-
 
 .subjectTagStream {
   background: #10b981;

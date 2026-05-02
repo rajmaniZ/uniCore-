@@ -15,11 +15,9 @@
   font-weight: 600;
 }
 
-
 .wrapper {
   display: flex;
 }
-
 
 .days {
   display: flex;
@@ -29,13 +27,11 @@
   font-size: 12px;
 }
 
-
 .monthRow {
   display: flex;
   gap: 15px;
   overflow-x: auto;
 }
-
 
 .monthBlock {
   display: flex;
@@ -43,19 +39,16 @@
   align-items: center;
 }
 
-
 .grid {
   display: flex;
   gap: 6px;
 }
-
 
 .column {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-
 
 .box {
   width: 18px;
@@ -69,7 +62,6 @@
   color: #555;
 }
 
-
 .green {
   background: #22c55e;
   color: white;
@@ -79,7 +71,6 @@
   background: #ef4444;
   color: white;
 }
-
 
 .monthLabel {
   margin-top: 6px;

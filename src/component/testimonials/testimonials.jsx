@@ -44,7 +44,6 @@ export default function Testimonials() {
               “{item.message}”
             </p>
 
-
           </div>
         ))}
       </div>

@@ -5,7 +5,6 @@
     color: #e6f7ff;
 }
 
-
 .title {
     text-align: center;
     font-size: 42px;
@@ -13,7 +12,6 @@
     margin-bottom: 50px;
     letter-spacing: 1px;
 }
-
 
 .info {
     display: flex;
@@ -26,7 +24,6 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-
 .info img {
     width: 220px;
     height: 220px;
@@ -36,7 +33,6 @@
     padding: 20px;
 }
 
-
 .info div {
     flex: 1;
     display: flex;
@@ -44,26 +40,22 @@
     gap: 15px;
 }
 
-
 .info h2 {
     font-size: 22px;
     font-weight: 500;
     color: #bfe9ff;
 }
 
-
 .info h3 {
     font-size: 26px;
     color: #4fc3f7;
 }
-
 
 .info p {
     font-size: 16px;
     line-height: 1.6;
     color: rgba(255,255,255,0.8);
 }
-
 
 .guide {
     margin-top: 40px;
@@ -73,19 +65,16 @@
     backdrop-filter: blur(10px);
 }
 
-
 .guide h3 {
     font-size: 26px;
     color: #81d4fa;
     margin-bottom: 10px;
 }
 
-
 .guide p {
     font-size: 16px;
     margin-bottom: 10px;
 }
-
 
 .guide ol {
     padding-left: 20px;
@@ -96,7 +85,6 @@
     font-size: 15px;
     line-height: 1.5;
 }
-
 
 @media (max-width: 768px) {
     .info {

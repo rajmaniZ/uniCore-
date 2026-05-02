@@ -31,11 +31,9 @@ const uploadWithProgress = async (path, file, setProgress) => {
 export const uploadImageFile = async (file, setProgress) =>
   uploadWithProgress("/upload/image", file, setProgress);
 
-
 export const uploadAssignmentFile = async (file, setProgress) => {
   return uploadWithProgress("/upload/assignment", file, setProgress);
 };
-
 
 export const uploadSubmissionFile = async (file, setProgress) => {
   return uploadWithProgress("/upload/submission", file, setProgress);

@@ -10,7 +10,6 @@ function AdminDashboard() {
   const { currentUser, joinRequests } = useAuth();
   const { students, teachers, colleges } = useData();
 
-  
   const collegeData = useMemo(() => {
     const collegeId = currentUser?.collegeId;
     return {
@@ -21,7 +20,6 @@ function AdminDashboard() {
     };
   }, [currentUser, students, teachers, joinRequests]);
 
-  
   const weeklyData = [
     { day: 'Fri', value: 150 },
     { day: 'Sat', value: 280 },
@@ -35,7 +33,6 @@ function AdminDashboard() {
 
   const maxValue = Math.max(...weeklyData.map(d => d.value));
 
-  
   const departmentData = [
     { rank: 1, name: 'Computer Science', avgGPA: 8.8, faculty: 35, students: 1250, status: 'Active' },
     { rank: 2, name: 'Electronics', avgGPA: 8.3, faculty: 28, students: 990, status: 'Active' },
@@ -43,7 +40,6 @@ function AdminDashboard() {
     { rank: 4, name: 'Civil', avgGPA: 7.9, faculty: 18, students: 600, status: 'Active' },
   ];
 
-  
   const topTeachers = [
     { name: 'Alice Johnson', dept: 'CSE-1', score: 89, change: '+8.8%' },
     { name: 'David Lee', dept: 'ME-1', score: 85, change: '+3.7%' },

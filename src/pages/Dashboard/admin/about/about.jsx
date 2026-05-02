@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./about.module.css";
+import Loader from "../../../../component/loader/loader";
 
 import { getInstituteConfig } from "../../../../api/configApi";
 import { getMyInstitute } from "../../../../api/instituteApi";
@@ -42,12 +43,7 @@ function About({ data: providedData = null }) {
   }, [providedData]);
 
   if (loading) {
-    return (
-      <div className={styles.loadingWrap}>
-        <div className={styles.spinner} />
-        <p>Loading institute info...</p>
-      </div>
-    );
+    return <Loader/>;
   }
 
   if (error) {

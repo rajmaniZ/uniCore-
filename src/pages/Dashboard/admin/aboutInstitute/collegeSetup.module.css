@@ -1,25 +1,23 @@
 
-
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap');
 
-
 .root {
-  --bg:          #f4f5f7;
-  --surface:     #ffffff;
-  --surface2:    #f8f9fb;
+  --bg:          transparent;
+  --surface:     #ffffff19;
+  --surface2:    #566fa133;
   --border:      #e3e6eb;
   --border2:     #d1d5de;
 
-  --sidebar-bg:  #111827;
-  --sidebar-txt: #9ca3af;
+  --sidebar-bg:  #938ae2;
+  --sidebar-txt: #ffffff;
   --sidebar-act: #f9fafb;
 
   --txt:         #111827;
-  --txt2:        #4b5563;
-  --txt3:        #9ca3af;
+  --txt2:        #e0e4ea;
+  --txt3:        #f0f1f4ce;
 
-  --accent:      #2563eb;
-  --accent-h:    #1d4ed8;
+  --accent:      #afbede;
+  --accent-h:    #f3f5fc;
   --accent-dim:  #dbeafe;
 
   --danger:      #ef4444;
@@ -27,12 +25,12 @@
   --warn:        #f59e0b;
   --warn-dim:    #fef3c7;
   --success:     #10b981;
-  --success-dim: #d1fae5;
+  --success-dim: #e7f0eb;
 
   --radius-sm:   6px;
   --radius:      10px;
   --radius-lg:   14px;
-  --shadow-sm:   0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
+  --shadow-sm:   0 1px 3px rgba(236, 229, 229, 0.07), 0 1px 2px rgba(0,0,0,.05);
   --shadow:      0 4px 12px rgba(0,0,0,.08);
   --shadow-lg:   0 10px 32px rgba(0,0,0,.12);
 
@@ -49,7 +47,6 @@
   display: flex;
   flex-direction: column;
 }
-
 
 .loadingScreen {
   min-height: 100vh;
@@ -74,7 +71,6 @@
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
-
 
 .pageHeader {
   display: flex;
@@ -122,7 +118,6 @@
   margin: 2px 0 0;
 }
 
-
 .summaryBar {
   display: flex;
   align-items: center;
@@ -161,7 +156,6 @@
   height: 30px;
   background: var(--border);
 }
-
 
 .stepsRow {
   display: flex;
@@ -228,13 +222,11 @@
   margin: 0 8px;
 }
 
-
 .body {
   display: flex;
   flex: 1;
   min-height: 0;
 }
-
 
 .sidebar {
   width: var(--sidebar-w);
@@ -264,7 +256,7 @@
 .addDeptBtn {
   width: 24px;
   height: 24px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(230, 182, 182, 0.826);
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: var(--radius-sm);
   color: #9ca3af;
@@ -339,7 +331,6 @@
   font-style: italic;
 }
 
-
 .tipBox {
   margin: 12px;
   padding: 14px;
@@ -369,7 +360,6 @@
   line-height: 1.7;
 }
 
-
 .main {
   flex: 1;
   padding: 24px;
@@ -377,13 +367,11 @@
   padding-bottom: calc(var(--footer-h) + 24px);
 }
 
-
 .deptList {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-
 
 .deptCard {
   background: var(--surface);
@@ -434,7 +422,6 @@
   flex-wrap: wrap;
 }
 
-
 .tabBar {
   display: flex;
   border-bottom: 1px solid var(--border);
@@ -465,7 +452,6 @@
 .tabContent {
   padding: 20px;
 }
-
 
 .formGrid {
   display: grid;
@@ -529,7 +515,6 @@
 
 .select { cursor: pointer; }
 
-
 .sectionTitle {
   display: flex;
   align-items: center;
@@ -551,7 +536,6 @@
   margin-left: 2px;
 }
 
-
 .hodBlock {
   display: flex;
   align-items: flex-start;
@@ -562,7 +546,6 @@
   border-radius: var(--radius);
   margin-bottom: 4px;
 }
-
 
 .personRow {
   display: flex;
@@ -596,7 +579,6 @@
 }
 
 .teacherList { padding: 4px 0; }
-
 
 .courseList {
   display: flex;
@@ -653,7 +635,6 @@
   gap: 12px;
   margin-bottom: 12px;
 }
-
 
 .structureList {
   display: flex;
@@ -719,7 +700,6 @@
   from { opacity: 0; transform: translateY(-4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 
 .tableWrap {
   overflow-x: auto;
@@ -808,7 +788,6 @@
   font-style: italic;
 }
 
-
 .addRowBtn {
   display: inline-flex;
   align-items: center;
@@ -827,7 +806,6 @@
 }
 
 .addRowBtn:hover { background: #bfdbfe; }
-
 
 .addBtn {
   display: inline-flex;
@@ -850,7 +828,6 @@
   background: #bfdbfe;
   border-color: var(--accent);
 }
-
 
 .addDeptCardBtn {
   display: flex;
@@ -875,7 +852,6 @@
   border-color: var(--accent);
   background: var(--accent-dim);
 }
-
 
 .emptyState {
   display: flex;
@@ -929,7 +905,6 @@
   margin: 0;
 }
 
-
 .pill {
   display: inline-flex;
   align-items: center;
@@ -946,7 +921,6 @@
 .pill_green  { background: var(--success-dim);  color: #059669;        }
 .pill_amber  { background: var(--warn-dim);     color: #b45309;        }
 .pill_red    { background: var(--danger-dim);   color: var(--danger);  }
-
 
 .iconBtn {
   display: inline-flex;
@@ -984,14 +958,12 @@
   color: var(--danger);
 }
 
-
 .chevron {
   transition: transform 0.2s;
   flex-shrink: 0;
   color: var(--txt3);
 }
 .chevron_open { transform: rotate(180deg); }
-
 
 .btnPrimary {
   display: inline-flex;
@@ -1052,7 +1024,6 @@
 }
 
 .btnDanger:hover { background: #dc2626; }
-
 
 .modalOverlay {
   position: fixed;
@@ -1119,7 +1090,6 @@
   margin-top: 6px;
 }
 
-
 .confirmBody {
   padding: 28px 24px;
   display: flex;
@@ -1152,7 +1122,6 @@
   display: flex;
   gap: 10px;
 }
-
 
 .toastContainer {
   position: fixed;
@@ -1189,7 +1158,6 @@
 .toast_error   { background: var(--danger);  color: #fff; }
 .toast_info    { background: #111827;         color: #f9fafb; }
 
-
 .progressWrap {
   flex: 1;
 }
@@ -1216,7 +1184,6 @@
   transition: width 0.4s ease;
 }
 
-
 .footerBar {
   position: sticky;
   bottom: 0;
@@ -1236,7 +1203,6 @@
   margin-left: auto;
 }
 
-
 .savingSpinner {
   display: inline-block;
   width: 14px;
@@ -1247,7 +1213,6 @@
   animation: spin 0.6s linear infinite;
   flex-shrink: 0;
 }
-
 
 @media (max-width: 900px) {
   .sidebar {
@@ -1271,4 +1236,4 @@
     flex-direction: column;
   }
 }
-
+

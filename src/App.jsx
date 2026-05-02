@@ -1,5 +1,9 @@
+import Loader from "./component/loader/loader";
+
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/authContext";
+
+import { useEffect, useState } from "react";
 
 import Layout from "./layout/layout";
 import LoginLayout from "./pages/login/loginLayout";
@@ -21,15 +25,13 @@ import Document from "./pages/documentation/Documantation";
 import PublicInstitute from "./pages/aboutInstitute/aboutInstitute";
 import Aichat from './pages/aiChat/chat';
 
-
-
 import Login from "./pages/login/login";
 import Register from "./pages/login/register/collegeRegister";
 import ForgetPassword from "./pages/login/forget-password";
 import RequestForAccount from "./pages/login/register/requestForAccount";
 
 import DataView from "./pages/Dashboard/component/dataView/DataView";
-// import DetailsPage from "./pages/Dashboard/component/Details/";
+
 import JoinRequestsPage from "./pages/Dashboard/component/joinRequests/joinRequests";
 import Profile from "./pages/Dashboard/component/profile/profile";
 import SettingsPage from "./pages/Dashboard/component/setting/settingsPage";
@@ -54,7 +56,7 @@ const rolePath = (role) => {
 function ProtectedRoute({ allowedRoles }) {
   const { user, token, isLoading } = useAuth();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (!token || !user) return <Navigate to="/login" replace />;
 
   const role = user.role?.toLowerCase();
@@ -68,7 +70,7 @@ function ProtectedRoute({ allowedRoles }) {
 function GuestRoute() {
   const { user, token, isLoading } = useAuth();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (token && user) return <Navigate to={rolePath(user.role)} replace />;
 
   return <Outlet />;
@@ -76,9 +78,36 @@ function GuestRoute() {
 
 function AppRoutes() {
   const { user, isLoading } = useAuth();
+
+  const [showLoader, setShowLoader] = useState(true);
+  const [fade, setFade] = useState(true);
+
   const home = user ? rolePath(user.role) : "/login";
 
-  if (isLoading) return <div>Loading...</div>;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFade(false); 
+
+      setTimeout(() => {
+        setShowLoader(false); 
+      }, 650); 
+    },1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading || showLoader) {
+    return (
+      <div
+        style={{
+          opacity: fade ? 1 : 0,
+          transition: "opacity .9s ease",
+        }}
+      >
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <Routes>
@@ -97,7 +126,7 @@ function AppRoutes() {
         <Route path="faqs" element={<Faqs />} />
         <Route path="docs" element={<Document />} />
         <Route path="institute/:id" element={<PublicInstitute />} />
-        <Route path="aiChat" element={<Aichat/>}/>
+        <Route path="aiChat" element={<Aichat />} />
       </Route>
 
       <Route element={<GuestRoute />}>
@@ -118,8 +147,8 @@ function AppRoutes() {
           <Route path="joinRequests" element={<JoinRequestsPage />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<SettingsPage />} />
-          {/* <Route path=":type/:id" element={<DetailsPage />} /> */}
-        <Route path="aiChat" element={<Aichat/>}/>
+          {}
+          <Route path="aiChat" element={<Aichat />} />
         </Route>
       </Route>
 
@@ -134,10 +163,10 @@ function AppRoutes() {
           <Route path="attendance" element={<Attendance />} />
           <Route path="timetable" element={<TimetablePage />} />
           <Route path="profile" element={<Profile />} />
-        <Route path="aiChat" element={<Aichat/>}/>
-        <Route path="aboutInstitute" element={<AboutInstitute />} />
+          <Route path="aiChat" element={<Aichat />} />
+          <Route path="aboutInstitute" element={<AboutInstitute />} />
           <Route path="settings" element={<SettingsPage />} />
-          {/* <Route path=":type/:id" element={<DetailsPage />} /> */}
+          {}
         </Route>
       </Route>
 
@@ -148,13 +177,13 @@ function AppRoutes() {
           <Route path="joinRequests" element={<JoinRequestsPage />} />
           <Route path="students" element={<DataView type="students" />} />
           <Route path="teachers" element={<DataView type="teachers" />} />
-        <Route path="aiChat" element={<Aichat/>}/>
+          <Route path="aiChat" element={<Aichat />} />
           <Route path="subjects" element={<Subjects />} />
           <Route path="attendance" element={<Attendance />} />
           <Route path="timetable" element={<TimetablePage />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<SettingsPage />} />
-          {/* <Route path=":type/:id" element={<DetailsPage />} /> */}
+          {}
         </Route>
       </Route>
 
@@ -168,7 +197,7 @@ function AppRoutes() {
           <Route path="timetable" element={<TimetablePage />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<SettingsPage />} />
-        <Route path="aiChat" element={<Aichat/>}/>
+          <Route path="aiChat" element={<Aichat />} />
         </Route>
       </Route>
 
@@ -182,7 +211,7 @@ function AppRoutes() {
           <Route path="timetable" element={<TimetablePage />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<SettingsPage />} />
-        <Route path="aiChat" element={<Aichat/>}/>
+          <Route path="aiChat" element={<Aichat />} />
         </Route>
       </Route>
 

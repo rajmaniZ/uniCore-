@@ -21,20 +21,17 @@
   margin: 0;
 }
 
-
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
-
 .mainGrid {
   display: grid;
   grid-template-columns: 2fr 1.5fr 1fr;
   gap: 20px;
 }
-
 
 .card {
   background: rgba(255, 255, 255, 0.05);
@@ -98,7 +95,6 @@
   margin-bottom: 8px;
 }
 
-
 .chart {
   display: flex;
   align-items: flex-end;
@@ -154,7 +150,6 @@
   color: #22c55e;
   font-size: 13px;
 }
-
 
 .performanceHeader {
   display: flex;
@@ -264,7 +259,6 @@
   cursor: pointer;
 }
 
-
 .moreBtn {
   color: rgba(255, 255, 255, 0.5);
   font-size: 18px;
@@ -332,13 +326,11 @@
   color: #ef4444;
 }
 
-
 .bottomGrid {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   gap: 20px;
 }
-
 
 .insightsSubtitle {
   font-size: 14px;
@@ -449,7 +441,6 @@
   color: rgba(255, 255, 255, 0.3);
   letter-spacing: 2px;
 }
-
 
 @media (max-width: 1400px) {
   .statsGrid {

@@ -33,10 +33,8 @@ function Navbar({ onMenuToggle }) {
     },
   ];
 
-  
   const role = user?.role?.toLowerCase();
 
-  
   const profilePath = role ? `/${role}/profile` : "/login";
 
   return (

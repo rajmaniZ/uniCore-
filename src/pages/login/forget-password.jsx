@@ -1,103 +1,8 @@
 
-
-
-
-
-
-
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                
-
-
-
-
-
-
-
-
-
-
-                                 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    
-
-
-                                
-
-
-
-
-
-                            
-
-
-
-
-                   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './login.module.css';
+import Logo  from './../../component/logo/logo'
 
 import {
   forgotPassword,
@@ -125,7 +30,6 @@ function ForgetPassword() {
   const isEmailValid = formData.email.trim() !== "";
   const isOtpValid = formData.otp && formData.newPassword;
 
-  
   const handleSendOtp = async (e) => {
     e.preventDefault();
 
@@ -144,7 +48,6 @@ function ForgetPassword() {
     }
   };
 
-  
   const handleVerify = async (e) => {
     e.preventDefault();
 
@@ -159,7 +62,6 @@ function ForgetPassword() {
 
       alert("Password reset successful");
 
-      
       window.location.href = "/login";
 
     } catch (err) {
@@ -170,13 +72,27 @@ function ForgetPassword() {
   };
 
   return (
+    
+    <>
+    <svg width="0" height="0">
+                <defs>
+                    <linearGradient id="uniGradient" x1="60%" y1="90%" x2="0%" y2="30%">
+                    <stop offset="10%" stopColor="#ff6ec4" />
+                    <stop offset="10%" stopColor="#ff9a44" />
+                    <stop offset="30%" stopColor="#f9c449" />
+                    <stop offset="60%" stopColor="#4cd964" />
+                    <stop offset="10%" stopColor="#5ac8fa" />
+                    <stop offset="90%" stopColor="#5856d6" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        
     <div className={styles.page}>
-      <form className={styles.loginForm}>
-
-        <div className={`${styles.title} ${styles.titleForget}`}>
-          <img src="/uniCore.png" alt="logo" className={styles.logo} />
-          <h1>uniCore</h1>
-        </div>
+       <form className={styles.loginForm}>
+           <div className={`${styles.title} ${styles.titleForget}`}>
+        <Logo className={styles.logo} />
+        <h1 className={styles.logoDiv}>uniCore</h1>
+      </div>
 
         <h2 className={styles.h2}>Reset Password</h2>
 
@@ -247,6 +163,7 @@ function ForgetPassword() {
         </div>
       </form>
     </div>
+    </>
   );
 }
 
