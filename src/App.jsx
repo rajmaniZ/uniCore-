@@ -91,7 +91,7 @@ function AppRoutes() {
       setTimeout(() => {
         setShowLoader(false); 
       }, 650); 
-    },1000);
+    },5000);
 
     return () => clearTimeout(timer);
   }, []);
