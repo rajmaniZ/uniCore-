@@ -2,6 +2,7 @@
 .container {
   padding: 20px;
   color: white;
+  margin-left:30px;
 }
 
 .header {
@@ -33,13 +34,14 @@
 .box {
   width: 28px;
   height: 28px;
-  background: #111;
+  background: #c5cbcc50;
   border-radius: 6px;
   cursor: pointer;
 }
 
 .present {
-  background: #22c55e;
+  /* background: #22c55e; */
+  color:Green;
 }
 
 .empty {
@@ -80,7 +82,9 @@
 }
 
 .table {
-  background: #111;
+  margin-top:30px;
+  margin-bottom: 30px;
+  background: #a2b6c443;
   border-radius: 8px;
   padding: 10px;
 }
