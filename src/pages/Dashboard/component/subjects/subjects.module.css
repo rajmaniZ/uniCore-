@@ -17,7 +17,7 @@
 
 .tab {
   padding: 8px 16px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(215, 203, 203, 0.05);
   border-radius: 8px;
   cursor: pointer;
   transition: 0.2s;
@@ -50,7 +50,7 @@
 }
 
 .card {
-  background: rgba(25,25,50,0.9);
+  background: rgba(189, 189, 208, 0.236);
   padding: 15px;
   margin-bottom: 15px;
   border-radius: 12px;
