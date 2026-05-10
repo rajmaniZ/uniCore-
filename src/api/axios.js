@@ -3,7 +3,7 @@ import axios from "axios";
 
 const getBaseURL = () => {
   const url = import.meta.env.VITE_API_URL;
-  return url ? `${url}/api` : "http://localhost:5000/api";
+  return url ? `${url}/api` : "https://unicore-bone-nvsv.onrender.com";
 };
 
 const API = axios.create({
