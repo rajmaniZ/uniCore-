@@ -97,7 +97,6 @@ function Subjects() {
             roleSubjects[0]._id
           );
         }
-
       } catch (err) {
         console.error(err);
 
@@ -106,7 +105,6 @@ function Subjects() {
             ?.msg ||
             "Failed to load subjects"
         );
-
       } finally {
         setLoading(false);
       }
@@ -133,7 +131,6 @@ function Subjects() {
         setMaterials(
           data || {}
         );
-
       } catch (err) {
         console.error(err);
       }
@@ -193,18 +190,13 @@ function Subjects() {
           }
         );
 
-        const response =
-          await uploadSubjectMaterial(
-            formData
-          );
+        await uploadSubjectMaterial(
+          formData
+        );
 
-        if (
-          response?.success
-        ) {
-          alert(
-            "Materials uploaded successfully"
-          );
-        }
+        alert(
+          "Materials uploaded successfully"
+        );
 
         setTitle("");
         setDescription("");
@@ -221,7 +213,6 @@ function Subjects() {
         }
 
         await loadMaterials();
-
       } catch (err) {
         console.error(err);
 
@@ -230,7 +221,6 @@ function Subjects() {
             ?.msg ||
             "Upload failed"
         );
-
       } finally {
         setUploading(false);
       }
@@ -252,7 +242,6 @@ function Subjects() {
         );
 
         await loadMaterials();
-
       } catch (err) {
         console.error(err);
 
@@ -544,15 +533,37 @@ function Subjects() {
                           (
                             resource
                           ) => {
-                            const fileUrl = `${import.meta.env.VITE_API_URL}${resource.url}`;
+
+                            const fileUrl =
+                              resource.url?.startsWith(
+                                "http"
+                              )
+                                ? resource.url
+                                : `${import.meta.env.VITE_API_URL}${resource.url}`;
 
                             const isImage =
                               resource.type ===
-                              "image";
+                                "image" ||
+                              /\.(jpg|jpeg|png|gif|webp)$/i.test(
+                                resource.url ||
+                                  ""
+                              );
 
                             const isPdf =
                               resource.type ===
-                              "pdf";
+                                "pdf" ||
+                              /\.pdf$/i.test(
+                                resource.url ||
+                                  ""
+                              );
+
+                            const isVideo =
+                              resource.type ===
+                                "video" ||
+                              /\.(mp4|webm|ogg)$/i.test(
+                                resource.url ||
+                                  ""
+                              );
 
                             return (
                               <div
@@ -620,17 +631,55 @@ function Subjects() {
                                   )}
 
                                   {isPdf && (
-                                    <iframe
-                                      src={
-                                        fileUrl
-                                      }
-                                      title={
-                                        resource.title
-                                      }
+                                    <div
                                       className={
-                                        styles.previewPdf
+                                        styles.pdfWrapper
                                       }
-                                    />
+                                    >
+                                      <embed
+                                        src={
+                                          fileUrl
+                                        }
+                                        type="application/pdf"
+                                        className={
+                                          styles.previewPdf
+                                        }
+                                      />
+
+                                      <div
+                                        className={
+                                          styles.pdfFallback
+                                        }
+                                      >
+                                        <a
+                                          href={
+                                            fileUrl
+                                          }
+                                          target="_blank"
+                                          rel="noreferrer"
+                                          className={
+                                            styles.openBtn
+                                          }
+                                        >
+                                          Open PDF
+                                        </a>
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {isVideo && (
+                                    <video
+                                      controls
+                                      className={
+                                        styles.previewVideo
+                                      }
+                                    >
+                                      <source
+                                        src={
+                                          fileUrl
+                                        }
+                                      />
+                                    </video>
                                   )}
                                 </div>
 
