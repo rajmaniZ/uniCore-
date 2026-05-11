@@ -132,7 +132,10 @@ function Subjects() {
           data || {}
         );
       } catch (err) {
-        console.error(err);
+        console.error(
+          "LOAD MATERIAL ERROR:",
+          err
+        );
       }
     };
 
@@ -214,7 +217,10 @@ function Subjects() {
 
         await loadMaterials();
       } catch (err) {
-        console.error(err);
+        console.error(
+          "UPLOAD ERROR:",
+          err
+        );
 
         alert(
           err.response?.data
@@ -243,7 +249,10 @@ function Subjects() {
 
         await loadMaterials();
       } catch (err) {
-        console.error(err);
+        console.error(
+          "DELETE ERROR:",
+          err
+        );
 
         alert(
           err.response?.data
@@ -266,6 +275,62 @@ function Subjects() {
         subjects,
       ]
     );
+
+  const getFileUrl = (
+    resource
+  ) => {
+    if (!resource?.url)
+      return "";
+
+    // cloudinary url
+    if (
+      resource.url.startsWith(
+        "http"
+      )
+    ) {
+      return resource.url;
+    }
+
+    // fallback local url
+    return `${import.meta.env.VITE_API_URL}${resource.url}`;
+  };
+
+  const getFileType = (
+    resource
+  ) => {
+    const url =
+      resource?.url || "";
+
+    const type =
+      resource?.type || "";
+
+    if (
+      type === "image" ||
+      /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(
+        url
+      )
+    ) {
+      return "image";
+    }
+
+    if (
+      type === "pdf" ||
+      /\.pdf$/i.test(url)
+    ) {
+      return "pdf";
+    }
+
+    if (
+      type === "video" ||
+      /\.(mp4|webm|ogg|mov)$/i.test(
+        url
+      )
+    ) {
+      return "video";
+    }
+
+    return "file";
+  };
 
   if (loading) {
     return <Loader />;
@@ -446,16 +511,12 @@ function Subjects() {
                         index
                       ) => (
                         <div
-                          key={
-                            index
-                          }
+                          key={index}
                           className={
                             styles.fileChip
                           }
                         >
-                          {
-                            file.name
-                          }
+                          {file.name}
                         </div>
                       )
                     )}
@@ -533,36 +594,14 @@ function Subjects() {
                           (
                             resource
                           ) => {
-
                             const fileUrl =
-                              resource.url?.startsWith(
-                                "http"
-                              )
-                                ? resource.url
-                                : `${import.meta.env.VITE_API_URL}${resource.url}`;
-
-                            const isImage =
-                              resource.type ===
-                                "image" ||
-                              /\.(jpg|jpeg|png|gif|webp)$/i.test(
-                                resource.url ||
-                                  ""
+                              getFileUrl(
+                                resource
                               );
 
-                            const isPdf =
-                              resource.type ===
-                                "pdf" ||
-                              /\.pdf$/i.test(
-                                resource.url ||
-                                  ""
-                              );
-
-                            const isVideo =
-                              resource.type ===
-                                "video" ||
-                              /\.(mp4|webm|ogg)$/i.test(
-                                resource.url ||
-                                  ""
+                            const fileType =
+                              getFileType(
+                                resource
                               );
 
                             return (
@@ -616,7 +655,8 @@ function Subjects() {
                                       "Unknown"}
                                   </div>
 
-                                  {isImage && (
+                                  {fileType ===
+                                    "image" && (
                                     <img
                                       src={
                                         fileUrl
@@ -627,47 +667,37 @@ function Subjects() {
                                       className={
                                         styles.previewImage
                                       }
+                                      onError={(
+                                        e
+                                      ) => {
+                                        console.log(
+                                          "IMAGE FAILED:",
+                                          fileUrl
+                                        );
+
+                                        e.target.style.display =
+                                          "none";
+                                      }}
                                     />
                                   )}
 
-                                  {isPdf && (
-                                    <div
-                                      className={
-                                        styles.pdfWrapper
+                                  {fileType ===
+                                    "pdf" && (
+                                    <iframe
+                                      src={
+                                        fileUrl
                                       }
-                                    >
-                                      <embed
-                                        src={
-                                          fileUrl
-                                        }
-                                        type="application/pdf"
-                                        className={
-                                          styles.previewPdf
-                                        }
-                                      />
-
-                                      <div
-                                        className={
-                                          styles.pdfFallback
-                                        }
-                                      >
-                                        <a
-                                          href={
-                                            fileUrl
-                                          }
-                                          target="_blank"
-                                          rel="noreferrer"
-                                          className={
-                                            styles.openBtn
-                                          }
-                                        >
-                                          Open PDF
-                                        </a>
-                                      </div>
-                                    </div>
+                                      title={
+                                        resource.title
+                                      }
+                                      className={
+                                        styles.previewPdf
+                                      }
+                                    />
                                   )}
 
-                                  {isVideo && (
+                                  {fileType ===
+                                    "video" && (
                                     <video
                                       controls
                                       className={
@@ -705,7 +735,8 @@ function Subjects() {
                                     href={
                                       fileUrl
                                     }
-                                    download
+                                    target="_blank"
+                                    rel="noreferrer"
                                     className={
                                       styles.downloadBtn
                                     }
