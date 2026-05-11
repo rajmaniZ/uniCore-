@@ -1,0 +1,225 @@
+/* subjects.module.css */
+
+.container {
+  width: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  color: white;
+}
+
+.card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  padding: 22px;
+  backdrop-filter: blur(10px);
+  overflow-x: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.header h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.header span {
+  font-size: 14px;
+  color: #cfcfcf;
+}
+
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.days {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 55px;
+  margin-top: 8px;
+}
+
+.days div {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #d8d8d8;
+  font-weight: 500;
+}
+
+.monthRow {
+  display: flex;
+  gap: 18px;
+}
+
+.monthBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.monthLabel {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #d2d2d2;
+  font-weight: 600;
+}
+
+.grid {
+  display: flex;
+  gap: 6px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.box {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: rgba(255,255,255,0.7);
+  transition: 0.2s ease;
+}
+
+.box:hover {
+  transform: scale(1.08);
+}
+
+.green {
+  background: #22c55e;
+  color: white;
+}
+
+.red {
+  background: #ef4444;
+  color: white;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #d6d6d6;
+}
+
+.legendColor {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.legendPresent {
+  background: #22c55e;
+}
+
+.legendHoliday {
+  background: #ef4444;
+}
+
+.legendEmpty {
+  background: rgba(255,255,255,0.08);
+}
+
+.loading {
+  color: white;
+  font-size: 16px;
+  padding: 30px;
+}
+
+.empty {
+  color: #cfcfcf;
+  font-size: 15px;
+}
+
+.wrapper::-webkit-scrollbar,
+.card::-webkit-scrollbar {
+  height: 6px;
+}
+
+.wrapper::-webkit-scrollbar-thumb,
+.card::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+  border-radius: 20px;
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .header h3 {
+    font-size: 20px;
+  }
+
+  .monthRow {
+    gap: 14px;
+  }
+
+  .box {
+    width: 20px;
+    height: 20px;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .days {
+    min-width: 45px;
+  }
+
+  .days div {
+    font-size: 11px;
+  }
+
+  .monthLabel {
+    font-size: 11px;
+  }
+
+  .box {
+    width: 18px;
+    height: 18px;
+    font-size: 7px;
+  }
+}

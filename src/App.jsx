@@ -42,6 +42,9 @@ import CreateAssignment from "./pages/Dashboard/component/createAssignments/assi
 import SubmitAssignment from "./pages/Dashboard/component/submitAssignments/assignment";
 import AboutInstitute from "./pages/Dashboard/admin/aboutInstitute/aboutInstitute";
 
+import AttForStudent from './pages/Dashboard/student/attandance/attandance'
+
+
 import AdminDashboard from "./pages/Dashboard/admin/dashboard/dashboard";
 import SuperAdminDashboard from "./pages/Dashboard/superAdmin/dashboard/dashboard";
 import HodDashboard from "./pages/Dashboard/HoD/dashboard/dashboard";
@@ -208,7 +211,7 @@ function AppRoutes() {
           <Route path="dashboard" element={<StudentDashboard />} />
           <Route path="subjects" element={<Subjects />} />
           <Route path="submitAssignment" element={<SubmitAssignment />} />
-          <Route path="attendance" element={<Attendance />} />
+          <Route path="attendance" element={<AttForStudent />} />
           <Route path="timetable" element={<TimetablePage />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<SettingsPage />} />
