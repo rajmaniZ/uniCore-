@@ -195,6 +195,7 @@ function AppRoutes() {
           <Route path="subjects" element={<Subjects />} />
           <Route path="attendance" element={<Attendance />} />
           <Route path="timetable" element={<TimetablePage />} />
+          {/* <Route path="timetable" element={<TimetablePage />} /> */}
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="aiChat" element={<Aichat />} />

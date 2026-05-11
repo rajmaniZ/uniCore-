@@ -1,4 +1,3 @@
-
 import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../../../../context/authContext";
 import styles from "./timetable.module.css";
@@ -9,11 +8,15 @@ import {
   saveTimetable,
 } from "../../../../api/timetableApi";
 
-import { getInstituteConfig } from "../../../../api/configApi";
-import { getMyInstitute } from "../../../../api/instituteApi";
+import {
+  getInstituteConfig,
+} from "../../../../api/configApi";
 
 import {
-  getConfigClasses,
+  getMyInstitute,
+} from "../../../../api/instituteApi";
+
+import {
   getConfigDepartments,
   getDepartmentCourseOptions,
   getId,
@@ -21,7 +24,14 @@ import {
   getStructureOptions,
 } from "../../utils/configRuntime";
 
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const days = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
 const timeSlots = [
   "9:00-10:00",
@@ -33,38 +43,72 @@ const timeSlots = [
 ];
 
 function TimetablePage() {
-  const { user, token } = useAuth();
-  const role = user?.role?.toLowerCase();
 
-  const isAdmin = role === "admin";
-  const isHod = role === "hod";
-  const isTeacher = role === "teacher";
-  const isStudent = role === "student";
-  const canEdit = isAdmin || isHod;
+  const { user, token } =
+    useAuth();
 
-  const [allTables, setAllTables] = useState([]);
-  const [config, setConfig] = useState(null);
-  const [showForm, setShowForm] = useState(false);
-  const [editMode, setEditMode] = useState(false);
-  const [error, setError] = useState("");
+  const role =
+    user?.role?.toLowerCase();
 
-  const [meta, setMeta] = useState({
-    type: "",
-    department: "",
-    course: "",
-    semester: "",
-    className: "",
-  });
+  const isAdmin =
+    role === "admin";
 
-  const [grid, setGrid] = useState({});
-  const [originalGrid, setOriginalGrid] = useState({});
+  const isHod =
+    role === "hod";
+
+  const isTeacher =
+    role === "teacher";
+
+  const isStudent =
+    role === "student";
+
+  const canEdit =
+    isAdmin || isHod;
+
+  const [allTables, setAllTables] =
+    useState([]);
+
+  const [config, setConfig] =
+    useState(null);
+
+  const [showForm, setShowForm] =
+    useState(false);
+
+  const [editingId, setEditingId] =
+    useState(null);
+
+  const [saving, setSaving] =
+    useState(false);
+
+  const [error, setError] =
+    useState("");
+
+  const [meta, setMeta] =
+    useState({
+      type: "",
+      department: "",
+      course: "",
+      semester: "",
+    });
+
+  const [grid, setGrid] =
+    useState({});
+
+  /* LOAD CONFIG */
 
   useEffect(() => {
-    if (!token) return;
+
+    if (!token)
+      return;
 
     const load = async () => {
+
       try {
-        const [inst, configData] = await Promise.all([
+
+        const [
+          institute,
+          configData,
+        ] = await Promise.all([
           getMyInstitute(),
           getInstituteConfig(),
         ]);
@@ -72,299 +116,1153 @@ function TimetablePage() {
         setConfig(configData);
 
         setMeta({
-          type: inst?.type,
-          department: isHod ? getId(user?.departmentId) : "",
+          type:
+            institute?.type || "",
+
+          department:
+            isHod
+              ? String(
+                  getId(
+                    user?.departmentId
+                  ) || ""
+                )
+              : "",
+
           course: "",
           semester: "",
-          className: "",
         });
 
-      } catch {
-        setError("Setup failed");
+      } catch (err) {
+
+        console.error(err);
+
+        setError(
+          "Failed to load setup"
+        );
       }
     };
 
     load();
+
   }, [token]);
 
-  const fetchTables = async () => {
-    try {
-      const data = await getTimetables();
+  /* FETCH TIMETABLES */
 
-      const formatted = (Array.isArray(data) ? data : []).map((table) => {
-        const newGrid = {};
+  const fetchTables =
+    async () => {
 
-        Object.keys(table.grid || {}).forEach((key) => {
-          const value = table.grid[key];
-          newGrid[key] = value
-            ? {
-              subject: getId(value.subject),
-              teacher: getId(value.teacher),
-              label: `${value.subject?.name || "Subject"} / ${value.teacher?.name || "Teacher"}`,
-            }
-            : null;
-        });
+      try {
 
-        return {
-          _id: table._id,
-          meta: {
-            department: table.department?._id,
-            course: table.course?._id,
-            semester: table.semester,
-            departmentName: table.department?.name,
-            courseName: table.course?.name,
-          },
-          grid: newGrid,
-        };
-      });
+        const data =
+          await getTimetables();
 
-      let filtered = formatted;
+        const formatted =
+          (
+            Array.isArray(data)
+              ? data
+              : []
+          ).map((table) => {
 
-      if (isHod) {
-        filtered = filtered.filter(
-          (t) => getId(t.meta.department) === getId(user.departmentId)
+            const newGrid = {};
+
+            Object.keys(
+              table.grid || {}
+            ).forEach((key) => {
+
+              const value =
+                table.grid[key];
+
+              newGrid[key] =
+                value
+                  ? {
+
+                      subject:
+                        String(
+                          getId(
+                            value.subject
+                          ) || ""
+                        ),
+
+                      teacher:
+                        String(
+                          getId(
+                            value.teacher
+                          ) || ""
+                        ),
+
+                      subjectName:
+                        value.subject?.name ||
+                        value.subjectName ||
+                        "Subject",
+
+                      teacherName:
+                        value.teacher?.name ||
+                        value.teacherName ||
+                        "Teacher",
+
+                    }
+                  : null;
+            });
+
+            return {
+
+              _id:
+                table._id,
+
+              meta: {
+
+                department:
+                  String(
+                    getId(
+                      table.department
+                    ) || ""
+                  ),
+
+                course:
+                  String(
+                    getId(
+                      table.course
+                    ) || ""
+                  ),
+
+                semester:
+                  String(
+                    table.semester || ""
+                  ),
+
+                departmentName:
+                  table.department?.name ||
+                  "Department",
+
+                courseName:
+                  table.course?.name ||
+                  "Course",
+
+              },
+
+              grid:
+                newGrid,
+
+            };
+          });
+
+        let filtered =
+          formatted;
+
+        /* ADMIN */
+
+        if (isAdmin) {
+
+          filtered =
+            formatted;
+        }
+
+        /* HOD */
+
+        else if (isHod) {
+
+          const hodDepartment =
+            String(
+              getId(
+                user?.departmentId
+              ) || ""
+            );
+
+          filtered =
+            formatted.filter(
+              (table) =>
+
+                String(
+                  table.meta.department
+                ) ===
+                hodDepartment
+            );
+        }
+
+        /* TEACHER */
+
+        else if (isTeacher) {
+
+          const teacherIds = [
+
+            String(
+              getId(user?._id)
+            ),
+
+            String(
+              getId(
+                user?.teacherId
+              )
+            ),
+
+            String(
+              getId(
+                user?.profileId
+              )
+            ),
+
+          ].filter(Boolean);
+
+          const teacherSubjects =
+            getScopedSubjects(
+              config,
+              {}
+            )
+              .filter((scope) => {
+
+                const scopeTeacherId =
+                  String(
+                    getId(
+                      scope.teacher
+                    ) || ""
+                  );
+
+                return teacherIds.includes(
+                  scopeTeacherId
+                );
+              })
+              .map((scope) =>
+                String(
+                  getId(
+                    scope.subject
+                  ) || ""
+                )
+              );
+
+          filtered =
+            formatted.filter(
+              (table) =>
+
+                Object.values(
+                  table.grid || {}
+                ).some((cell) => {
+
+                  if (!cell)
+                    return false;
+
+                  return teacherSubjects.includes(
+                    String(
+                      cell.subject
+                    )
+                  );
+                })
+            );
+        }
+
+        /* STUDENT */
+
+        else if (isStudent) {
+
+          const departmentId =
+            String(
+              getId(
+                user?.departmentId
+              ) || ""
+            );
+
+          const courseId =
+            String(
+              getId(
+                user?.courseId
+              ) || ""
+            );
+
+          const semester =
+            String(
+              user?.semester || ""
+            );
+
+          filtered =
+            formatted.filter(
+              (table) =>
+
+                String(
+                  table.meta.department
+                ) ===
+                  departmentId &&
+
+                String(
+                  table.meta.course
+                ) ===
+                  courseId &&
+
+                String(
+                  table.meta.semester
+                ) ===
+                  semester
+            );
+        }
+
+        setAllTables(
+          filtered
+        );
+
+      } catch (err) {
+
+        console.error(err);
+
+        setError(
+          "Failed to load timetable"
         );
       }
-
-      if (isTeacher) {
-        const currentTeacherId = getId(user?._id || user?.id || user);
-        filtered = filtered.filter((t) =>
-          Object.values(t.grid).some(
-            (c) => c?.teacher && getId(c.teacher) === currentTeacherId
-          )
-        );
-      }
-
-      if (isStudent) {
-        filtered = filtered.filter(
-          (t) =>
-            getId(t.meta.department) === getId(user.departmentId) &&
-            getId(t.meta.course) === getId(user.courseId) &&
-            String(t.meta.semester) === String(user.semester)
-        );
-      }
-
-      setAllTables(filtered);
-
-    } catch {
-      setError("Failed to load timetables");
-    }
-  };
+    };
 
   useEffect(() => {
-    fetchTables();
-  }, [token]);
 
-  const departments = useMemo(
-    () => getConfigDepartments(config),
-    [config]
-  );
+    if (config) {
+      fetchTables();
+    }
 
-  const courses = useMemo(
-    () => getDepartmentCourseOptions(config, meta.department),
-    [config, meta.department]
-  );
+  }, [config]);
 
-  const semesters = useMemo(
-    () => getStructureOptions(config, meta.department, meta.course),
-    [config, meta.department, meta.course]
-  );
+  /* OPTIONS */
 
-  const subjects = useMemo(() => {
-    const scopes = getScopedSubjects(config, {
-      departmentId: meta.department,
-      courseId: meta.course,
-      semester: meta.semester,
-    });
+  const departments =
+    useMemo(
+      () =>
+        getConfigDepartments(
+          config
+        ),
+      [config]
+    );
 
-    return scopes.map((s) => ({
-      subjectId: getId(s.subject),
-      teacherId: getId(s.teacher),
-      subjectName: s.subject?.name,
-      teacherName: s.teacher?.name,   
-    }));
-  }, [config, meta]);
+  const courses =
+    useMemo(
+      () =>
+        getDepartmentCourseOptions(
+          config,
+          meta.department
+        ),
+      [
+        config,
+        meta.department,
+      ]
+    );
 
-  const handleCellChange = (day, time, subjectId) => {
-    const key = `${day}_${time}`;
-    const scope = subjects.find((s) => s.subjectId === subjectId);
+  const semesters =
+    useMemo(
+      () =>
+        getStructureOptions(
+          config,
+          meta.department,
+          meta.course
+        ),
+      [
+        config,
+        meta.department,
+        meta.course,
+      ]
+    );
 
-    setGrid((prev) => ({
-      ...prev,
-      [key]: {
-        subject: subjectId,
-        teacher: scope?.teacherId,
-      },
-    }));
-  };
+  const subjects =
+    useMemo(() => {
 
-  const handleSave = async () => {
-    if (!canEdit) return;
-    const formatted = {};
+      const scopes =
+        getScopedSubjects(
+          config,
+          {
+            departmentId:
+              meta.department,
 
-    Object.keys(grid).forEach((key) => {
-      const c = grid[key];
-      if (c?.subject && c?.teacher) formatted[key] = c;
-    });
+            courseId:
+              meta.course,
 
-    await saveTimetable({
-      ...meta,
-      grid: formatted,
-    });
+            semester:
+              meta.semester,
+          }
+        );
 
-    setShowForm(false);
-    setGrid({});
-    fetchTables();
-  };
+      return scopes.map(
+        (s) => ({
 
-  const handleDelete = async (id) => {
-    if (!canEdit) return;
-    await deleteTimetable(id);
-    fetchTables();
-  };
+          subjectId:
+            String(
+              getId(
+                s.subject
+              ) || ""
+            ),
+
+          teacherId:
+            String(
+              getId(
+                s.teacher
+              ) || ""
+            ),
+
+          subjectName:
+            s.subject?.name ||
+            "Subject",
+
+          teacherName:
+            s.teacher?.name ||
+            "Teacher",
+
+        })
+      );
+
+    }, [config, meta]);
+
+  /* TEACHER CONFLICT */
+
+  const isTeacherBusy =
+    (
+      teacherId,
+      currentKey
+    ) => {
+
+      const currentBusy =
+        Object.entries(grid).some(
+          ([key, value]) =>
+
+            key !== currentKey &&
+
+            String(
+              value?.teacher
+            ) ===
+            String(
+              teacherId
+            )
+        );
+
+      if (currentBusy)
+        return true;
+
+      const busyInOtherTables =
+        allTables.some((table) => {
+
+          if (
+            editingId &&
+            table._id === editingId
+          ) {
+            return false;
+          }
+
+          const cell =
+            table.grid?.[
+              currentKey
+            ];
+
+          if (!cell)
+            return false;
+
+          return (
+            String(
+              cell.teacher
+            ) ===
+            String(
+              teacherId
+            )
+          );
+        });
+
+      return busyInOtherTables;
+    };
+
+  /* CELL CHANGE */
+
+  const handleCellChange =
+    (
+      day,
+      time,
+      subjectId
+    ) => {
+
+      const key =
+        `${day}_${time}`;
+
+      if (!subjectId) {
+
+        setGrid((prev) => ({
+
+          ...prev,
+
+          [key]: null,
+
+        }));
+
+        return;
+      }
+
+      const scope =
+        subjects.find(
+          (s) =>
+            s.subjectId ===
+            subjectId
+        );
+
+      if (!scope)
+        return;
+
+      if (
+        scope.teacherId &&
+        isTeacherBusy(
+          scope.teacherId,
+          key
+        )
+      ) {
+
+        alert(
+          `${scope.teacherName} is already assigned during ${day} ${time}`
+        );
+
+        return;
+      }
+
+      setGrid((prev) => ({
+
+        ...prev,
+
+        [key]: {
+
+          subject:
+            scope.subjectId,
+
+          teacher:
+            scope.teacherId,
+
+          subjectName:
+            scope.subjectName,
+
+          teacherName:
+            scope.teacherName,
+
+        },
+
+      }));
+    };
+
+  /* EDIT */
+
+  const handleEdit =
+    (table) => {
+
+      if (!canEdit)
+        return;
+
+      setEditingId(
+        table._id
+      );
+
+      setMeta({
+
+        ...meta,
+
+        department:
+          table.meta.department,
+
+        course:
+          table.meta.course,
+
+        semester:
+          table.meta.semester,
+
+      });
+
+      setGrid(
+        table.grid
+      );
+
+      setShowForm(true);
+    };
+
+  /* SAVE */
+
+  const handleSave =
+    async () => {
+
+      if (!canEdit)
+        return;
+
+      try {
+
+        setSaving(true);
+
+        const formatted =
+          {};
+
+        Object.keys(grid)
+          .forEach((key) => {
+
+            const cell =
+              grid[key];
+
+            if (
+              cell?.subject &&
+              cell?.teacher
+            ) {
+
+              formatted[key] = {
+
+                subject:
+                  cell.subject,
+
+                teacher:
+                  cell.teacher,
+
+              };
+            }
+          });
+
+        await saveTimetable({
+
+          _id:
+            editingId,
+
+          ...meta,
+
+          grid:
+            formatted,
+
+        });
+
+        setShowForm(false);
+
+        setEditingId(null);
+
+        setGrid({});
+
+        fetchTables();
+
+      } catch (err) {
+
+        console.error(err);
+
+        alert(
+          "Failed to save timetable"
+        );
+
+      } finally {
+
+        setSaving(false);
+      }
+    };
+
+  /* DELETE */
+
+  const handleDelete =
+    async (id) => {
+
+      if (!canEdit)
+        return;
+
+      try {
+
+        await deleteTimetable(
+          id
+        );
+
+        fetchTables();
+
+      } catch (err) {
+
+        console.error(err);
+      }
+    };
 
   return (
+
     <div className={styles.container}>
 
       {canEdit && (
-        <button onClick={() => setShowForm(!showForm)}>
-          {showForm ? "Close" : "+ Create"}
+
+        <button
+          className={
+            styles.createBtn
+          }
+          onClick={() =>
+            setShowForm(
+              !showForm
+            )
+          }
+        >
+
+          {showForm
+            ? "Close"
+            : "+ Create Timetable"}
+
         </button>
+
       )}
 
-      {error && <p>{error}</p>}
+      {error && (
+        <p>{error}</p>
+      )}
 
-      {canEdit && showForm && (
-        <div className={styles.createBox}>
+      {/* FORM */}
+
+      {canEdit &&
+        showForm && (
+
+        <div
+          className={
+            styles.createBox
+          }
+        >
 
           <select
-            value={meta.department}
+            value={
+              meta.department
+            }
             disabled={isHod}
             onChange={(e) =>
-              setMeta({ ...meta, department: e.target.value })
+              setMeta({
+                ...meta,
+                department:
+                  e.target.value,
+              })
             }
           >
-            <option value="">Department</option>
-            {departments.map((d) => (
-              <option key={getId(d.department)} value={getId(d.department)}>
-                {d.department?.name}
-              </option>
-            ))}
+
+            <option value="">
+              Department
+            </option>
+
+            {departments.map(
+              (d) => (
+
+                <option
+                  key={getId(
+                    d.department
+                  )}
+                  value={getId(
+                    d.department
+                  )}
+                >
+
+                  {
+                    d.department?.name
+                  }
+
+                </option>
+
+              )
+            )}
+
           </select>
 
           <select
-            value={meta.course}
+            value={
+              meta.course
+            }
             onChange={(e) =>
-              setMeta({ ...meta, course: e.target.value })
+              setMeta({
+                ...meta,
+                course:
+                  e.target.value,
+              })
             }
           >
-            <option value="">Course</option>
-            {courses.map((c) => (
-              <option key={getId(c.course)} value={getId(c.course)}>
-                {c.course?.name}
-              </option>
-            ))}
+
+            <option value="">
+              Course
+            </option>
+
+            {courses.map(
+              (c) => (
+
+                <option
+                  key={getId(
+                    c.course
+                  )}
+                  value={getId(
+                    c.course
+                  )}
+                >
+
+                  {
+                    c.course?.name
+                  }
+
+                </option>
+
+              )
+            )}
+
           </select>
 
           <select
-            value={meta.semester}
+            value={
+              meta.semester
+            }
             onChange={(e) =>
-              setMeta({ ...meta, semester: e.target.value })
+              setMeta({
+                ...meta,
+                semester:
+                  e.target.value,
+              })
             }
           >
-            <option value="">Semester</option>
-            {semesters.map((s) => (
-              <option key={s.number} value={s.number}>
-                {s.label}
-              </option>
-            ))}
+
+            <option value="">
+              Semester
+            </option>
+
+            {semesters.map(
+              (s) => (
+
+                <option
+                  key={s.number}
+                  value={s.number}
+                >
+
+                  {s.label}
+
+                </option>
+
+              )
+            )}
+
           </select>
 
-          {}
-          <div className={styles.grid}>
+          <div
+            className={
+              styles.grid
+            }
+          >
+
             <div></div>
-            {days.map((d) => <div key={d}>{d}</div>)}
 
-            {timeSlots.map((time) => (
-              <div key={time} style={{ display: "contents" }}>
-                <div>{time}</div>
+            {days.map((day) => (
 
-                {days.map((day) => {
-                  const key = `${day}_${time}`;
-                  const cell = grid[key] || {};
+              <div
+                key={day}
+                className={
+                  styles.header
+                }
+              >
 
-                  return (
-                    <div key={key}>
-                      <select
-                        value={cell.subject || ""}
-                        onChange={(e) =>
-                          handleCellChange(day, time, e.target.value)
-                        }
-                      >
-                        <option value="">Subject</option>
-                        {subjects.map((s) => (
-                          <option key={s.subjectId} value={s.subjectId}>
-                            {s.subjectName}
-                          </option>
-                        ))}
-                      </select>
-                      <select value={cell.teacher || ""} disabled>
-                        <option value="">Teacher</option>
-                        {subjects
-                          .filter((s) => s.subjectId === cell.subject)  
-                          .map((s) => (
-                            <option key={s.teacherId} value={s.teacherId}>
-                              {s.teacherName}   
-                            </option>
-                          ))}
-                      </select>
+                {day}
 
-                    </div>
-                  );
-                })}
               </div>
+
             ))}
+
+            {timeSlots.map(
+              (time) => (
+
+                <div
+                  key={time}
+                  style={{
+                    display:
+                      "contents",
+                  }}
+                >
+
+                  <div
+                    className={
+                      styles.time
+                    }
+                  >
+                    {time}
+                  </div>
+
+                  {days.map(
+                    (day) => {
+
+                      const key =
+                        `${day}_${time}`;
+
+                      const cell =
+                        grid[key] ||
+                        {};
+
+                      return (
+
+                        <div
+                          key={key}
+                          className={
+                            styles.cell
+                          }
+                        >
+
+                          <select
+                            value={
+                              cell.subject ||
+                              ""
+                            }
+                            onChange={(e) =>
+                              handleCellChange(
+                                day,
+                                time,
+                                e.target.value
+                              )
+                            }
+                          >
+
+                            <option value="">
+                              Subject
+                            </option>
+
+                            {subjects.map(
+                              (s) => (
+
+                                <option
+                                  key={
+                                    s.subjectId
+                                  }
+                                  value={
+                                    s.subjectId
+                                  }
+                                >
+
+                                  {
+                                    s.subjectName
+                                  }
+
+                                </option>
+
+                              )
+                            )}
+
+                          </select>
+
+                          <input
+                            disabled
+                            value={
+                              cell.teacherName ||
+                              ""
+                            }
+                            placeholder="Teacher"
+                          />
+
+                        </div>
+
+                      );
+                    }
+                  )}
+
+                </div>
+
+              )
+            )}
+
           </div>
 
-          <button onClick={handleSave}>Save</button>
+          <button
+            onClick={
+              handleSave
+            }
+            disabled={
+              saving
+            }
+          >
+
+            {saving
+              ? "Saving..."
+              : editingId
+                ? "Update Timetable"
+                : "Save Timetable"}
+
+          </button>
+
         </div>
+
       )}
 
-      {}
-      {allTables.map((t) => (
-        <div key={t._id} className={styles.tableBox}>
+      {/* TABLE */}
 
-          <h3>
-            {t.meta.departmentName} | {t.meta.courseName} | Sem {t.meta.semester}
-          </h3>
+      {allTables.length === 0 ? (
 
-          {canEdit && (
-            <button onClick={() => handleDelete(t._id)}>Delete</button>
-          )}
+        <div
+          className={
+            styles.tableBox
+          }
+        >
 
-          <div className={styles.grid}>
-            <div></div>
-            {days.map((d) => <div key={d}>{d}</div>)}
+          <p
+            className={
+              styles.empty
+            }
+          >
+            No timetable found
+          </p>
 
-            {timeSlots.map((time) => (
-              <div key={time} style={{ display: "contents" }}>
-                <div>{time}</div>
-
-                {days.map((day) => {
-                  const cell = t.grid[`${day}_${time}`];
-                  return (
-                    <div key={day + time}>
-                      {cell ? cell.label : "-"}
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
         </div>
-      ))}
+
+      ) : (
+
+        allTables.map(
+          (table) => (
+
+            <div
+              key={table._id}
+              className={
+                styles.tableBox
+              }
+            >
+
+              <div
+                className={
+                  styles.caption
+                }
+              >
+
+                <h3>
+
+                  {
+                    table.meta
+                      .departmentName
+                  }
+
+                  {" • "}
+
+                  {
+                    table.meta
+                      .courseName
+                  }
+
+                  {" • "}
+
+                  Semester {" "}
+
+                  {
+                    table.meta
+                      .semester
+                  }
+
+                </h3>
+
+                {canEdit && (
+
+                  <div>
+
+                    <button
+                      onClick={() =>
+                        handleEdit(
+                          table
+                        )
+                      }
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        handleDelete(
+                          table._id
+                        )
+                      }
+                    >
+                      Delete
+                    </button>
+
+                  </div>
+
+                )}
+
+              </div>
+
+              <div
+                className={
+                  styles.grid
+                }
+              >
+
+                <div></div>
+
+                {days.map((day) => (
+
+                  <div
+                    key={day}
+                    className={
+                      styles.header
+                    }
+                  >
+                    {day}
+                  </div>
+
+                ))}
+
+                {timeSlots.map(
+                  (time) => (
+
+                    <div
+                      key={time}
+                      style={{
+                        display:
+                          "contents",
+                      }}
+                    >
+
+                      <div
+                        className={
+                          styles.time
+                        }
+                      >
+                        {time}
+                      </div>
+
+                      {days.map(
+                        (day) => {
+
+                          const cell =
+                            table.grid?.[
+                              `${day}_${time}`
+                            ];
+
+                          return (
+
+                            <div
+                              key={
+                                day + time
+                              }
+                              className={
+                                styles.cell
+                              }
+                            >
+
+                              {cell ? (
+
+                                <>
+
+                                  <strong>
+                                    {
+                                      cell.subjectName
+                                    }
+                                  </strong>
+
+                                  <span>
+                                    {
+                                      cell.teacherName
+                                    }
+                                  </span>
+
+                                </>
+
+                              ) : (
+
+                                <span
+                                  className={
+                                    styles.empty
+                                  }
+                                >
+                                  -
+                                </span>
+
+                              )}
+
+                            </div>
+
+                          );
+                        }
+                      )}
+
+                    </div>
+
+                  )
+                )}
+
+              </div>
+
+            </div>
+
+          )
+        )
+
+      )}
 
     </div>
+
   );
 }
 

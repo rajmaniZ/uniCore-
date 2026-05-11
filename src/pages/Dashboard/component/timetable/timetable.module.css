@@ -3,131 +3,313 @@
   color: white;
 }
 
+/* CREATE BOX */
+
 .createBox {
-  
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  padding: 18px;
+  border-radius: 16px;
+
+  margin-bottom: 24px;
+
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
+
+  backdrop-filter: blur(10px);
 }
 
 .createBox input,
 .createBox select {
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
-  min-width: 120px;
+  padding: 10px 12px;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  min-width: 140px;
+
   flex: 1;
-  background-color: transparent;
 
-}
+  background: rgba(255,255,255,0.04);
 
-.createBox button {
-  padding: 8px 14px;
-  background: #667eea;
-  border: none;
-  border-radius: 8px;
   color: white;
-  cursor: pointer;
+
+  outline: none;
+
+  transition: 0.2s ease;
 }
+
+.createBox input:focus,
+.createBox select:focus {
+  border-color: #667eea;
+}
+
+.createBox option {
+  background: #1f2937;
+  color: white;
+}
+
+/* BUTTONS */
+
+.createBtn,
+.createBox button,
+.caption button {
+  padding: 10px 16px;
+
+  background: linear-gradient(
+    135deg,
+    #667eea,
+    #764ba2
+  );
+
+  border: none;
+
+  border-radius: 10px;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.createBtn:hover,
+.createBox button:hover,
+.caption button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* TABLE */
+
+.tableBox {
+  margin-top: 28px;
+
+  background: rgba(255,255,255,0.03);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  border-radius: 18px;
+
+  padding: 18px;
+
+  overflow: hidden;
+
+  backdrop-filter: blur(12px);
+}
+
+.caption {
+  margin-bottom: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+}
+
+.caption h3 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  color: white;
+}
+
+/* GRID */
 
 .grid {
   display: grid;
+
   grid-template-columns: 120px repeat(6, 1fr);
-  border: 1px solid rgba(255,255,255,0.1);
-  overflow-x: auto; 
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  border-radius: 14px;
+
+  overflow: hidden;
 }
+
+/* HEADER */
 
 .header {
-  padding: 10px;
-  background: rgba(46, 66, 155, 0.3);
+  padding: 12px;
+
+  background: rgba(102,126,234,0.15);
+
   text-align: center;
-  font-weight: bold;
+
+  font-weight: 600;
+
+  font-size: 13px;
+
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
+
+/* TIME */
 
 .time {
-  padding: 10px;
-  
+  padding: 12px;
+
   white-space: nowrap;
+
+  background: rgba(255,255,255,0.03);
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  border-right: 1px solid rgba(255,255,255,0.06);
 }
 
+/* CELL */
+
 .cell {
-  min-height: 80px;
-  padding: 8px;
-  border: 2px solid rgba(214, 31, 31, 0.95);
+  min-height: 90px;
+
+  padding: 10px;
+
+  border-right: 1px solid rgba(255,255,255,0.06);
+
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 6px;
+
+  background: rgba(255,255,255,0.02);
+
+  transition: 0.2s ease;
 }
+
+.cell:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+/* CELL TEXT */
 
 .cell strong {
   font-size: 14px;
-  border:2px solid white;
+  font-weight: 600;
+
+  color: white;
+
+  line-height: 1.4;
 }
 
 .cell span {
   font-size: 12px;
-  color: #ccc;
+
+  color: rgba(255,255,255,0.7);
 }
 
 .cell small {
   font-size: 11px;
-  color: #803535;
+
+  color: rgba(255,255,255,0.45);
 }
+
+/* EMPTY */
 
 .empty {
   color: rgba(255,255,255,0.3);
+
+  font-size: 13px;
 }
 
-.createBtn {
-  padding: 10px 16px;
-  
-  border: none;
-  border-radius: 10px;
+/* CELL INPUT */
+
+.cell select,
+.cell input {
+  padding: 8px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(255,255,255,0.04);
+
   color: white;
-  cursor: pointer;
-  margin-bottom: 15px;
+
+  outline: none;
+
+  font-size: 12px;
 }
+
+.cell select option {
+  background: #1f2937;
+  color: white;
+}
+
+.cell input:disabled {
+  opacity: 0.75;
+}
+
+/* META */
 
 .meta {
   display: flex;
   flex-wrap: wrap;
+
   gap: 10px;
+
   margin-bottom: 10px;
 }
 
 .meta input {
   padding: 8px;
+
   border-radius: 6px;
+
   border: none;
+
   flex: 1;
 }
 
-.cellInput {
-  padding: 6px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  color: white;
-}
+/* RESPONSIVE */
 
-.tableBox {
-  margin-top: 30px;
-}
+@media (max-width: 1024px) {
 
-.caption {
-  margin-bottom: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  
-  gap: 10px;
-  align-items: center;
+  .grid {
+    grid-template-columns: 90px repeat(6, 1fr);
+
+    overflow-x: auto;
+  }
+
+  .cell {
+    min-height: 80px;
+  }
 }
 
 @media (max-width: 768px) {
+
   .container {
-    padding: 10px;
+    padding: 12px;
+  }
+
+  .createBox {
+    flex-direction: column;
+  }
+
+  .createBox input,
+  .createBox select,
+  .createBox button {
+    width: 100%;
+  }
+
+  .caption {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .grid {
@@ -136,41 +318,20 @@
 
   .header,
   .time {
-    padding: 6px;
+    padding: 8px;
+
     font-size: 12px;
   }
 
   .cell {
-    min-height: 60px;
-    padding: 5px;
-  }
-
-  .createBox {
-    flex-direction: column;
-  }
-
-  .createBox input,
-  .createBox select {
-    width: 100%;
-  }
-
-  .caption {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-@media (max-width: 1024px) {
-  .grid {
-    grid-template-columns: 90px repeat(6, 1fr);
-  }
-
-  .cell {
     min-height: 70px;
+
+    padding: 8px;
   }
 }
 
 @media (min-width: 1400px) {
+
   .grid {
     grid-template-columns: 150px repeat(6, 1fr);
   }

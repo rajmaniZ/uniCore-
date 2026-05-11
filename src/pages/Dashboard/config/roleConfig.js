@@ -49,11 +49,12 @@ export const roleConfig = {
       { name: "Assignments", path: "/teacher/assignment", icon: "clipboard" },
       { name: "Subjects", path: "/teacher/subjects", icon: "book" },
       { name: "Attendance", path: "/teacher/attendance", icon: "checkSquare" },
+      // { name: "Timetable", path: "/teacher/timetable", icon: "calendar" },
       { name: "Timetable", path: "/teacher/timetable", icon: "calendar" },
       { name: "Profile", path: "/teacher/profile", icon: "user" },
       { name: "Settings", path: "/teacher/settings", icon: "settings" },
     ],
-    permissions: ["mark_attendance", "create_assignments", "review_submissions"],
+    permissions: ["mark_attendance", "create_assignments", "review_submissions","view_own"],
   },
   student: {
     label: "Student",
